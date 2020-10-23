@@ -8,7 +8,7 @@
 from smbus2 import SMBus
 
 numBoards = 17 #Number of Boards in the game
-boardAddr = [x for x in range (0,numBoards)] # board addresses 0 - 16
+boardAddr = [x for x in range (8,8+numBoards)] # board addresses 8 - 25
 boardStoneCount = [0]*17
 with SMBus(1) as bus: # indicates /dev/ic2-1
    while True:
