@@ -7,6 +7,7 @@ int stoneCount_byteSize = 5;
 int num_MCU = 2;
 boolean nextFlag = false;
 int phase = 0;
+int round = 0;
 String[] phaseLabels = {"Plan","Evolve","Demand"};
 
 int last_mousePosX = 500;
@@ -19,7 +20,7 @@ int NEXT_BUTTON_HEIGHT = 100;
 
 int PHASE_DISPLAY_XPOS = 250;
 int PHASE_DISPLAY_YPOS = 0;
-int PHASE_DISPLAY_WIDTH = 100;
+int PHASE_DISPLAY_WIDTH = 200;
 int PHASE_DISPLAY_HEIGHT = 100;
 
 int STONE_DISPLAY_XPOS = 0;
@@ -46,7 +47,7 @@ void draw(){
   rect(PHASE_DISPLAY_XPOS,PHASE_DISPLAY_YPOS,PHASE_DISPLAY_WIDTH,PHASE_DISPLAY_HEIGHT);
   fill(0,102,153);
   text("ROUND: ",PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2-20);
-  text((phase-(phase%3))/3,20+PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2-20);
+  text(round,50+PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2-20);
   text(phaseLabels[phase],PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2);
 
 // draw stone display 
@@ -54,10 +55,13 @@ void draw(){
   rect(STONE_DISPLAY_XPOS,STONE_DISPLAY_YPOS,STONE_DISPLAY_WIDTH,STONE_DISPLAY_HEIGHT);
   fill(0,102,153);
   for(int i = 0; i < stoneCount_byteSize*num_MCU; i = i+1){
-    text(in_total[i],STONE_DISPLAY_XPOS+STONE_DISPLAY_WIDTH/2,STONE_DISPLAY_YPOS+STONE_DISPLAY_HEIGHT/2);
+    text(in_total[i],10*i+STONE_DISPLAY_XPOS+STONE_DISPLAY_WIDTH/2,STONE_DISPLAY_YPOS+STONE_DISPLAY_HEIGHT/2);
   }
     
   if(last_mousePosX < (NEXT_BUTTON_XPOS+NEXT_BUTTON_WIDTH) && last_mousePosY < (NEXT_BUTTON_YPOS+NEXT_BUTTON_HEIGHT)){
+    if((phase+1)%3 == 0){
+      round = round + 1;
+    }
     phase = (phase + 1)%3;
     resetMousePos();
 //    readStones();
