@@ -1,7 +1,8 @@
 import processing.io.*;
 I2C i2c;
 
-byte[] in_1, in_2, in_total;
+byte[] in_1, in_2; 
+byte[] in_total = {0,0,0,0,0,0,0,0,0,0};
 int stoneCount_byteSize = 5;
 int num_MCU = 2;
 boolean nextFlag = false;
@@ -29,7 +30,6 @@ int STONE_DISPLAY_HEIGHT = 100;
 void setup(){
   size(500,500);
   i2c = new I2C(I2C.list()[0]);
-  in_total = 
 }
 
 void draw(){
@@ -45,6 +45,8 @@ void draw(){
   noFill();
   rect(PHASE_DISPLAY_XPOS,PHASE_DISPLAY_YPOS,PHASE_DISPLAY_WIDTH,PHASE_DISPLAY_HEIGHT);
   fill(0,102,153);
+  text("ROUND: ",PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2-20);
+  text((phase-(phase%3))/3,20+PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2-20);
   text(phaseLabels[phase],PHASE_DISPLAY_XPOS+PHASE_DISPLAY_WIDTH/2,PHASE_DISPLAY_YPOS+PHASE_DISPLAY_HEIGHT/2);
 
 // draw stone display 
@@ -58,7 +60,7 @@ void draw(){
   if(last_mousePosX < (NEXT_BUTTON_XPOS+NEXT_BUTTON_WIDTH) && last_mousePosY < (NEXT_BUTTON_YPOS+NEXT_BUTTON_HEIGHT)){
     phase = (phase + 1)%3;
     resetMousePos();
-    readStones();
+//    readStones();
   }
 }
 void readStones(){
