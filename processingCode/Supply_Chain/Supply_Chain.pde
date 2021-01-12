@@ -5,7 +5,8 @@ PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PI
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
 //Set the pagestate at 0 to begin the program at Dia1
-int pagestate=2;
+int pagestate=1;
+
 
 void setup()
 {
