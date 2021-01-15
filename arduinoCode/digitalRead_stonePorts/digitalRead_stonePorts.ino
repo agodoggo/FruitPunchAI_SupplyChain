@@ -15,16 +15,16 @@ A0 pin. Check the serial monitor to view the voltage generated.
 Development environment specifics:
 Arduino 1.6.7
 ******************************************************************************/
-const int PIEZO_PIN_0 = 2; // Piezo output
-const int PIEZO_PIN_1 = 3; // Piezo output
-const int PIEZO_PIN_2 = 4; // Piezo output
-const int PIEZO_PIN_3 = 5; // Piezo output
-const int PIEZO_PIN_4 = 6; // Piezo output
-const int PIEZO_PIN_5 = 7; // Piezo output
-const int PIEZO_PIN_6 = 8; // Piezo output
-const int PIEZO_PIN_7 = 9; // Piezo output
-const int PIEZO_PIN_8 = 10; // Piezo output
-const int PIEZO_PIN_9 = 11; // Piezo output
+const int PIEZO_PIN_0 = 22; // Piezo output
+const int PIEZO_PIN_1 = 24; // Piezo output
+const int PIEZO_PIN_2 = 26; // Piezo output
+const int PIEZO_PIN_3 = 28; // Piezo output
+const int PIEZO_PIN_4 = 30; // Piezo output
+const int PIEZO_PIN_5 = 32; // Piezo output
+const int PIEZO_PIN_6 = 34; // Piezo output
+const int PIEZO_PIN_7 = 36; // Piezo output
+const int PIEZO_PIN_8 = 38; // Piezo output
+const int PIEZO_PIN_9 = 40l; // Piezo output
 
 void setup() 
 {
