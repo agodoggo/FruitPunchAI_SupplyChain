@@ -34,6 +34,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 12){
   image(Dia12,0,0);
+  //display roundNo on Dias 12-26 (gray box from (50,50) to (165,105))
   }
   if(pagestate == 13){
   image(Dia13,0,0);
