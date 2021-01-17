@@ -12,6 +12,21 @@ int pagestate=1;
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
 
+//set serial baudrate
+int baudRate = 9600;
+
+//Serial string received
+String val;
+
+//boolean for Serial registration
+boolean firstContact = false;
+
+//defining the phase codings
+char OTHER = '0'
+char ASSEMBLY = '1';
+char LOGISTICS = '2';
+char TRANSPORT1 = '3';
+char TRANSPORT2 = '4';
 
 void setup()
 {
@@ -29,6 +44,11 @@ void setup()
  Dia29 = loadImage("Data/Dia29.PNG");Dia30 = loadImage("Data/Dia30.PNG");Dia31 = loadImage("Data/Dia31.PNG");Dia32 = loadImage("Data/Dia32.PNG");
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
+ 
+ //set Arduino ports
+ String arduinoPort = Serial.list()[1];
+ myArduinoPort = new Serial(this, arduinoPort, baudRate);
+ myArduinoPort.bufferUntil('\n');
 }
 
 void draw()
@@ -36,6 +56,38 @@ void draw()
  background (0);
  pagestate_change(pagestate);
  //x,y - width, lenght
- 
-
+}
+void serialEvent (Serial myArduinoPort){
+  val = myArduinoPort.readStringUntil('\n');
+  if (val!=null){
+    val = trim(val);
+    if(firstContact == false){
+      if (val.equals("noContact"){
+        myArduinoPort.clear();
+        firstContact = true;
+        myArduinoPort.write("contact");
+      }
+    }
+    else{ // contact has been made
+      //ASSEMBLY phase
+      if (pagestate >= 18 && pagestate <= 21){
+        myArduinoPort.write(ASSEMBLY);
+      }
+      //LOGISTICS phase
+      else if (pagestate >= 23 && pagestate <= 25){
+        myArduinoPort.write(LOGISTICS);
+      }
+      //TRANSPORT 1 phase
+      else if (pagestate >=27 && pagestate <= 28){
+        myArduinoPort.write(TRANSPORT1);
+      }
+      //TRANSPORT 2 phase
+      else if (pagestate >=29 && pagestate <= 30){
+        myArduinoPort.write(TRANSPORT2);
+      }
+      else{
+        myArduinoPort.write(OTHER);
+      }
+    }
+  }
 }
