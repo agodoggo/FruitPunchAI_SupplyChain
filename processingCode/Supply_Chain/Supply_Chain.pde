@@ -57,6 +57,8 @@ void draw()
  pagestate_change(pagestate);
  //x,y - width, lenght
 }
+
+//I could write this to only trigger for a pagestate change, but this should work
 void serialEvent (Serial myArduinoPort){
   val = myArduinoPort.readStringUntil('\n');
   if (val!=null){
