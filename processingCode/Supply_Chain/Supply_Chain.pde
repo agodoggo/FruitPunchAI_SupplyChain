@@ -11,22 +11,26 @@ int pagestate=1;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
+int roundLim = 10; //default round limit
 
 //set serial baudrate
 int baudRate = 9600;
 
-//Serial string received
-String val;
-
 //boolean for Serial registration
+Serial myArduinoPort;
 boolean firstContact = false;
+char NOCONTACT = 'N';
+char CONTACT = 'C';
 
 //defining the phase codings
-char OTHER = '0'
+char msg_sent;
+String msg_rec;
+char OTHER = '0';
 char ASSEMBLY = '1';
 char LOGISTICS = '2';
 char TRANSPORT1 = '3';
 char TRANSPORT2 = '4';
+char DEMAND = '5';
 
 void setup()
 {
@@ -60,36 +64,18 @@ void draw()
 
 //I could write this to only trigger for a pagestate change, but this should work
 void serialEvent (Serial myArduinoPort){
-  val = myArduinoPort.readStringUntil('\n');
-  if (val!=null){
-    val = trim(val);
+  msg_rec = myArduinoPort.readStringUntil('\n');
+  if (msg_rec!=null){
+    msg_rec = trim(msg_rec);
     if(firstContact == false){
-      if (val.equals("noContact"){
+      if (msg_rec.equals(NOCONTACT)){
         myArduinoPort.clear();
         firstContact = true;
-        myArduinoPort.write("contact");
+        myArduinoPort.write(CONTACT);
       }
     }
     else{ // contact has been made
-      //ASSEMBLY phase
-      if (pagestate >= 18 && pagestate <= 21){
-        myArduinoPort.write(ASSEMBLY);
-      }
-      //LOGISTICS phase
-      else if (pagestate >= 23 && pagestate <= 25){
-        myArduinoPort.write(LOGISTICS);
-      }
-      //TRANSPORT 1 phase
-      else if (pagestate >=27 && pagestate <= 28){
-        myArduinoPort.write(TRANSPORT1);
-      }
-      //TRANSPORT 2 phase
-      else if (pagestate >=29 && pagestate <= 30){
-        myArduinoPort.write(TRANSPORT2);
-      }
-      else{
-        myArduinoPort.write(OTHER);
-      }
+      myArduinoPort.write(msg_sent);
     }
   }
 }

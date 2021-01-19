@@ -269,9 +269,16 @@ void mouseClicked(){
   //Dia 36
   //go back to beginning
   else if (pagestate == 36 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 12;
-  pagestate_change(12);
-  roundNo = roundNo + 1;
+    if(roundNo <= roundLim){
+      pagestate = 12;
+      pagestate_change(12);
+      roundNo = roundNo + 1;
+    }
+    else{
+      //display game over and return to homescreen
+      pagestate = 1;
+      pagestate_change(1);
+    }
   }
     
     
