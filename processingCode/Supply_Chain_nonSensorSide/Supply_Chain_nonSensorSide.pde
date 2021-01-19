@@ -31,7 +31,10 @@ char LOGISTICS = '2';
 char TRANSPORT1 = '3';
 char TRANSPORT2 = '4';
 char DEMAND = '5';
-char WAITING = '6'
+char WAITING = '6';
+
+//boolean nextPhase
+boolean nextPhase = false;
 
 void setup()
 {
@@ -76,7 +79,13 @@ void serialEvent (Serial myArduinoPort){
       }
     }
     else{ // contact has been made
-      myArduinoPort.write(msg_sent);
+      if (msg_rec.equals(WAITING) && msg_sent == WAITING){
+        nextPhase = true;
+      }
+      else{
+        myArduinoPort.clear();
+        myArduinoPort.write(msg_sent);
+      }
     }
   }
 }
