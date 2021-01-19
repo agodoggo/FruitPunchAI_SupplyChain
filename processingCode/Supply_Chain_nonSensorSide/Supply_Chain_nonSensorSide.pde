@@ -54,6 +54,7 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
  //set Arduino ports
+ println(Serial.list());
  String arduinoPort = Serial.list()[1];
  myArduinoPort = new Serial(this, arduinoPort, baudRate);
  myArduinoPort.bufferUntil('\n');
@@ -76,6 +77,7 @@ void serialEvent (Serial myArduinoPort){
         myArduinoPort.clear();
         firstContact = true;
         myArduinoPort.write(CONTACT);
+        println(CONTACT);
       }
     }
     else{ // contact has been made
@@ -85,6 +87,7 @@ void serialEvent (Serial myArduinoPort){
       else{
         myArduinoPort.clear();
         myArduinoPort.write(msg_sent);
+        println(msg_sent);
       }
     }
   }
