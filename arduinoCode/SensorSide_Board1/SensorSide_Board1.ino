@@ -1,10 +1,9 @@
-//program for Arduino of non-sensor side
+//program for Arduino of sensor side, board 1 (non-raspberry pi side)
 //last modified 18 January 2019
 
 //define all of these
-static int phaseNo = 5
-int phasePins[phaseNo] = {4,7,3,2,6} // {Assembly, Logistics, Transport1, Transport2, Demand}
-int slotCount_dataPin = 5 //make sure to pullup to 20k
+static int phaseNo = 2
+int phasePins[phaseNo] = {22,23} // {Assembly, Transport2}
 char msg_rec;
 char msg_sent;
 
@@ -27,7 +26,6 @@ void setup() {
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
-  pinMode(slotCount_dataPin, INPUT_PULLUP);
   establishContact()
 }
 
@@ -48,29 +46,11 @@ void loop() {
       }
       digitalWrite(phasePins[0],HIGH);
     }
-    else if (msg_rec == LOGISTICS){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[1],HIGH);
-    }
-    else if (msg_rec == TRANSPORT1){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[2],HIGH);
-    }
     else if (msg_rec == TRANSPORT2){
       for (int i = 0; i < phaseNo; i++){
         digitalWrite(phasePins[i],LOW);
       }
-      digitalWrite(phasePins[3],HIGH);
-    }
-    else if (msg_rec == DEMAND){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[4],HIGH);
+      digitalWrite(phasePins[1],HIGH);
     }
     delay(1000);
   }
@@ -79,8 +59,6 @@ void loop() {
     for (int i = 0; i < phaseNo; i++){
       digitalWrite(phasePins[i],LOW);
     }
-
-    //figure out the data in for the slot counter -- look up the model and how the data transfer works
   }
 }
 

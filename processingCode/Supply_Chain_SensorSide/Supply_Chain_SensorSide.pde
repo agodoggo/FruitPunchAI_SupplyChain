@@ -17,7 +17,9 @@ int roundLim = 10; //default round limit
 int baudRate = 9600;
 
 //boolean for Serial registration
-Serial myArduinoPort;
+Serial myArduinoPort1;
+Serial myArduinoPort2;
+Serial myrPiPort;
 boolean firstContact = false;
 char NOCONTACT = 'N';
 char CONTACT = 'C';
@@ -31,7 +33,11 @@ char LOGISTICS = '2';
 char TRANSPORT1 = '3';
 char TRANSPORT2 = '4';
 char DEMAND = '5';
-char WAITING = '6'
+char WAITING = '6';
+char STONES = '7';
+
+//boolean nextPhase
+boolean nextPhase = false;
 
 void setup()
 {
@@ -50,10 +56,21 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
- //set Arduino ports
- String arduinoPort = Serial.list()[1];
- myArduinoPort = new Serial(this, arduinoPort, baudRate);
- myArduinoPort.bufferUntil('\n');
+ //set Arduino port board 1
+ String arduinoPort1 = Serial.list()[1];
+ myArduinoPort1 = new Serial(this, arduinoPort1, baudRate);
+ myArduinoPort1.bufferUntil('\n');
+ 
+ //set Arduino port board 2
+ String arduinoPort2 = Serial.list()[2];
+ myArduinoPort2 = new Serial(this, arduinoPort2, baudRate);
+ myArduinoPort2.bufferUntil('\n');
+ 
+ //set raspberry pi port
+ String rPiPort = Serial.list()[3];
+ myrPiPort = new Serial(this, rPiPort, baudRate);
+ myrPiPort.bufferUntil('\n');
+ 
 }
 
 void draw()
@@ -64,19 +81,30 @@ void draw()
 }
 
 //I could write this to only trigger for a pagestate change, but this should work
-void serialEvent (Serial myArduinoPort){
-  msg_rec = myArduinoPort.readStringUntil('\n');
+void serialEvent (Serial myPort){
+  msg_rec = myPort.readStringUntil('\n');
   if (msg_rec!=null){
     msg_rec = trim(msg_rec);
     if(firstContact == false){
       if (msg_rec.equals(NOCONTACT)){
-        myArduinoPort.clear();
+        myPort.clear();
         firstContact = true;
-        myArduinoPort.write(CONTACT);
+        myPort.write(CONTACT);
       }
     }
     else{ // contact has been made
-      myArduinoPort.write(msg_sent);
+      //waiting condition
+      if (msg_rec.equals(WAITING) && msg_sent == WAITING){
+        nextPhase = true;
+      }
+      else if(msg_sent == STONES){
+        //input the stone values into appropriate variables
+        //send to the AI program
+      }
+      else{
+        myPort.clear();
+        myPort.write(msg_sent);
+      }
     }
   }
 }

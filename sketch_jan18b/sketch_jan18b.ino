@@ -1,4 +1,4 @@
-//program for Arduino of non-sensor side
+//program for Arduino of sensor side - board 2 (raspberry pi side)
 //last modified 18 January 2019
 
 //define all of these
@@ -72,7 +72,6 @@ void loop() {
       }
       digitalWrite(phasePins[4],HIGH);
     }
-    delay(1000);
   }
   else{
     Serial.println("No message");

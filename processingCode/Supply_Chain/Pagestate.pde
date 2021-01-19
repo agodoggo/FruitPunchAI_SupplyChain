@@ -70,7 +70,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 17){
   image(Dia17,0,0);
-  msg_sent = OTHER;
+  msg_sent = WAITING;
   text(roundNo, 100, 75);
   }
   if(pagestate == 18){
@@ -95,7 +95,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 22){
   image(Dia22,0,0);
-  msg_sent = OTHER;
+  msg_sent = WAITING;
   text(roundNo, 100, 75);
   }
   if(pagestate == 23){
@@ -115,7 +115,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 26){
   image(Dia26,0,0);
-  msg_sent = OTHER;
+  msg_sent = WAITING;
   text(roundNo, 100, 75);
   }
   if(pagestate == 27){
@@ -136,7 +136,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 31){
   image(Dia31,0,0);
-  msg_sent = OTHER;
+  msg_sent = WAITING;
   }
   if(pagestate == 32){
   image(Dia32,0,0);
@@ -152,7 +152,7 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate == 35){
   image(Dia35,0,0);
-  msg_sent = OTHER;
+  msg_sent = WAITING;
   }
   if(pagestate == 36){
   image(Dia36,0,0);
