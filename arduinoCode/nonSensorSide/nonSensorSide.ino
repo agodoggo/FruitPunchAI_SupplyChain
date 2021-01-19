@@ -27,7 +27,7 @@ void setup() {
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
-  // pinMode(slotCount_dataPin, INPUT) set to pullup
+  pinMode(slotCount_dataPin, INPUT_PULLUP);
   establishContact()
 }
 
@@ -36,6 +36,7 @@ void loop() {
   if (Serial.available()){
     msg_rec = Serial.read();
 
+    // arrow if-else statements
     if (msg_rec == OTHER){
       for (int i = 0; i < phaseNo; i++){
         digitalWrite(phasePins[i],LOW);
@@ -77,6 +78,8 @@ void loop() {
     for (int i = 0; i < phaseNo; i++){
       digitalWrite(phasePins[i],LOW);
     }
+
+    //figure out the data in for the slot counter -- look up the model and how the data transfer works
   }
 }
 
