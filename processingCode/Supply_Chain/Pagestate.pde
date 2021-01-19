@@ -46,63 +46,77 @@ public void pagestate_change(int pagestate) {
   if(pagestate == 12){
   image(Dia12,0,0);
   msg_sent = OTHER;
-  //display roundNo on Dias 12-26 (gray box from (50,50) to (165,105))
+  text(roundNo, 100, 75);
   }
   if(pagestate == 13){
   image(Dia13,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 14){
   image(Dia14,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 15){
   image(Dia15,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 16){
   image(Dia16,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 17){
   image(Dia17,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 18){
   image(Dia18,0,0);
   msg_sent = ASSEMBLY;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 19){
   image(Dia19,0,0);
   msg_sent = ASSEMBLY;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 20){
   image(Dia20,0,0);
   msg_sent = ASSEMBLY;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 21){
   image(Dia21,0,0);
   msg_sent = ASSEMBLY;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 22){
   image(Dia22,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 23){
   image(Dia23,0,0);
   msg_sent = LOGISTICS;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 24){
   image(Dia24,0,0);
   msg_sent = LOGISTICS;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 25){
   image(Dia25,0,0);
   msg_sent = LOGISTICS;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 26){
   image(Dia26,0,0);
   msg_sent = OTHER;
+  text(roundNo, 100, 75);
   }
   if(pagestate == 27){
   image(Dia27,0,0);
