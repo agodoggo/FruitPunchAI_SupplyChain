@@ -3,21 +3,19 @@
 
 //define all of these
 int phasePins[5] = {4,7,3,2,6}; // {Assembly, Logistics, Transport1, Transport2, Demand}
+int phaseArrowStates[5] = {LOW,LOW,LOW,LOW,LOW}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int slotCount_dataPin = 5; //make sure to pullup to 20k
-char msg_rec;
-char msg_sent;
-
-//boolean for Serial registration
-char NOCONTACT = 'N';
-char CONTACT = 'C';
+int msg_rec;
+int score = 0;
 
 //defining the phase codings
-char OTHER = '0';
-char ASSEMBLY = '1';
-char LOGISTICS = '2';
-char TRANSPORT1 = '3';
-char TRANSPORT2 = '4';
-char DEMAND = '5';
+int OTHER = '0';
+int ASSEMBLY = '1';
+int LOGISTICS = '2';
+int TRANSPORT1 = '3';
+int TRANSPORT2 = '4';
+int DEMAND = '5';
+int SCORE = '6';
 
 
 void setup() {
@@ -32,60 +30,46 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial.available()){
+  if (Serial.available() > 0){
     msg_rec = Serial.read();
-
+    
     // arrow if-else statements
     if (msg_rec == OTHER){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
+      phaseArrowStates = {LOW,LOW,LOW,LOW,LOW};
     }
     else if (msg_rec == ASSEMBLY){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[0],HIGH);
+      phaseArrowStates = {HIGH,LOW,LOW,LOW,LOW};
     }
     else if (msg_rec == LOGISTICS){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[1],HIGH);
+       phaseArrowStates = {LOW,HIGH,LOW,LOW,LOW};
     }
     else if (msg_rec == TRANSPORT1){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[2],HIGH);
+       phaseArrowStates = {LOW,LOW,HIGH,LOW,LOW};
     }
     else if (msg_rec == TRANSPORT2){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[3],HIGH);
+       phaseArrowStates = {LOW,LOW,LOW,HIGH,LOW};
     }
     else if (msg_rec == DEMAND){
-      for (int i = 0; i < 5; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[4],HIGH);
+       phaseArrowStates = {LOW,LOW,LOW,LOW,HIGH};
     }
-    delay(1000);
+    
+    //score query statements
+    if (msg_rec == SCORE){
+      Serial.print(score);
+    }
   }
-  else{
-    Serial.println("No message");
-    for (int i = 0; i < 5; i++){
-      digitalWrite(phasePins[i],LOW);
-    }
+  
+  else{ // no data to read
+    
+  }
 
-    //figure out the data in for the slot counter -- look up the model and how the data transfer works
-  }
+  score += digitalRead(slotCount_dataPin); //need to check if this is sufficient, otherwise need to implement a debounce
+  writeArrowStates();
+  delay(10);
 }
 
-void establishContact(){
-  while (Serial.available() <= 0){
-    Serial.println(NOCONTACT);
-    delay(300);
+void writeArrowStates(){
+  for (int i = 0; i < 5; i++){
+    digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
 }
