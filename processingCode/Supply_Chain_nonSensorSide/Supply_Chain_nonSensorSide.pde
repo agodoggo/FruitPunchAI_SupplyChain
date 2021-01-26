@@ -37,7 +37,6 @@ String TRANSPORT1 = "3";
 String TRANSPORT2 = "4";
 String DEMAND = "5";
 
-
 void setup()
 {
  //set screen size, this is the pixel ratio of the build in screens
