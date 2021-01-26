@@ -8,6 +8,7 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //Set the pagestate at 0 to begin the program at Dia1
 int pagestate = 1;
+boolean newpage = false;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
@@ -17,20 +18,25 @@ int roundLim = 10; //default round limit
 int baudRate = 9600;
 
 //boolean for Serial registration
-Serial[] myPorts = new Serial[2];
-int[] dataIn = new int[2];
-boolean[] dataIn_changed = {false,false};
+Serial myArduinoPort;
+Serial myRPiPort;
 
-//defining the phase codings
-int msg_rec;
-int OTHER = 0;
-int ASSEMBLY = 1;
-int LOGISTICS = 2;
-int TRANSPORT1 = 3;
-int TRANSPORT2 = 4;
-int DEMAND = 5;
-int SCORE = 6;
-int WAITING = 7;
+//score Strings
+String myScore;
+String oppScore;
+
+//instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
+//instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
+
+//defining the instructions from RPi to Arduino
+//arrow phase codes
+String NONE = "0";
+String ASSEMBLY = "1";
+String LOGISTICS = "2";
+String TRANSPORT1 = "3";
+String TRANSPORT2 = "4";
+String DEMAND = "5";
+
 
 void setup()
 {
@@ -50,32 +56,59 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
  String arduinoPort = Serial.list()[1];
- myPorts[0] = new Serial(this, arduinoPort, baudRate);
+ myArduinoPort = new Serial(this, arduinoPort, baudRate);
 
  String RPiPort = Serial.list()[2];
- myPorts[1] = new Serial(this, RPiPort, baudRate);
- 
- 
+ myRPiPort = new Serial(this, RPiPort, baudRate);
 }
 
 void draw()
 {
  background (0);
- pagestate_change(pagestate);
+ if (newpage){
+    pagestate_change(pagestate);
+    newpage = false;
+ }
 }
 
-void serialEvent(Serial myPort){ //read in Data from Serial Port
-  int portNumber = -1;
-  
-  for (int p = 0; p < myPorts.length; p++){
-    if (myPort == myPorts[p]){
-      portNumber = p;
+char[] recvWithStartEndMarkers(Serial port) {
+    int numChars = 32;
+    char[] receivedChars = new char[numChars];
+    
+    boolean recvInProgress = false;
+    int ndx = 0;
+    char startMarker = '<';
+    char endMarker = '>';
+    char rc;
+ 
+    while (port.available() > 0) {
+        rc = port.readChar();
+
+        if (recvInProgress == true) {
+            if (rc != endMarker) {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars) {
+                    ndx = numChars - 1;
+                }
+            }
+            else {
+                receivedChars[ndx] = '\0'; // terminate the string
+                recvInProgress = false;
+                ndx = 0;
+            }
+        }
+
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
     }
-  }
-  
-  int inByte = myPort.read();
-  dataIn_changed[portNumber] = inByte != dataIn[portNumber]; //used to see if new value is read
-  dataIn[portNumber] = inByte;
-  
-  println("Got " + inByte + " from serial port " + portNumber);
+    return receivedChars;
+}
+
+String createArduinoPacket(String arrow_phase, String score_query){
+  return "<"+arrow_phase+","+score_query+">";
+}
+String createRPiPacket(String opponent_waiting, String score_query){
+  return "<"+opponent_waiting+","+score_query+">";
 }

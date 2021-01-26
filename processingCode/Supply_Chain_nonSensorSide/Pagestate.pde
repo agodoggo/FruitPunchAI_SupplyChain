@@ -112,29 +112,6 @@ public void pagestate_change(int pagestate) {
   image(Dia37,0,0);
   }
   
-  //Serial messages to arduino
-  if (pagestate >=1 && pagestate <= 17){
-    myPorts[0].write(OTHER);
-  }
-  else if (pagestate >=18 && pagestate <= 22){
-    myPorts[0].write(ASSEMBLY);
-  }
-  else if (pagestate >=23 && pagestate <= 26){
-    myPorts[0].write(LOGISTICS);
-  }
-  else if (pagestate >=27 && pagestate <= 28){
-    myPorts[0].write(TRANSPORT1);
-  }
-  else if (pagestate >=29 && pagestate <= 31){
-    myPorts[0].write(TRANSPORT2);
-  }
-  else if (pagestate >=32 && pagestate <= 35){
-    myPorts[0].write(DEMAND);
-  }
-  else if (pagestate == 36){
-    myPorts[0].write(SCORE);
-  }
-  
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
     text(roundNo, 100, 75);
@@ -142,24 +119,54 @@ public void pagestate_change(int pagestate) {
   
   //display score
   if(pagestate == 36){
-    text("Your score",350,600);
-    text(dataIn[0],400,600);
-    text("Opponent's score",350,750);
-    text(dataIn[1],450,750);
+    text("Your score ",350,600);
+    text(myScore,400,600);
+    text("Opponent's score ",350,750);
+    text(oppScore,450,750);
   }
   
-  //Serial messages to other Raspberry Pi - changes pagestate if receives waiting as well
-  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
-    myPorts[1].write(WAITING);
-    if (dataIn[1] == WAITING){
-      dataIn[1] = -1;
+  //Serial receiving from Arduino and Raspberry Pi
+  if(pagestate == 35){
+    String tmpArd = new String(recvWithStartEndMarkers(myArduinoPort));
+    if (Integer.parseInt(tmpArd) == 1){ //checks if RPi Instruction for opponent waiting is true
       pagestate = pagestate + 1;
       pagestate_change(pagestate);
     }
   }
-  else if(pagestate == 36){
-    if(dataIn_changed[0]){
-      myPorts[1].write(dataIn[0]);
-    }
+  
+  if (pagestate == 36){
+    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
+    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
+  }
+  
+  //Serial messages to arduino
+  if (pagestate >=1 && pagestate <= 17){
+    myArduinoPort.write(createArduinoPacket(NONE,NONE));
+  }
+  else if (pagestate >=18 && pagestate <= 22){
+    myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
+  }
+  else if (pagestate >=23 && pagestate <= 26){
+    myArduinoPort.write(createArduinoPacket(LOGISTICS,NONE));
+  }
+  else if (pagestate >=27 && pagestate <= 28){
+    myArduinoPort.write(createArduinoPacket(TRANSPORT1,NONE));
+  }
+  else if (pagestate >=29 && pagestate <= 31){
+    myArduinoPort.write(createArduinoPacket(TRANSPORT2,NONE));
+  }
+  else if (pagestate >=32 && pagestate <= 35){
+    myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
+  }
+  else if (pagestate == 36){//score query
+    myArduinoPort.write(createArduinoPacket(NONE,"1"));
+  }
+  
+  //Serial messages to other Raspberry Pi
+  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){ //waiting instances
+    myRPiPort.write(createRPiPacket("1",NONE));  
+  }
+  if(pagestate==36){
+    myRPiPort.write(createRPiPacket(NONE,myScore));
   }
 }

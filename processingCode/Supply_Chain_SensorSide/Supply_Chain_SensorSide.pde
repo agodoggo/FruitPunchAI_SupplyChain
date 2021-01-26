@@ -7,7 +7,7 @@ PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PI
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
 //Set the pagestate at 0 to begin the program at Dia1
-int pagestate=1;
+int pagestate = 1;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
@@ -17,27 +17,21 @@ int roundLim = 10; //default round limit
 int baudRate = 9600;
 
 //boolean for Serial registration
-Serial myArduinoPort1;
-Serial myArduinoPort2;
-Serial myrPiPort;
-boolean firstContact = false;
-char NOCONTACT = 'N';
-char CONTACT = 'C';
+Serial[] myPorts = new Serial[3];
+int[] dataIn = new int[3];
+boolean[] dataIn_changed = {false,false, false};
 
 //defining the phase codings
-char msg_sent;
-String msg_rec;
-char OTHER = '0';
-char ASSEMBLY = '1';
-char LOGISTICS = '2';
-char TRANSPORT1 = '3';
-char TRANSPORT2 = '4';
-char DEMAND = '5';
-char WAITING = '6';
-char STONES = '7';
-
-//boolean nextPhase
-boolean nextPhase = false;
+int msg_rec;
+int OTHER = 0;
+int ASSEMBLY = 1;
+int LOGISTICS = 2;
+int TRANSPORT1 = 3;
+int TRANSPORT2 = 4;
+int DEMAND = 5;
+int SCORE = 6;
+int WAITING = 7;
+int STONE_COUNT = 8;
 
 void setup()
 {
@@ -56,20 +50,15 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
- //set Arduino port board 1
- String arduinoPort1 = Serial.list()[1];
- myArduinoPort1 = new Serial(this, arduinoPort1, baudRate);
- myArduinoPort1.bufferUntil('\n');
+ String arduinoPort_left = Serial.list()[1];
+ myPorts[0] = new Serial(this, arduinoPort_left, baudRate);
  
- //set Arduino port board 2
- String arduinoPort2 = Serial.list()[2];
- myArduinoPort2 = new Serial(this, arduinoPort2, baudRate);
- myArduinoPort2.bufferUntil('\n');
+ String arduinoPort_right = Serial.list()[2];
+ myPorts[1] = new Serial(this, arduinoPort_right, baudRate);
+
+ String RPiPort = Serial.list()[3];
+ myPorts[2] = new Serial(this, RPiPort, baudRate);
  
- //set raspberry pi port
- String rPiPort = Serial.list()[3];
- myrPiPort = new Serial(this, rPiPort, baudRate);
- myrPiPort.bufferUntil('\n');
  
 }
 
@@ -77,34 +66,20 @@ void draw()
 {
  background (0);
  pagestate_change(pagestate);
- //x,y - width, lenght
 }
 
-//I could write this to only trigger for a pagestate change, but this should work
-void serialEvent (Serial myPort){
-  msg_rec = myPort.readStringUntil('\n');
-  if (msg_rec!=null){
-    msg_rec = trim(msg_rec);
-    if(firstContact == false){
-      if (msg_rec.equals(NOCONTACT)){
-        myPort.clear();
-        firstContact = true;
-        myPort.write(CONTACT);
-      }
-    }
-    else{ // contact has been made
-      //waiting condition
-      if (msg_rec.equals(WAITING) && msg_sent == WAITING){
-        nextPhase = true;
-      }
-      else if(msg_sent == STONES){
-        //input the stone values into appropriate variables
-        //send to the AI program
-      }
-      else{
-        myPort.clear();
-        myPort.write(msg_sent);
-      }
+void serialEvent(Serial myPort){ //read in Data from Serial Port
+  int portNumber = -1;
+  
+  for (int p = 0; p < myPorts.length; p++){
+    if (myPort == myPorts[p]){
+      portNumber = p;
     }
   }
+  
+  int inByte = myPort.read();
+  dataIn_changed[portNumber] = inByte != dataIn[portNumber]; //used to see if new value is read
+  dataIn[portNumber] = inByte;
+  
+  println("Got " + inByte + " from serial port " + portNumber);
 }

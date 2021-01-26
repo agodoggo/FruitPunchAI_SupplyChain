@@ -50,7 +50,8 @@ void mouseClicked(){
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
     if (mouseX>500 && mouseX < 750 && mouseY > 1110 && mouseY < 1250) {
      pagestate = 4;
-     pagestate_change(4);}
+     pagestate_change(4);
+     }
   }
 
   //SUPPLY PHASE

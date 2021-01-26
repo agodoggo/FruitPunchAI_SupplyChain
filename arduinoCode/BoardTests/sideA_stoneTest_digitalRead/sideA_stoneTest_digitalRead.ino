@@ -1,7 +1,6 @@
 #define SIX_STONE_BOARD 6
 #define TWO_STONE_BOARD 2
 #define BOARD_COUNT 11
-#define MAX_BOARD_NAME_LENGTH 
 
 #include "Arduino.h"
 
