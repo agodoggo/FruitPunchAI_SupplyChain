@@ -2,149 +2,195 @@
 //last modified 18 January 2019
 
 //stones
-#define TEN_STONE_BOARD 10
-#define SIX_STONE_BOARD 6
-#define TWO_STONE_BOARD 2
-#define BOARD_COUNT 2
-#define MAX_BOARD_NAME_LENGTH 
+const int TEN_STONE_BOARD =  10;
+const int SIX_STONE_BOARD =  6;
+const int TWO_STONE_BOARD = 2;
+const int BOARD_COUNT = 6;
 
-int board1[TEN_STONE_BOARD] = {22,24,26,28,30,32,34,36,38,40};
-int board2[TEN_STONE_BOARD] = {4,5,6,7,8,9,10,11,12,13};
-int board3[TEN_STONE_BOARD] = {23,25,27,29,31,33,35,37,39,41};
-int board4[SIX_STONE_BOARD] = {42,44,46,48,50,52};
-int board5[SIX_STONE_BOARD] = {A0,A1,A2,A3,A4,A5};
-int board6[TWO_STONE_BOARD] = {A6,A7};
-
-int board1_val[TEN_STONE_BOARD];
-int board2_val[TEN_STONE_BOARD];
-int board3_val[TEN_STONE_BOARD];
-int board4_val[SIX_STONE_BOARD];
-int board5_val[SIX_STONE_BOARD];
-int board6_val[TWO_STONE_BOARD];
-
+int board_sums[BOARD_COUNT];
+int board_vals[BOARD_COUNT][TEN_STONE_BOARD];
+int board_pins[BOARD_COUNT][TEN_STONE_BOARD] = {
+  {22,24,26,28,30,32,34,36,38,40},
+  {4,5,6,7,8,9,10,11,12,13},
+  {23,25,27,29,31,33,35,37,39,41},
+  {42,44,46,48,50,52},
+  {A0,A1,A2,A3,A4,A5},
+  {A6,A7}
+};
 
 //define all of these
-static int phaseNo = 5
-int phasePins[phaseNo] = {3,A8,2} // {Logistics, Transport1, Demand}
-int slotCount_dataPin = A9 //make sure to pullup to 20k
-char msg_rec;
-char msg_sent;
+const int phaseNo = 3;
+int phasePins[phaseNo] = {3,A8,2}; // {Logistics, Transport1, Demand}
+int slotCount_dataPin = A9; //make sure to pullup to 20k
+int phaseArrowStates[phaseNo] = {LOW,LOW,LOW};
+const byte numChars = 32;
+char receivedChars[numChars];
+char tempChars[numChars];
+int score = 0;
 
 //boolean for Serial registration
-char NOCONTACT = 'N';
-char CONTACT = 'C';
+boolean newData = false;
 
 //defining the phase codings
-char OTHER = '0';
-char ASSEMBLY = '1';
-char LOGISTICS = '2';
-char TRANSPORT1 = '3';
-char TRANSPORT2 = '4';
-char DEMAND = '5';
+int NONE = 0;
+int ASSEMBLY = 1;
+int LOGISTICS = 2;
+int TRANSPORT1 = 3;
+int TRANSPORT2 = 4;
+int DEMAND = 5;
+int SCORE = 6;
+int STONE_COUNT = 8;
+
+//deciphered score
+int arrow_phase = -1;
+int score_query = -1;
+int stone_query = -1;
 
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  setupStoneBoards();
+  pinMode(slotCount_dataPin, INPUT_PULLUP);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
-  pinMode(slotCount_dataPin, INPUT_PULLUP);
-  establishContact()
+  setupStoneBoards(); 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial.available()){
-    msg_rec = Serial.read();
-
-    // arrow if-else statements
-    if (msg_rec == OTHER){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-    }
-    else if (msg_rec == LOGISTICS){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[0],HIGH);
-    }
-    else if (msg_rec == TRANSPORT1){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[1],HIGH);
-    }
-    else if (msg_rec == DEMAND){
-      for (int i = 0; i < phaseNo; i++){
-        digitalWrite(phasePins[i],LOW);
-      }
-      digitalWrite(phasePins[2],HIGH);
-    }
-  }
-  else{
-    Serial.println("No message");
-    for (int i = 0; i < phaseNo; i++){
-      digitalWrite(phasePins[i],LOW);
-    }
-
-    //figure out the data in for the slot counter -- look up the model and how the data transfer works
-  }
+  recvWithStartEndMarkers();
+  changeHardwareState();
 }
 
-void establishContact(){
-  while (Serial.available() <= 0){
-    Serial.println(NOCONTACT);
-    delay(300);
-  }
+void recvWithStartEndMarkers() {
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char startMarker = '<';
+    char endMarker = '>';
+    char rc;
+ 
+    while (Serial.available() > 0 && newData == false) {
+        rc = Serial.read();
+
+        if (recvInProgress == true) {
+            if (rc != endMarker) {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars) {
+                    ndx = numChars - 1;
+                }
+            }
+            else {
+                receivedChars[ndx] = '\0'; // terminate the string
+                recvInProgress = false;
+                ndx = 0;
+                newData = true;
+            }
+        }
+
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
 }
+void parseData(){
+    char * strtokIndx; // this is used by strtok() as an index
+
+    strtokIndx = strtok(tempChars,",");      // get the first part - the string
+    arrow_phase = atoi(strtokIndx); // copy it to messageFromPC
+ 
+    strtokIndx = strtok(NULL, ","); // this continues where the previous call left off
+    score_query = atoi(strtokIndx);     // convert this part to an integer
+
+    strtokIndx = strtok(NULL, ","); // this continues where the previous call left off
+    stone_query = atoi(strtokIndx);     // convert this part to an integer
+}
+void changeHardwareState(){
+  if(newData == true){
+    //get information from packet and change boolean
+    strcpy(tempChars, receivedChars);
+    parseData();
+    newData = false;
+
+    //arrow if-else statements
+    if (arrow_phase == NONE){
+      phaseArrowStates[0]=LOW;phaseArrowStates[1]=LOW;phaseArrowStates[2]=LOW;
+    }
+    else if (arrow_phase == LOGISTICS){
+      phaseArrowStates[0]=HIGH;phaseArrowStates[1]=LOW;phaseArrowStates[2]=LOW;
+    }
+    else if (arrow_phase == TRANSPORT1){
+       phaseArrowStates[0]=LOW;phaseArrowStates[1]=HIGH;phaseArrowStates[2]=LOW;
+    }
+    else if (arrow_phase == DEMAND){
+       phaseArrowStates[0]=LOW;phaseArrowStates[1]=LOW;phaseArrowStates[2]=HIGH;
+    }
+    
+    //score query
+    if (score_query == 1){
+      Serial.print(createPacket(String(score)));
+    }
+
+    //stone query
+    if (stone_query == 1){
+      StoneCount();
+      sendStoneCount();
+    }
+  }
+  writeArrowStates();
+  delay(10);
+}
+
 
 void setupStoneBoards(){
-  for(int i = 0; i < TEN_STONE_BOARD; i++){
-    pinMode(board1[i], INPUT);
-    pinMode(board2[i], INPUT);
-    pinMode(board3[i], INPUT);
+  for(int i = 0; i < BOARD_COUNT-3; i++){
+    for(int j = 0; j < TEN_STONE_BOARD; j++){
+      pinMode(board_pins[i][j], INPUT);
+    }
   }
-  for(int i = 0; i < SIX_STONE_BOARD; i++){
-    pinMode(board4[i], INPUT);
-    pinMode(board5[i], INPUT);
+  for(int i = 3; i < BOARD_COUNT-1; i++){
+    for(int j = 0; j < SIX_STONE_BOARD; j++){
+      pinMode(board_pins[i][j], INPUT);
+    }
   }
-  pinMode(board6[0],INPUT);pinMode(board6[1],INPUT);
+  for(int j = 0; j < TWO_STONE_BOARD; j++){
+    pinMode(board_pins[5][j], INPUT);
+  }
 }
 
-void sensorRead(){
-//  // Read Piezo ADC value in, and convert it to a voltage
-  for(int i = 0; i < TEN_STONE_BOARD; i++){
-    board1_val[i] = digitalRead(board1[i]);
-    board2_val[i] = digitalRead(board2[i]);
-    board3_val[i] = digitalRead(board3[i]);
+void StoneCount(){
+  for(int i = 0; i < BOARD_COUNT-3; i++){
+    for(int j = 0; j < TEN_STONE_BOARD; j++){
+      board_vals[i][j] = digitalRead((board_pins[i][j], INPUT));
+      board_sums[i] = board_sums[i] + board_vals[i][j];
+    }
   }
-  for(int i = 0; i < SIX_STONE_BOARD; i++){
-    board4_val[i] = digitalRead(board4[i]);
-    board5_val[i] = digitalRead(board5[i]);
+  for(int i = 3; i < BOARD_COUNT-1; i++){
+    for(int j = 0; j < SIX_STONE_BOARD; j++){
+      board_vals[i][j] = digitalRead((board_pins[i][j], INPUT));
+      board_sums[i] = board_sums[i] + board_vals[i][j];pinMode(board_pins[i][j], INPUT);
+    }
   }
-  board6_val[0] = digitalRead(board6[0]);board6_val[1] = digitalRead(board6[1]);
+  for(int j = 0; j < TWO_STONE_BOARD; j++){
+      board_vals[5][j] = digitalRead((board_pins[5][j], INPUT));
+      board_sums[5] = board_sums[5] + board_vals[5][j];
+  }
 }
-
 void sendStoneCount(){
-  int board1Sum = 0;
-  int board2Sum = 0;
-  int board3Sum = 0;
-  int board4Sum = 0;
-  int board5Sum = 0;
-  int board6Sum = 0;
-  
-  for(int i = 0; i < TEN_STONE_BOARD; i++){
-    board1Sum+= board1[i];
-    board2Sum+= board2[i];
-    board3Sum+= board3[i];
+  Serial.print("<");
+  for(int i = 0; i < BOARD_COUNT-1; i++){
+    Serial.print(board_sums[i]);
+    Serial.print(",");
   }
-  for(int i = 0; i < SIX_STONE_BOARD; i++){
-    int board4Sum+=board4[i];
-    int board5Sum+=board5[i];
+  Serial.print(board_sums[BOARD_COUNT-1]);
+  Serial.print(">");
+}
+String createPacket(String val){
+  return "<"+val+">";
+}
+void writeArrowStates(){
+  for (int i = 0; i < phaseNo; i++){
+    digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
-  board6Sum = board6[0] + board6[1];
-  Serial.println(); 
 }

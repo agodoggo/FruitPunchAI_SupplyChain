@@ -18,7 +18,8 @@ int roundLim = 10; //default round limit
 int baudRate = 9600;
 
 //boolean for Serial registration
-Serial myArduinoPort;
+Serial myArduinoPort_left;
+Serial myArduinoPort_right;
 Serial myRPiPort;
 
 //score Strings
@@ -54,10 +55,13 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
- String arduinoPort = Serial.list()[1];
- myArduinoPort = new Serial(this, arduinoPort, baudRate);
+ String arduinoPort_left = Serial.list()[1];
+ myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
+ 
+  String arduinoPort_right = Serial.list()[2];
+ myArduinoPort_right = new Serial(this, arduinoPort_right, baudRate);
 
- String RPiPort = Serial.list()[2];
+ String RPiPort = Serial.list()[3];
  myRPiPort = new Serial(this, RPiPort, baudRate);
 }
 
@@ -71,7 +75,7 @@ void draw()
 }
 
 char[] recvWithStartEndMarkers(Serial port) {
-    int numChars = 32;
+    int numChars = 128;
     char[] receivedChars = new char[numChars];
     
     boolean recvInProgress = false;
@@ -105,9 +109,22 @@ char[] recvWithStartEndMarkers(Serial port) {
     return receivedChars;
 }
 
-String createArduinoPacket(String arrow_phase, String score_query){
-  return "<"+arrow_phase+","+score_query+">";
+String createArduinoPacket(String arrow_phase, String score_query, String stone_count_query){
+  return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
 }
-String createRPiPacket(String opponent_waiting, String score_query){
-  return "<"+opponent_waiting+","+score_query+">";
+String createRPiPacket(String opponent_waiting, String score){
+  return "<"+opponent_waiting+","+score_+">";
+}
+int[] parseStoneValues(){
+    int numBoards = 17;
+    int[] stoneCount = new int [numBoards];
+    String[] arduinoLeft = split(new String(recvWithStartEndMarkers(myArduinoPort_left)),",");
+    for(int i=0; i<=arduinoLeft.length;i++){
+      stoneCount[i] = Integer.parseInt(arduinoLeft[i]);
+    }
+    String[] arduinoRight = split(new String(recvWithStartEndMarkers(myArduinoPort_right)),",");
+    for(int i=0; i<=arduinoRight.length;i++){
+      stoneCount[i+11] = Integer.parseInt(arduinoRight[i]);
+    }
+    return stoneCount;
 }

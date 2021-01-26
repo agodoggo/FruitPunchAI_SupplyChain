@@ -125,20 +125,6 @@ public void pagestate_change(int pagestate) {
     text(oppScore,450,750);
   }
   
-  //Serial receiving from Arduino and Raspberry Pi
-  if(pagestate == 35){
-    String tmpArd = new String(recvWithStartEndMarkers(myArduinoPort));
-    if (Integer.parseInt(tmpArd) == 1){ //checks if RPi Instruction for opponent waiting is true
-      pagestate = pagestate + 1;
-      pagestate_change(pagestate);
-    }
-  }
-  
-  if (pagestate == 36){
-    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
-    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
-  }
-  
   //Serial messages to arduino
   if (pagestate >=1 && pagestate <= 17){
     myArduinoPort.write(createArduinoPacket(NONE,NONE));
@@ -168,5 +154,19 @@ public void pagestate_change(int pagestate) {
   }
   if(pagestate==36){
     myRPiPort.write(createRPiPacket(NONE,myScore));
+  }
+  
+  //Serial receiving from Arduino and Raspberry Pi
+  if(pagestate == 35){
+    String tmpArd = new String(recvWithStartEndMarkers(myArduinoPort));
+    if (Integer.parseInt(tmpArd) == 1){ //checks if RPi Instruction for opponent waiting is true
+      pagestate = pagestate + 1;
+      pagestate_change(pagestate);
+    }
+  }
+  
+  if (pagestate == 36){
+    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
+    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
   }
 }
