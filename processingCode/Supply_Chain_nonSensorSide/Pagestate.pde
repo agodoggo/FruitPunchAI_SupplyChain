@@ -156,15 +156,16 @@ public void pagestate_change(int pagestate) {
     myRPiPort.write(createRPiPacket(NONE,myScore));
   }
   
-  //Serial receiving from Arduino and Raspberry Pi
-  if(pagestate == 35){
-    String tmpArd = new String(recvWithStartEndMarkers(myArduinoPort));
-    if (Integer.parseInt(tmpArd) == 1){ //checks if RPi Instruction for opponent waiting is true
+  //Serial receiving from Raspberry Pi
+  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
+    int oppWaiting = Integer.parseInt(split(new String(recvWithStartEndMarkers(myRPiPort)),",")[1]);
+    if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
       pagestate = pagestate + 1;
       pagestate_change(pagestate);
     }
   }
   
+  //serial receiving from Arduino port
   if (pagestate == 36){
     myScore = new String(recvWithStartEndMarkers(myArduinoPort));
     oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
