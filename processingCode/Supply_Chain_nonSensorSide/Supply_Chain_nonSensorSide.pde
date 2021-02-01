@@ -8,7 +8,7 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //Set the pagestate at 0 to begin the program at Dia1
 int pagestate = 1;
-boolean newpage = false;
+boolean newpage = true;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
@@ -64,10 +64,7 @@ void setup()
 void draw()
 {
  background (0);
- if (newpage){
-    pagestate_change(pagestate);
-    newpage = false;
- }
+ pagestate_change(pagestate);
 }
 
 char[] recvWithStartEndMarkers(Serial port) {

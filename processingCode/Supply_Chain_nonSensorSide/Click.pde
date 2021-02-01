@@ -2,7 +2,6 @@ void mouseClicked(){
   
   //Dia 1 buttons
   //New game button
-  int initial_pagestate = pagestate;
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
     pagestate = 2;
   }
@@ -250,11 +249,6 @@ void mouseClicked(){
       //display game over and return to homescreen
       pagestate = 1;
     }
-  }
-    
-  // see if pagestate changed
-  if(initial_pagestate==pagestate){
-    newpage = true;
   }
 }
   
