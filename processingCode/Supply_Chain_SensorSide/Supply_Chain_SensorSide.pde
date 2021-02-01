@@ -113,7 +113,7 @@ String createArduinoPacket(String arrow_phase, String score_query, String stone_
   return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
 }
 String createRPiPacket(String opponent_waiting, String score){
-  return "<"+opponent_waiting+","+score_+">";
+  return "<"+opponent_waiting+","+score+">";
 }
 int[] parseStoneValues(){
     int numBoards = 17;
