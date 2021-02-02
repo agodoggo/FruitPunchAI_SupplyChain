@@ -1,5 +1,5 @@
 //demand LED blink test
-const int demand_LED = 6;
+const int demand_LED = 5;
 void setup() {
   // put your setup code here, to run once:
   pinMode(demand_LED,OUTPUT);
