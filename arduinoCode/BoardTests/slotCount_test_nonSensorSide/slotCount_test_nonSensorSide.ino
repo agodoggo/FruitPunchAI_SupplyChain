@@ -8,6 +8,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  int slotCount = digitalRead(slotCount);
+  int slotCount = analogRead(slotCount);
   Serial.println(slotCount);
 }
