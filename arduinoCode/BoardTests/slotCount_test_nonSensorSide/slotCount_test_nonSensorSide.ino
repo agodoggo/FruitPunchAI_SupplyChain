@@ -11,6 +11,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   int sensValue = digitalRead(slotCount);
   if (sensValue != toggle){
+    toggle = sensValue;
     Serial.println(millis());
   }
 //  float slotCount = sensValue * (5.0/1023.0);
