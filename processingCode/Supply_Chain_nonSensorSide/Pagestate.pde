@@ -163,9 +163,9 @@ public void pagestate_change(int pagestate) {
     String ArduinoMsg = new String(recvWithStartEndMarkers(myArduinoPort));
     print("ArduinoMsg:"+ArduinoMsg);
     myScore = ArduinoMsg;
-    String RpiMsg = new String(recvWithStartEndMarkers(myRPiPort));
-    print("RpiMsg:" + RpiMsg);
-    oppScore = split(RpiMsg,',')[1];
+    //String RpiMsg = new String(recvWithStartEndMarkers(myRPiPort));
+    //print("RpiMsg:" + RpiMsg);
+    //oppScore = split(RpiMsg,',')[1];
   }
   
   //display score
