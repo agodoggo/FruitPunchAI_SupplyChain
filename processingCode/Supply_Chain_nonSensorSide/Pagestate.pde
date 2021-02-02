@@ -160,8 +160,12 @@ public void pagestate_change(int pagestate) {
   
   //serial receiving from Arduino port and RPi
   if (pagestate == 36){
-    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
-    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
+    String ArduinoMsg = new String(recvWithStartEndMarkers(myArduinoPort));
+    print("ArduinoMsg:"+ArduinoMsg);
+    myScore = ArduinoMsg;
+    String RpiMsg = new String(recvWithStartEndMarkers(myRPiPort);
+    print("RpiMsg:" + RpiMsg);
+    oppScore = split(RpiMsg,',')[1];
   }
   
   //display score
