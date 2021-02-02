@@ -3,7 +3,7 @@ const int slotCount = 5;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  pinMode(slotCount,INPUT);
+  pinMode(slotCount,INPUT_PULLUP);
 }
 
 void loop() {
