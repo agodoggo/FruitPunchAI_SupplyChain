@@ -118,14 +118,6 @@ public void pagestate_change(int pagestate) {
     text(roundNo, 100, 75);
   }
   
-  //display score
-  if(pagestate == 36){
-    text("Your score ",350,600);
-    text(myScore,400,600);
-    text("Opponent's score ",350,750);
-    text(oppScore,450,750);
-  }
-  
   //Serial messages to arduino
   if (pagestate >=1 && pagestate <= 17){
     myArduinoPort.write(createArduinoPacket(NONE,NONE));
@@ -166,9 +158,17 @@ public void pagestate_change(int pagestate) {
     }
   }
   
-  //serial receiving from Arduino port
+  //serial receiving from Arduino port and RPi
   if (pagestate == 36){
     myScore = new String(recvWithStartEndMarkers(myArduinoPort));
     oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
+  }
+  
+  //display score
+  if(pagestate == 36){
+    text("Your score ",350,600);
+    text(myScore,400,600);
+    text("Opponent's score ",350,750);
+    text(oppScore,450,750);
   }
 }
