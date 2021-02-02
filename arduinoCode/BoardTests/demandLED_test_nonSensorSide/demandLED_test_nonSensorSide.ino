@@ -4,7 +4,7 @@
 const int demand_LED = 6;
 const int LED_COUNT = 16;
 
-Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEOKHZ800)
+Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800)
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
