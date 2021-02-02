@@ -14,6 +14,9 @@ boolean newpage = true;
 int roundNo = 1;
 int roundLim = 10; //default round limit
 
+//global int
+int oppWaiting = 0;
+
 //set serial baudrate
 int baudRate = 9600;
 
@@ -59,6 +62,9 @@ void setup()
 
  String RPiPort = Serial.list()[4];
  myRPiPort = new Serial(this, RPiPort, baudRate);
+ 
+ myArduinoPort.bufferUntil('>');
+ myRPiPort.bufferUntil('>');
 }
 
 void draw()
@@ -67,39 +73,19 @@ void draw()
  pagestate_change(pagestate);
 }
 
-char[] recvWithStartEndMarkers(Serial port) {
-    int numChars = 32;
-    char[] receivedChars = new char[numChars];
-    
-    boolean recvInProgress = false;
-    int ndx = 0;
-    char startMarker = '<';
-    char endMarker = '>';
-    char rc;
- 
-    while (port.available() > 0) {
-        rc = port.readChar();
-
-        if (recvInProgress == true) {
-            if (rc != endMarker) {
-                receivedChars[ndx] = rc;
-                ndx++;
-                if (ndx >= numChars) {
-                    ndx = numChars - 1;
-                }
-            }
-            else {
-                receivedChars[ndx] = '\0'; // terminate the string
-                recvInProgress = false;
-                ndx = 0;
-            }
-        }
-
-        else if (rc == startMarker) {
-            recvInProgress = true;
-        }
-    }
-    return receivedChars;
+void serialEvent(Serial thisPort){
+  //store received transmission in variable
+  char[] tmp = new char[32];
+  tmp = recvWithStartEndMarkers(thisPort);
+  
+  //store in appropriate globals
+  if (thisPort == myArduinoPort){
+    myScore = str(Integer.parseInt(split(new String(tmp),",")[0]));
+  }
+  if(thisPort == myRPiPort){
+    oppWaiting = Integer.parseInt(split(new String(tmp),",")[0]);
+    oppScore = str(Integer.parseInt(split(new String(tmp),",")[1]));
+  }
 }
 
 String createArduinoPacket(String arrow_phase, String score_query){

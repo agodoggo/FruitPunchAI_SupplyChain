@@ -10,7 +10,7 @@ void mouseClicked(){
   //Dia 2 buttons
   //next button
   else if (pagestate == 2 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
-    pagestate =4;
+    pagestate = 4;
   }
   //Minus button should decrease number in system
   else if (pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
@@ -49,16 +49,16 @@ void mouseClicked(){
   }
 
   //SUPPLY PHASE
-  //Dia 12  
+  //Dia 12
+  //skip waiting page for now (Dia 17), go to next phase (Dia 18)
+  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
+  pagestate = 18;
+  sendWaitingStatus()
+  }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
-    pagestate =13;
+    pagestate = 13;
   }
-  //next button
-  //else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  //pagestate = 17;
-  //pagestate_change(17);
-  //}
   //Ai advice cloud
   else if (pagestate == 12 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
   pagestate = 16;
@@ -89,13 +89,25 @@ void mouseClicked(){
    pagestate = 12;
     }
   }
-  //skip waiting page for now (Dia 17), go to next phase (Dia 18)
-  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  pagestate = 18;
+  
+  //Dia 17
+  //next button to Dia 18
+  else if (pagestate == 17 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
+  checkWaiting()
   }
+  
     
   //ASSEMBLY
   //Dia 18
+  //skip dia 22 for now -> Dia 23
+  else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+  pagestate = 23; //change to 22 for final version
+  sendWaitingStatus()
+  }
+  //info button
+  else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
+  pagestate = 20;
+  }
   //Ai advice cloud
   else if (pagestate == 18 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
   pagestate = 19;
@@ -105,12 +117,6 @@ void mouseClicked(){
   //go back to Dia 18 by clicking outside of bubble
   else if (pagestate == 19 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
   pagestate =18;
-  }
-  
-  //Dia 18
-  //info button
-  else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 20;
   }
   
   //Dia 20
@@ -127,20 +133,19 @@ void mouseClicked(){
     }
   }
   
-  //Dia 18
-  ////next button -> Dia 22
-  //else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 22;
-  //pagestate_change(22);
-  //}
-  //skip dia 22 for now -> Dia 23
-  else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 23;
-  }
-    
+  //Dia 22
+  ////next button -> Dia 23
+  else if (pagestate == 22 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+  checkWaiting()
+  } 
     
   //LOGISTICS  
   //Dia 23
+  //next button -> Dia 27
+  else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    pagestate = 27;
+    sendWaitingStatus()
+  }
   //Ai advice cloud
   else if (pagestate == 23 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
   pagestate = 25;
@@ -166,13 +171,8 @@ void mouseClicked(){
   
   //Dia 23
   ////next dia 26
-  //else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 26;
-  //pagestate_change(26);
-  //}
-  //skip dia 26 for now -> Dia 27
-  else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 27;
+  else if (pagestate == 26 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    checkWaiting();
   }
 
   //TRANSPORT
@@ -196,6 +196,7 @@ void mouseClicked(){
   //next button -> 32 (change to 31 when waiting for opponent function written)
   else if (pagestate == 29 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 32;
+  sendWaitingStatus()
   }
   //info button
   else if (pagestate == 29 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -207,35 +208,43 @@ void mouseClicked(){
   else if (pagestate == 30 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
   pagestate = 29;
   }
+  
+  //Dia 31
+  else if (pagestate == 31 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    checkWaiting();
+  }
 
   //DEMAND
   //Dia 32
-  ////next button
-  //else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 35;
-  //pagestate_change(35);
-  //}
-  //skip dia 35 for now -> 36
+  //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 36;
+    pagestate = 36;
+    sendWaitingStatus();
   }
   //info button
   else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 33;
+    pagestate = 33;
   }
   
   //Dia 33
   //next button
   else if (pagestate == 33 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 34;
+    pagestate = 34;
   }
   
   //Dias 33-34
   //back button
   else if (pagestate == 33 || pagestate == 34) {
-  if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-   pagestate = 32;
+    if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+      pagestate = 32;
     }
+  }
+  
+  //Dia 35
+  ////next button
+  else if (pagestate == 35 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    sendScore();
+    checkWaiting();
   }
   
   //Dia 36
@@ -249,6 +258,29 @@ void mouseClicked(){
       //display game over and return to homescreen
       pagestate = 1;
     }
+  }
+  
+  //Serial messages to arduino for arrow displays
+  if (pagestate >=1 && pagestate <= 17){
+    myArduinoPort.write(createArduinoPacket(NONE,NONE));
+  }
+  else if (pagestate >=18 && pagestate <= 22){
+    myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
+  }
+  else if (pagestate >=23 && pagestate <= 26){
+    myArduinoPort.write(createArduinoPacket(LOGISTICS,NONE));
+  }
+  else if (pagestate >=27 && pagestate <= 28){
+    myArduinoPort.write(createArduinoPacket(TRANSPORT1,NONE));
+  }
+  else if (pagestate >=29 && pagestate <= 31){
+    myArduinoPort.write(createArduinoPacket(TRANSPORT2,NONE));
+  }
+  else if (pagestate >=32 && pagestate <= 35){
+    myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
+  }
+  else if (pagestate == 36){//score query
+    myArduinoPort.write(createArduinoPacket(NONE,"1"));
   }
 }
   
