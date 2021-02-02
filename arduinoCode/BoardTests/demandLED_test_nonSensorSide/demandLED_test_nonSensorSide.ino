@@ -9,7 +9,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   strip.begin();
-  strip.setBrightness(255);
+  strip.setBrightness(120);
   strip.show();
 }
 
