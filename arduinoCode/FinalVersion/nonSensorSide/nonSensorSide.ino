@@ -1,6 +1,13 @@
 //program for Arduino of non-sensor side
 //last modified 25 January 2019
 
+//slot counter variables
+int State;             // the current reading from the input pin
+int lastState = LOW;   // the previous reading from the input pin
+unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+unsigned long debounceDelay = 30;    // the debounce time; increase if the output flickers
+
+
 //define all of these
 const int phaseNo = 5;
 int phasePins[phaseNo] = {4,7,3,2,6}; // {Assembly, Logistics, Transport1, Transport2, Demand}
@@ -108,7 +115,7 @@ void changeHardwareState(){
     
   }
 
-  score += digitalRead(slotCount_dataPin); //need to check if this is sufficient, otherwise need to implement a debounce
+  slotCount();
   writeArrowStates();
   delay(10);
 }
@@ -126,4 +133,31 @@ void parseData(){
 
 String createPacket(String val){
   return "<"+val+">";
+}
+
+void slotCount(){
+  int reading = digitalRead(slotCount_dataPin);
+
+  // If the switch changed, due to noise or pressing:
+  if (reading != lastState) {
+    // reset the debouncing timer
+    lastDebounceTime = millis();
+  }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // whatever the reading is at, it's been there for longer than the debounce
+    // delay, so take it as the actual current state:
+
+    // if the button state has changed:
+    if (reading != State) {
+      State = reading;
+
+      // only toggle the LED if the new button state is HIGH
+      if (State == LOW) {
+        score++;
+        Serial.println(score); //comment out for final version
+      }
+    } 
+  }
+  lastState = reading;
 }
