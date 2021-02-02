@@ -1,3 +1,5 @@
+#include <Adafruit_NeoPixel.h>
+
 //demand LED blink test
 const int demand_LED = 6;
 const int LED_COUNT = 16;
