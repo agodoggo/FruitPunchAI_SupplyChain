@@ -171,6 +171,7 @@ public void pagestate_change(int pagestate) {
   //display score
   if(pagestate == 36){
     text("Your score ",350,600);
+    fill(0);
     text(myScore,400,600);
     text("Opponent's score ",350,750);
     text(oppScore,450,750);
