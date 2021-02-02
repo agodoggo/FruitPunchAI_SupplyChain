@@ -1,5 +1,5 @@
 //demand LED blink test
-const int slotCount = 5;
+const int slotCount = A5;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
