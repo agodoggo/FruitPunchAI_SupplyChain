@@ -21,5 +21,6 @@ void loop() {
   strip.show();
   delay(1000);
   strip.clear();
+  strip.show();
   delay(1000);
 }
