@@ -1,3 +1,5 @@
+#include <Adafruit_NeoPixel.h>
+
 //program for Arduino of non-sensor side
 //last modified 25 January 2019
 
@@ -7,10 +9,14 @@ int lastState = LOW;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 30;    // the debounce time; increase if the output flickers
 
+//slot counter LED
+const int demand_LED = 6;
+const int LED_COUNT = 16;
+Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
 
 //define all of these
 const int phaseNo = 5;
-int phasePins[phaseNo] = {4,7,3,2,6}; // {Assembly, Logistics, Transport1, Transport2, Demand}
+int phasePins[phaseNo] = {4,7,3,2}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int phaseArrowStates[5] = {LOW,LOW,LOW,LOW,LOW}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int slotCount_dataPin = 5; //make sure to pullup to 20k
 const byte numChars = 32;
@@ -102,7 +108,13 @@ void changeHardwareState(){
     // arrow if-else statements
     if (arrow_phase > 0 && arrow_phase < 6){
       memset(phaseArrowStates,0,sizeof(phaseArrowStates));
-      phaseArrowStates[arrow_phase-1] = HIGH;
+      setLEDStripLOW();
+      if(arrow_phase > 0 && arrow_phase < 5){
+        phaseArrowStates[arrow_phase-1] = HIGH;
+      }
+      else if (arrow_phase == 5){
+        setLEDStripHIGH();
+      }
     }
     
     //score query statements
@@ -160,4 +172,22 @@ void slotCount(){
     } 
   }
   lastState = reading;
+}
+
+void setupLEDstrip(){
+  strip.begin();
+  strip.setBrightness(120);
+  strip.show();
+}
+
+void setLEDStripHIGH(){
+  for(int i = 0; i < LED_COUNT; i++){
+    strip.setPixelColor(i,255,255,255);
+  }
+  strip.show()
+}
+
+void setLEDStripLOW(){
+  strip.clear();
+  strip.show();
 }
