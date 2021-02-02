@@ -1,5 +1,6 @@
 //slot counter counting test - based on Debounce Arduino example
 
+//global variables
 //debouncing variables
 int State;             // the current reading from the input pin
 int lastState = LOW;   // the previous reading from the input pin
@@ -8,6 +9,7 @@ int lastState = LOW;   // the previous reading from the input pin
 // milliseconds, will quickly become a bigger number than can be stored in an int.
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 30;    // the debounce time; increase if the output flickers
+
 
 const int slotCount = A5;
 int toggle = HIGH;
