@@ -8,7 +8,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  int sensValue = analogRead(slotCount);
-  float slotCount = sensValue * (5.0/1023.0);
-  Serial.println(slotCount);
+  int sensValue = digitalRead(slotCount);
+//  float slotCount = sensValue * (5.0/1023.0);
+  Serial.println(sensValue);
 }
