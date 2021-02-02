@@ -1,3 +1,4 @@
+//git test
 public void pagestate_change(int pagestate) {
   //change background picture
   if(pagestate == 1){
