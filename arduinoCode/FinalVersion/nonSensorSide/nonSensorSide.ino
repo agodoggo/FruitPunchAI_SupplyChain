@@ -58,7 +58,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  unsigned long startTime = millis());
+  unsigned long startTime = millis();
   recvWithStartEndMarkers();
   changeHardwareState();
   Serial.println(readTime-startTime);
