@@ -93,7 +93,7 @@ void mouseClicked(){
   //Dia 17
   //next button to Dia 18
   else if (pagestate == 17 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  checkWaiting()
+  checkWaiting();
   }
   
     
@@ -102,7 +102,7 @@ void mouseClicked(){
   //skip dia 22 for now -> Dia 23
   else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 23; //change to 22 for final version
-  sendWaitingStatus()
+  sendWaitingStatus();
   }
   //info button
   else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -136,7 +136,7 @@ void mouseClicked(){
   //Dia 22
   ////next button -> Dia 23
   else if (pagestate == 22 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  checkWaiting()
+  checkWaiting();
   } 
     
   //LOGISTICS  
@@ -144,7 +144,7 @@ void mouseClicked(){
   //next button -> Dia 27
   else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
     pagestate = 27;
-    sendWaitingStatus()
+    sendWaitingStatus();
   }
   //Ai advice cloud
   else if (pagestate == 23 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
