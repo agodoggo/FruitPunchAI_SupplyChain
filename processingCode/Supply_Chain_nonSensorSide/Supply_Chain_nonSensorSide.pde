@@ -76,6 +76,7 @@ void draw()
 void serialEvent(Serial thisPort){
   //store received transmission in variable
   char[] tmp = new char[32];
+  print("New message: " + new String(tmp));
   tmp = recvWithStartEndMarkers(thisPort);
   
   //store in appropriate globals
