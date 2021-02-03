@@ -150,7 +150,7 @@ void slotCount(){
   
   int reading = digitalRead(slotCount_dataPin);
 //  readTime = millis();
-  Serial.print(reading);
+//  Serial.print(reading);
   // If the switch changed, due to noise or pressing:
   if (reading != lastState) {
     // reset the debouncing timer
