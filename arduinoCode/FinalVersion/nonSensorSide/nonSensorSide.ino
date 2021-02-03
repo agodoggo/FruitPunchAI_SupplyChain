@@ -13,7 +13,7 @@ unsigned long debounceDelay = 10;    // the debounce time; increase if the outpu
 const int demand_LED = 6;
 const int LED_COUNT = 16;
 Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
-boolean demand_phase = true;
+boolean demand_phase = false;
 
 //define all of these
 const int phaseNo = 4;
@@ -180,11 +180,8 @@ void writeArrowStates(){
   for (int i = 0; i < phaseNo; i++){
     digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
-//  Serial.print(demand_phase);
   if(demand_phase=true){
     setLEDStripHIGH();
-//    Serial.println("HIGH");
-//    delay(10);
   }
   else{
     setLEDStripLOW();
