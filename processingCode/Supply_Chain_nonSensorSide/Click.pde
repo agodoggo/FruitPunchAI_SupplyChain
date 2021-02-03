@@ -195,8 +195,9 @@ void mouseClicked(){
   //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
     pagestate = 35;
-    sendScore();
-    sendWaitingStatus();
+    myArduinoPort.write(createArduinoPacket(NONE,"1")); //ask for score before proceeding to dia36
+    waitForArduinoData();
+    createRPiPacket("1", myScore); //send score and waiting status together
   }
   //info button
   else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -248,9 +249,6 @@ void mouseClicked(){
   }
   else if (pagestate >=32 && pagestate <= 35){
     myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
-  }
-  else if (pagestate == 36){//score query
-    myArduinoPort.write(createArduinoPacket(NONE,"1"));
   }
 }
   

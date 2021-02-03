@@ -24,6 +24,10 @@ int baudRate = 115200;
 Serial myArduinoPort;
 Serial myRPiPort;
 
+//new data for arduino and raspberry pi
+boolean ArduinoNewData = false;
+boolean RaspberryPiNewData = false;
+
 //score Strings
 String myScore = "0";
 String oppScore = "0";
@@ -82,6 +86,7 @@ void serialEvent(Serial thisPort){
   if (thisPort == myArduinoPort){
     print("Decoded message from Arduino: " + new String(tmp));
     myScore = new String(tmp);
+    ArduinoNewData = true;
   }
   if(thisPort == myRPiPort){
     String[] val = new String[2];
@@ -91,6 +96,7 @@ void serialEvent(Serial thisPort){
     print("oppWaiting: " + str(oppWaiting));
     oppScore = val[1];
     print("oppScore: " + oppScore);
+    RaspberryPiNewData = true;
   }
 }
 

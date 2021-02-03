@@ -11,8 +11,11 @@ public void sendWaitingStatus(){
   myRPiPort.write(createRPiPacket("1",NONE)); 
 }
 
-public void sendScore(){
- myRPiPort.write(createRPiPacket(NONE,myScore));
+public void waitForArduinoData(){
+  while(ArduinoNewData){
+     delay(10);
+  }
+  ArduinoNewData = false;
 }
 
 char[] recvWithStartEndMarkers(Serial port) {
