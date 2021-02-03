@@ -53,7 +53,7 @@ void mouseClicked(){
   //skip waiting page for now (Dia 17), go to next phase (Dia 18)
   else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
   pagestate = 18;
-  sendWaitingStatus()
+  sendWaitingStatus();
   }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
