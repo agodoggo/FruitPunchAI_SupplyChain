@@ -1,8 +1,6 @@
 //Serial receiving from Raspberry Pi
 public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
-    pagestate = pagestate + 1;
-    oppWaiting = 0;
     if(pagestate==17){
       myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
     }
@@ -18,6 +16,8 @@ public void checkWaiting(){
     else if(pagestate==35){
       myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
     }
+    pagestate = pagestate + 1;
+    oppWaiting = 0;
   }
 }
 

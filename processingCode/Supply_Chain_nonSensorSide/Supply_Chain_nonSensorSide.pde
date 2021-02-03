@@ -24,7 +24,7 @@ int baudRate = 115200;
 Serial myArduinoPort;
 Serial myRPiPort;
 
-//new data for arduino and raspberry pi
+/\new data for arduino and raspberry pi
 boolean ArduinoNewData = false;
 boolean RaspberryPiNewData = false;
 
@@ -84,27 +84,27 @@ void serialEvent(Serial thisPort){
   
   //store in appropriate globals
   if (thisPort == myArduinoPort){
-    print("Decoded message from Arduino: " + new String(tmp) +"/n");
+    print("Decoded message from Arduino: " + new String(tmp) +"\n");
     myScore = new String(tmp);
     ArduinoNewData = true;
   }
   if(thisPort == myRPiPort){
     String[] val = new String[2];
     val = split(new String(tmp),",");
-    print("Decoded message from Raspberry Pi: " + new String(tmp) +"/n");
+    print("Decoded message from Raspberry Pi: " + new String(tmp) +"\n");
     oppWaiting = Integer.parseInt(val[0]);
-    print("oppWaiting: " + str(oppWaiting) +"/n");
+    print("oppWaiting: " + str(oppWaiting) +"\n");
     oppScore = val[1];
-    print("oppScore: " + oppScore +"/n");
+    print("oppScore: " + oppScore +"\n");
     RaspberryPiNewData = true;
   }
 }
 
 String createArduinoPacket(String arrow_phase, String score_query){
-  print("New message to Arduino: " + "<"+arrow_phase+","+score_query+">"+"/n");
+  print("New message to Arduino: " + "<"+arrow_phase+","+score_query+">"+"\n");
   return "<"+arrow_phase+","+score_query+">";
 }
 String createRPiPacket(String opponent_waiting, String score_query){
-  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"/n");
+  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
 }
