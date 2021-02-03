@@ -168,7 +168,7 @@ void slotCount(){
       // only toggle the LED if the new button state is HIGH
       if (State == LOW) {
         score++;
-        Serial.println(score); //comment out for final version
+//        Serial.println(score); //comment out for final version
       }
     } 
   }
