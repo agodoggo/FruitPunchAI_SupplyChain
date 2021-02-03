@@ -15,9 +15,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  setLEDStripHIGH()
+  setLEDStripHIGH();
   delay(1000);
-  setLEDStripLOW()
+  setLEDStripLOW();
   delay(1000);
 }
 
