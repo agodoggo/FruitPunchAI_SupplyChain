@@ -13,6 +13,9 @@ public void checkWaiting(){
     else if(pagestate==31){
       myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
     }
+    else if(pagestate == 35){
+       myArduinoPort.write(createArduinoPacket(NONE,NONE));
+    }
     pagestate = pagestate + 1;
     oppWaiting = 0;
   }

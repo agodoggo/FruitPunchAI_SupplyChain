@@ -230,7 +230,6 @@ void mouseClicked(){
       //display game over and return to homescreen
       pagestate = 1;
     }
-    myArduinoPort.write(createArduinoPacket(NONE,NONE));
   }
 }
   
