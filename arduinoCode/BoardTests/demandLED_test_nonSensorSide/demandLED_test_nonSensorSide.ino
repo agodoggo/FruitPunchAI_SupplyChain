@@ -15,12 +15,20 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  setLEDStripHIGH()
+  delay(1000);
+  setLEDStripLOW()
+  delay(1000);
+}
+
+void setLEDStripHIGH(){
   for(int i = 0; i < LED_COUNT; i++){
     strip.setPixelColor(i,255,255,255);
   }
   strip.show();
-  delay(1000);
+}
+
+void setLEDStripLOW(){
   strip.clear();
   strip.show();
-  delay(1000);
 }
