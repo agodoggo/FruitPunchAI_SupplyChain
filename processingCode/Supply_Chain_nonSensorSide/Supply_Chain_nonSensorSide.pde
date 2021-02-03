@@ -77,13 +77,14 @@ void serialEvent(Serial thisPort){
   //store received transmission in variable
   char[] tmp = new char[32];
   tmp = recvWithStartEndMarkers(thisPort);
-  print("Decoded message: " + new String(tmp));
   
   //store in appropriate globals
   if (thisPort == myArduinoPort){
+    print("Decoded message from Arduino: " + new String(tmp));
     myScore = new String(tmp);
   }
   if(thisPort == myRPiPort){
+    print("Decoded message from Raspberry Pi: " + new String(tmp));
     oppWaiting = Integer.parseInt(split(new String(tmp),",")[0]);
     oppScore = str(Integer.parseInt(split(new String(tmp),",")[1]));
   }
