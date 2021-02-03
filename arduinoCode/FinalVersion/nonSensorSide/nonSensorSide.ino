@@ -125,7 +125,8 @@ void changeHardwareState(){
   }
   
   else{ // no data to read
-    
+     memset(phaseArrowStates,0,sizeof(phaseArrowStates));
+     demand_phase = false;
   }
 
   slotCount();
