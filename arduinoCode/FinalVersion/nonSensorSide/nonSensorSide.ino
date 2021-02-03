@@ -44,6 +44,9 @@ int SCORE = 1;
 int arrow_phase = -1;
 int score_query = -1;
 
+//extra vars
+unsigned long readTime;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -55,10 +58,10 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  unsigned long startTime = millis());
   recvWithStartEndMarkers();
-  Serial.print("-");
   changeHardwareState();
-  Serial.print("|");
+  Serial.println(readTime-startTime);
 }
 
 void writeArrowStates(){
@@ -150,8 +153,9 @@ String createPacket(String val){
 }
 
 void slotCount(){
+  
   int reading = digitalRead(slotCount_dataPin);
-
+  readTime = millis();
   // If the switch changed, due to noise or pressing:
   if (reading != lastState) {
     // reset the debouncing timer
