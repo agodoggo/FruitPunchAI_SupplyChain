@@ -163,6 +163,7 @@ void mouseClicked(){
   //next button
   else if (pagestate == 27 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 29;
+  myArduinoPort.write(createArduinoPacket(TRANSPORT2,NONE));
   }
   //info button
   else if (pagestate == 27 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
