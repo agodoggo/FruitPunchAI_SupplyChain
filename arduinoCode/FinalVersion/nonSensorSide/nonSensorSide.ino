@@ -7,7 +7,7 @@
 int State;             // the current reading from the input pin
 int lastState = LOW;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 30;    // the debounce time; increase if the output flickers
+unsigned long debounceDelay = 10;    // the debounce time; increase if the output flickers
 
 //slot counter LED
 const int demand_LED = 6;
