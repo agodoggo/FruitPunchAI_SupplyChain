@@ -107,10 +107,10 @@ void changeHardwareState(){
 
     
     // arrow if-else statements
-    if (arrow_phase >= 0 && arrow_phase < 6){
+    if (arrow_phase >= 0 && arrow_phase <= 5){
       memset(phaseArrowStates,0,sizeof(phaseArrowStates));
       demand_phase = false;
-      if(arrow_phase > 0 && arrow_phase < 5){
+      if(arrow_phase >= 1 && arrow_phase <= phaseNo){
         phaseArrowStates[arrow_phase-1] = HIGH;
       }
       else if (arrow_phase == 5){
