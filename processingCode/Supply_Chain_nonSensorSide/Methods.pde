@@ -3,6 +3,21 @@ public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     pagestate = pagestate + 1;
     oppWaiting = 0;
+    if(pagestate==17){
+      myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
+    }
+    else if(pagestate==22){
+      myArduinoPort.write(createArduinoPacket(LOGISTICS,NONE));
+    }
+    else if(pagestate==26){
+      myArduinoPort.write(createArduinoPacket(TRANSPORT1,NONE));
+    }
+    else if(pagestate==31){
+      myArduinoPort.write(createArduinoPacket(TRANSPORT2,NONE));
+    }
+    else if(pagestate==35){
+      myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
+    }
   }
 }
 
