@@ -84,11 +84,13 @@ void serialEvent(Serial thisPort){
     myScore = new String(tmp);
   }
   if(thisPort == myRPiPort){
+    String[] val = new String[2];
+    val = split(new String(tmp),",");
     print("Decoded message from Raspberry Pi: " + new String(tmp));
-    oppWaiting = Integer.parseInt(split(new String(tmp),",")[0]);
+    oppWaiting = Integer.parseInt(val[0]);
     print("oppWaiting: " + str(oppWaiting));
-    oppScore = str(Integer.parseInt(split(new String(tmp),",")[1]));
-    print("oppWaiting: " + oppScore);
+    oppScore = val[1];
+    print("oppScore: " + oppScore);
   }
 }
 
