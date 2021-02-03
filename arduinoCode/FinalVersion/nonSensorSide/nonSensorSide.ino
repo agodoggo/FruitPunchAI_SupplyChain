@@ -15,9 +15,9 @@ const int LED_COUNT = 16;
 Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
 
 //define all of these
-const int phaseNo = 5;
+const int phaseNo = 4;
 int phasePins[phaseNo] = {4,7,3,2}; // {Assembly, Logistics, Transport1, Transport2, Demand}
-int phaseArrowStates[5] = {LOW,LOW,LOW,LOW,LOW}; // {Assembly, Logistics, Transport1, Transport2, Demand}
+int phaseArrowStates[phaseNo] = {LOW,LOW,LOW,LOW}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int slotCount_dataPin = 5; //make sure to pullup to 20k
 const byte numChars = 32;
 char receivedChars[numChars];
@@ -186,7 +186,7 @@ void setLEDStripHIGH(){
   for(int i = 0; i < LED_COUNT; i++){
     strip.setPixelColor(i,255,255,255);
   }
-  strip.show()
+  strip.show();
 }
 
 void setLEDStripLOW(){
