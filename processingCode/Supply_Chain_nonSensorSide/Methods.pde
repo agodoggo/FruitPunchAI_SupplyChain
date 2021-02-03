@@ -27,7 +27,7 @@ public void sendWaitingStatus(){
 }
 
 public void waitForArduinoData(){
-  while(ArduinoNewData){
+  while(!ArduinoNewData){
      delay(10);
   }
   ArduinoNewData = false;
