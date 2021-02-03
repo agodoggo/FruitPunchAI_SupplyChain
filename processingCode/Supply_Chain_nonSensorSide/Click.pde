@@ -225,7 +225,7 @@ void mouseClicked(){
     if(roundNo <= roundLim){
       pagestate = 12;
       roundNo = roundNo + 1;
-      myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
+      myArduinoPort.write(createArduinoPacket(NONE,NONE));
     }
     else{
       //display game over and return to homescreen
