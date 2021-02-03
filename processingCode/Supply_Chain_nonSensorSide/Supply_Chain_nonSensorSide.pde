@@ -81,7 +81,7 @@ void serialEvent(Serial thisPort){
   
   //store in appropriate globals
   if (thisPort == myArduinoPort){
-    myScore = str(Integer.parseInt(new String(tmp)));
+    myScore = new String(tmp);
   }
   if(thisPort == myRPiPort){
     oppWaiting = Integer.parseInt(split(new String(tmp),",")[0]);
