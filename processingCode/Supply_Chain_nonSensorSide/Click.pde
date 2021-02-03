@@ -4,7 +4,6 @@ void mouseClicked(){
   //New game button
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
     pagestate = 2;
-    myArduinoPort.write(createArduinoPacket(NONE,NONE));
   }
   
   
@@ -26,7 +25,6 @@ void mouseClicked(){
   //next button
   else if (pagestate == 4 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
     pagestate =12;
-    myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
   }  
   //Question mark
    else if (pagestate == 4 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
@@ -232,6 +230,7 @@ void mouseClicked(){
       //display game over and return to homescreen
       pagestate = 1;
     }
+    myArduinoPort.write(createArduinoPacket(NONE,NONE));
   }
 }
   
