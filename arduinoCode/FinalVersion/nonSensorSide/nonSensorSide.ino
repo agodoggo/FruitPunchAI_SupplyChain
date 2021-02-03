@@ -125,8 +125,6 @@ void changeHardwareState(){
   }
   
   else{ // no data to read
-     memset(phaseArrowStates,0,sizeof(phaseArrowStates));
-     demand_phase = false;
   }
 
   slotCount();
@@ -183,9 +181,9 @@ void writeArrowStates(){
   }
   Serial.print("Demand: ");
   Serial.println(demand_phase);
-  Serial.print("Demand: ");
+  Serial.print("Arrow phase: ");
   Serial.println(arrow_phase);
-  if(demand_phase=true){
+  if(demand_phase==true){
     setLEDStripHIGH();
   }
   else{
