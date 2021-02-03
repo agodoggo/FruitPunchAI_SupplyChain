@@ -8,7 +8,6 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //Set the pagestate at 0 to begin the program at Dia1
 int pagestate = 1;
-boolean newpage = true;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
@@ -36,8 +35,9 @@ String oppScore = "0";
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
 
 //defining the instructions from RPi to Arduino
-//arrow phase codes
 String NONE = "0";
+
+//arrow phase codes
 String ASSEMBLY = "1";
 String LOGISTICS = "2";
 String TRANSPORT1 = "3";
@@ -48,8 +48,11 @@ String DEMAND = "5";
 String SCORE_QUERY = "1";
 String SCORE_ERASE = "2";
 
+//Waiting codes
+String WAITING = "1";
+
 void setup()
-{
+{ 
  //set screen size, this is the pixel ratio of the build in screens
  size (800, 1280);
  
@@ -65,6 +68,8 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
+ 
+ //setup serial ports
  String arduinoPort = Serial.list()[2];
  myArduinoPort = new Serial(this, arduinoPort, baudRate);
 
@@ -77,38 +82,8 @@ void setup()
 
 void draw()
 {
- background (0);
- pagestate_change(pagestate);
-}
-
-void serialEvent(Serial thisPort){
-  //store received transmission in variable
-  char[] tmp = new char[32];
-  tmp = recvWithStartEndMarkers(thisPort);
-  
-  //store in appropriate globals
-  if (thisPort == myArduinoPort){
-    print("Decoded message from Arduino: " + new String(tmp) +"\n");
-    myScore = new String(tmp);
-    ArduinoNewData = true;
+   //loop waiting if waiting
+  if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
+    checkWaiting();
   }
-  if(thisPort == myRPiPort){
-    String[] val = new String[2];
-    val = split(new String(tmp),",");
-    print("Decoded message from Raspberry Pi: " + new String(tmp) +"\n");
-    oppWaiting = Integer.parseInt(val[0]);
-    print("oppWaiting: " + str(oppWaiting) +"\n");
-    oppScore = val[1];
-    print("oppScore: " + oppScore +"\n");
-    RaspberryPiNewData = true;
-  }
-}
-
-String createArduinoPacket(String arrow_phase, String score_query){
-  print("New message to Arduino: " + "<"+arrow_phase+","+score_query+">"+"\n");
-  return "<"+arrow_phase+","+score_query+">";
-}
-String createRPiPacket(String opponent_waiting, String score_query){
-  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
-  return "<"+opponent_waiting+","+score_query+">";
 }

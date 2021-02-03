@@ -199,7 +199,7 @@ void mouseClicked(){
     pagestate = 35;
     myArduinoPort.write(createArduinoPacket(DEMAND,"1")); //ask for score before proceeding to dia36
     waitForArduinoData();
-    createRPiPacket("1", myScore); //send score and waiting status together
+    createRPiPacket(WAITING, myScore); //send score and waiting status together
   }
   //info button
   else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -233,5 +233,8 @@ void mouseClicked(){
       pagestate = 1;
     }
   }
+  
+  //change to correct pagestate
+  pagestate_change(pagestate);
 }
   

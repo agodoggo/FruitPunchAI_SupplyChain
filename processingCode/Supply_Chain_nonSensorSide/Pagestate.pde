@@ -1,5 +1,7 @@
 //git test
 public void pagestate_change(int pagestate) {
+  //clears out old frame
+  background(0);
   //change background picture
   if(pagestate == 1){
   image(Dia1,0,0);
@@ -125,9 +127,5 @@ public void pagestate_change(int pagestate) {
     text(myScore,500,600);
     text("Opponent's score ",350,750);
     text(oppScore,550,750);
-  }
-  
-  if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
-    checkWaiting();
   }  
 }
