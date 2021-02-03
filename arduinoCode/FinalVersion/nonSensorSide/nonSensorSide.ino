@@ -129,6 +129,7 @@ void changeHardwareState(){
 
   slotCount();
   writeArrowStates();
+  delay(10);
 }
 
 void parseData(){
@@ -179,10 +180,10 @@ void writeArrowStates(){
   for (int i = 0; i < phaseNo; i++){
     digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
-  Serial.println(demand_phase);
+  Serial.print(demand_phase);
   if(demand_phase=true){
     setLEDStripHIGH();
-    Serial.print("HIGH");
+    Serial.println("HIGH");
   }
   else{
     setLEDStripLOW();
