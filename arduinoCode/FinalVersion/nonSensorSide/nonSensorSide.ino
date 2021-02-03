@@ -13,6 +13,7 @@ unsigned long debounceDelay = 10;    // the debounce time; increase if the outpu
 const int demand_LED = 6;
 const int LED_COUNT = 16;
 Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
+boolean demand_phase = false;
 
 //define all of these
 const int phaseNo = 4;
@@ -64,12 +65,6 @@ void loop() {
 //  Serial.println(readTime-startTime);
 }
 
-void writeArrowStates(){
-  for (int i = 0; i < phaseNo; i++){
-    digitalWrite(phasePins[i],phaseArrowStates[i]);
-  }
-}
-
 void recvWithStartEndMarkers() {
     static boolean recvInProgress = false;
     static byte ndx = 0;
@@ -113,12 +108,12 @@ void changeHardwareState(){
     // arrow if-else statements
     if (arrow_phase > 0 && arrow_phase < 6){
       memset(phaseArrowStates,0,sizeof(phaseArrowStates));
-      setLEDStripLOW();
+      demand_phase = false;
       if(arrow_phase > 0 && arrow_phase < 5){
         phaseArrowStates[arrow_phase-1] = HIGH;
       }
       else if (arrow_phase == 5){
-        setLEDStripHIGH();
+        demand_phase = true;
       }
     }
     
@@ -179,6 +174,18 @@ void slotCount(){
     } 
   }
   lastState = reading;
+}
+
+void writeArrowStates(){
+  for (int i = 0; i < phaseNo; i++){
+    digitalWrite(phasePins[i],phaseArrowStates[i]);
+  }
+  if(demand_phase=true){
+    setLEDStripHIGH();
+  }
+  else{
+    setLEDStripLOW();
+  }
 }
 
 void setupLEDstrip(){
