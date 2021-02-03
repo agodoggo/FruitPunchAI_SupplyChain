@@ -56,7 +56,9 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   recvWithStartEndMarkers();
+  Serial.print("-");
   changeHardwareState();
+  Serial.print("|");
 }
 
 void writeArrowStates(){
