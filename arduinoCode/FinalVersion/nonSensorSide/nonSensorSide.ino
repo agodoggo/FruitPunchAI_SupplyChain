@@ -7,7 +7,7 @@
 int State;             // the current reading from the input pin
 int lastState = LOW;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 10;    // the debounce time; increase if the output flickers
+unsigned long debounceDelay = 2;    // the debounce time; increase if the output flickers
 
 //slot counter LED
 const int demand_LED = 6;
@@ -113,7 +113,7 @@ void changeHardwareState(){
       if(arrow_phase >= 1 && arrow_phase <= phaseNo){
         phaseArrowStates[arrow_phase-1] = HIGH;
       }
-      else if (arrow_phase == 5){
+      else if (arrow_phase == DEMAND){
         demand_phase = true;
       }
     }
