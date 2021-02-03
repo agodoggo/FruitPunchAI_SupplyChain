@@ -182,6 +182,7 @@ void writeArrowStates(){
   Serial.println(demand_phase);
   if(demand_phase=true){
     setLEDStripHIGH();
+    Serial.print("HIGH");
   }
   else{
     setLEDStripLOW();
