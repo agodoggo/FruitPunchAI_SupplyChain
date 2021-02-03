@@ -63,6 +63,10 @@ void loop() {
   recvWithStartEndMarkers();
   changeHardwareState();
 //  Serial.println(readTime-startTime);
+  setLEDStripHIGH();
+  delay(1000);
+  setLEDStripLOW();
+  delay(1000);
 }
 
 void recvWithStartEndMarkers() {
