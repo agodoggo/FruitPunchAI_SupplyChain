@@ -180,7 +180,10 @@ void writeArrowStates(){
   for (int i = 0; i < phaseNo; i++){
     digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
+  Serial.print("Demand: ");
   Serial.println(demand_phase);
+  Serial.print("Demand: ");
+  Serial.println(arrow_phase);
   if(demand_phase=true){
     setLEDStripHIGH();
   }
