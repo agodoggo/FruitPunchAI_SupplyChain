@@ -129,7 +129,6 @@ void changeHardwareState(){
 
   slotCount();
   writeArrowStates();
-  delay(10);
 }
 
 void parseData(){
