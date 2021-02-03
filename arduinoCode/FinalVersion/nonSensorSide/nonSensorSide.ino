@@ -50,7 +50,7 @@ int score_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
