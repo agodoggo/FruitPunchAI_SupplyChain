@@ -55,6 +55,7 @@ void setup() {
     pinMode(phasePins[i],OUTPUT);
   }
   pinMode(slotCount_dataPin, INPUT_PULLUP);
+  setupLEDstrip();
 }
 
 void loop() {
@@ -63,10 +64,6 @@ void loop() {
   recvWithStartEndMarkers();
   changeHardwareState();
 //  Serial.println(readTime-startTime);
-  setLEDStripHIGH();
-  delay(1000);
-  setLEDStripLOW();
-  delay(1000);
 }
 
 void recvWithStartEndMarkers() {
@@ -183,11 +180,11 @@ void writeArrowStates(){
   for (int i = 0; i < phaseNo; i++){
     digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
-  Serial.print(demand_phase);
+//  Serial.print(demand_phase);
   if(demand_phase=true){
     setLEDStripHIGH();
-    Serial.println("HIGH");
-    delay(10);
+//    Serial.println("HIGH");
+//    delay(10);
   }
   else{
     setLEDStripLOW();
