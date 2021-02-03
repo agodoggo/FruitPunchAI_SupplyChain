@@ -77,7 +77,7 @@ void serialEvent(Serial thisPort){
   //store received transmission in variable
   char[] tmp = new char[32];
   tmp = recvWithStartEndMarkers(thisPort);
-  print("New message: " + new String(tmp));
+  print("Decoded message: " + new String(tmp));
   
   //store in appropriate globals
   if (thisPort == myArduinoPort){
