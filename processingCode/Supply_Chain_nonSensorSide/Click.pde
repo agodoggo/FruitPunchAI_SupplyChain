@@ -196,7 +196,7 @@ void mouseClicked(){
   //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
     pagestate = 35;
-    myArduinoPort.write(createArduinoPacket(NONE,"1")); //ask for score before proceeding to dia36
+    myArduinoPort.write(createArduinoPacket(DEMAND,"1")); //ask for score before proceeding to dia36
     waitForArduinoData();
     createRPiPacket("1", myScore); //send score and waiting status together
   }
