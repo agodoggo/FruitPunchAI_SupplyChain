@@ -1,10 +1,10 @@
 //program for Arduino of sensor side, board 1 (non-raspberry pi side)
-//last modified 25 January 2019
+//last modified 3 February 2021
 
 #include "Arduino.h"
+#include <Adafruit_NeoPixel.h>
 
 //stone constants
-
 const int SIX_STONE_BOARD =  6;
 const int TWO_STONE_BOARD = 2;
 const int BOARD_COUNT = 11;
@@ -44,8 +44,10 @@ int LOGISTICS = 2;
 int TRANSPORT1 = 3;
 int TRANSPORT2 = 4;
 int DEMAND = 5;
-int SCORE = 6;
-int STONE_COUNT = 8;
+
+//information codes
+const int SCORE_QUERY = 1;
+const int SCORE_ERASE = 2;
 
 //deciphered score
 int arrow_phase = -1;
@@ -54,7 +56,7 @@ int stone_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
@@ -126,22 +128,21 @@ void changeHardwareState(){
     newData = false;
 
     //arrow if-else statements
-    if (arrow_phase == NONE){
-      phaseArrowStates[0] = LOW;
-      phaseArrowStates[1] = LOW;
-    }
-    else if (arrow_phase == ASSEMBLY){
+    phaseArrowStates[0] = LOW;
+    phaseArrowStates[1] = LOW;
+    if (arrow_phase == ASSEMBLY){
       phaseArrowStates[0] = HIGH;
-      phaseArrowStates[1] = LOW;
     }
     else if (arrow_phase == TRANSPORT2){
-       phaseArrowStates[0] = LOW;
       phaseArrowStates[1] = HIGH;
     }
 
     //score query
-    if (score_query == 1){
+    if (score_query == SCORE_QUERY){
       Serial.print(createPacket(String(score)));
+    }
+    else if (score_query == SCORE_ERASE){
+      score=0;
     }
 
     //stone query
@@ -151,7 +152,6 @@ void changeHardwareState(){
     }
   }
   writeArrowStates();
-  delay(10);
 }
 
 void writeArrowStates(){

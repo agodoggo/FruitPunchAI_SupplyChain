@@ -1,5 +1,7 @@
 //program for Arduino of sensor side - board 2 (raspberry pi side)
-//last modified 18 January 2019
+//last modified 3 February 2021
+
+#include <Adafruit_NeoPixel.h>
 
 //stones
 const int TEN_STONE_BOARD =  10;
@@ -18,11 +20,23 @@ int board_pins[BOARD_COUNT][TEN_STONE_BOARD] = {
   {A6,A7}
 };
 
+//slot counter variables
+int State;             // the current reading from the input pin
+int lastState = LOW;   // the previous reading from the input pin
+unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+unsigned long debounceDelay = 2;    // the debounce time; increase if the output flickers
+
+//slot counter LED
+const int demand_LED = 2;
+const int LED_COUNT = 16;
+Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
+boolean demand_phase = false;
+
 //define all of these
-const int phaseNo = 3;
-int phasePins[phaseNo] = {3,A8,2}; // {Logistics, Transport1, Demand}
+const int phaseNo = 2;
+int phasePins[phaseNo] = {3,A8}; // {Logistics, Transport1}
 int slotCount_dataPin = A9; //make sure to pullup to 20k
-int phaseArrowStates[phaseNo] = {LOW,LOW,LOW};
+int phaseArrowStates[phaseNo] = {LOW,LOW};
 const byte numChars = 32;
 char receivedChars[numChars];
 char tempChars[numChars];
@@ -31,15 +45,18 @@ int score = 0;
 //boolean for Serial registration
 boolean newData = false;
 
-//defining the phase codings
-int NONE = 0;
-int ASSEMBLY = 1;
-int LOGISTICS = 2;
-int TRANSPORT1 = 3;
-int TRANSPORT2 = 4;
-int DEMAND = 5;
-int SCORE = 6;
-int STONE_COUNT = 8;
+/instruction packet components <ARROW_PHASE,SCORE_QUERY>
+//defining the arrow phase codings
+const int NONE = 0;
+const int ASSEMBLY = 1;
+const int LOGISTICS = 2;
+const int TRANSPORT1 = 3;
+const int TRANSPORT2 = 4;
+const int DEMAND = 5;
+
+//information codes
+const int SCORE_QUERY = 1;
+const int SCORE_ERASE = 2;
 
 //deciphered score
 int arrow_phase = -1;
@@ -49,12 +66,13 @@ int stone_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(slotCount_dataPin, INPUT_PULLUP);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
-  setupStoneBoards(); 
+  setupStoneBoards();
+  setupLEDstrip();
 }
 
 void loop() {
@@ -114,22 +132,25 @@ void changeHardwareState(){
     newData = false;
 
     //arrow if-else statements
-    if (arrow_phase == NONE){
-      phaseArrowStates[0]=LOW;phaseArrowStates[1]=LOW;phaseArrowStates[2]=LOW;
-    }
-    else if (arrow_phase == LOGISTICS){
-      phaseArrowStates[0]=HIGH;phaseArrowStates[1]=LOW;phaseArrowStates[2]=LOW;
+    phaseArrowStates[0]=LOW;
+    phaseArrowStates[1]=LOW;
+    demand_phase=false;
+    if (arrow_phase == LOGISTICS){
+      phaseArrowStates[0]=HIGH;
     }
     else if (arrow_phase == TRANSPORT1){
-       phaseArrowStates[0]=LOW;phaseArrowStates[1]=HIGH;phaseArrowStates[2]=LOW;
+       phaseArrowStates[1]=HIGH;
     }
     else if (arrow_phase == DEMAND){
-       phaseArrowStates[0]=LOW;phaseArrowStates[1]=LOW;phaseArrowStates[2]=HIGH;
+       demand_phase = true;
     }
     
     //score query
-    if (score_query == 1){
+    if (score_query == SCORE_QUERY){
       Serial.print(createPacket(String(score)));
+    }
+    else if (score_query == SCORE_ERASE){
+      score=0;
     }
 
     //stone query
@@ -139,7 +160,6 @@ void changeHardwareState(){
     }
   }
   writeArrowStates();
-  delay(10);
 }
 
 
@@ -161,20 +181,23 @@ void setupStoneBoards(){
 
 void StoneCount(){
   for(int i = 0; i < BOARD_COUNT-3; i++){
+    board_sums[i] = 0;
     for(int j = 0; j < TEN_STONE_BOARD; j++){
-      board_vals[i][j] = digitalRead((board_pins[i][j], INPUT));
+      board_vals[i][j] = digitalRead(board_pins[i][j]);
       board_sums[i] = board_sums[i] + board_vals[i][j];
     }
   }
   for(int i = 3; i < BOARD_COUNT-1; i++){
+    board_sums[i] = 0;
     for(int j = 0; j < SIX_STONE_BOARD; j++){
-      board_vals[i][j] = digitalRead((board_pins[i][j], INPUT));
-      board_sums[i] = board_sums[i] + board_vals[i][j];pinMode(board_pins[i][j], INPUT);
+      board_vals[i][j] = digitalRead(board_pins[i][j]);
+      board_sums[i] = board_sums[i] + board_vals[i][j];
     }
   }
+  board_sums[BOARD_COUNT-1] = 0;
   for(int j = 0; j < TWO_STONE_BOARD; j++){
-      board_vals[5][j] = digitalRead((board_pins[5][j], INPUT));
-      board_sums[5] = board_sums[5] + board_vals[5][j];
+      board_vals[BOARD_COUNT-1][j] = digitalRead(board_pins[5][j]);
+      board_sums[BOARD_COUNT-1] = board_sums[BOARD_COUNT-1] + board_vals[BOARD_COUNT-1][j];
   }
 }
 void sendStoneCount(){
@@ -189,8 +212,48 @@ void sendStoneCount(){
 String createPacket(String val){
   return "<"+val+">";
 }
+void slotCount(){
+  int reading = digitalRead(slotCount_dataPin);
+  if (reading != lastState) {
+    lastDebounceTime = millis();
+  }
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (reading != State) {
+      State = reading;
+      if (State == LOW) {
+        score++;
+      }
+    } 
+  }
+  lastState = reading;
+}
+
 void writeArrowStates(){
   for (int i = 0; i < phaseNo; i++){
     digitalWrite(phasePins[i],phaseArrowStates[i]);
   }
+  if(demand_phase==true){
+    setLEDStripHIGH();
+  }
+  else{
+    setLEDStripLOW();
+  }
+}
+
+void setupLEDstrip(){
+  strip.begin();
+  strip.setBrightness(120);
+  strip.show();
+}
+
+void setLEDStripHIGH(){
+  for(int i = 0; i < LED_COUNT; i++){
+    strip.setPixelColor(i,255,255,255);
+  }
+  strip.show();
+}
+
+void setLEDStripLOW(){
+  strip.clear();
+  strip.show();
 }

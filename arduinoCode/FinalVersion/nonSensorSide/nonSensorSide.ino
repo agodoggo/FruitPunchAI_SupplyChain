@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
 //program for Arduino of non-sensor side
-//last modified 25 January 2019
+//last modified 3 February 2021
 
 //slot counter variables
 int State;             // the current reading from the input pin
@@ -27,9 +27,6 @@ boolean newData = false;
 int score = 0;
 
 //instruction packet components <ARROW_PHASE,SCORE_QUERY>
-char messageFromPC[numChars] = {0};
-int integerFromPC = 0;
-
 //defining the arrow phase codings
 const int NONE = 0;
 const int ASSEMBLY = 1;
@@ -109,7 +106,9 @@ void changeHardwareState(){
     
     // arrow if-else statements
     if (arrow_phase >= 0 && arrow_phase <= 5){
-      memset(phaseArrowStates,0,sizeof(phaseArrowStates));
+      for(int i = 0; i < phaseNo; i++){
+        phaseArrowStates[i] = LOW;
+      }
       demand_phase = false;
       if(arrow_phase >= 1 && arrow_phase <= phaseNo){
         phaseArrowStates[arrow_phase-1] = HIGH;
@@ -151,28 +150,15 @@ String createPacket(String val){
 }
 
 void slotCount(){
-  
   int reading = digitalRead(slotCount_dataPin);
-//  readTime = millis();
-//  Serial.print(reading);
-  // If the switch changed, due to noise or pressing:
   if (reading != lastState) {
-    // reset the debouncing timer
     lastDebounceTime = millis();
   }
-
   if ((millis() - lastDebounceTime) > debounceDelay) {
-    // whatever the reading is at, it's been there for longer than the debounce
-    // delay, so take it as the actual current state:
-
-    // if the button state has changed:
     if (reading != State) {
       State = reading;
-
-      // only toggle the LED if the new button state is HIGH
       if (State == LOW) {
         score++;
-//        Serial.println(score); //comment out for final version
       }
     } 
   }
