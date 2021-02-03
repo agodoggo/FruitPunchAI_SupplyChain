@@ -196,7 +196,7 @@ void mouseClicked(){
   //next button -> 32 (change to 31 when waiting for opponent function written)
   else if (pagestate == 29 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 32;
-  sendWaitingStatus()
+  sendWaitingStatus();
   }
   //info button
   else if (pagestate == 29 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
