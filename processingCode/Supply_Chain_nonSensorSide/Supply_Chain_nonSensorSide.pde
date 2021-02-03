@@ -90,6 +90,7 @@ void serialEvent(Serial thisPort){
 }
 
 String createArduinoPacket(String arrow_phase, String score_query){
+  print("New message to Arduino: " + "<"+arrow_phase+","+score_query+">");
   return "<"+arrow_phase+","+score_query+">";
 }
 String createRPiPacket(String opponent_waiting, String score_query){
