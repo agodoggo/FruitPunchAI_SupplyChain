@@ -50,9 +50,9 @@ void mouseClicked(){
 
   //SUPPLY PHASE
   //Dia 12
-  //skip waiting page for now (Dia 17), go to next phase (Dia 18)
+  //next button
   else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  pagestate = 18;
+  pagestate = 17;
   sendWaitingStatus();
   }  
   //info button on dia 12
@@ -89,19 +89,12 @@ void mouseClicked(){
    pagestate = 12;
     }
   }
-  
-  //Dia 17
-  //next button to Dia 18
-  else if (pagestate == 17 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  checkWaiting();
-  }
-  
     
   //ASSEMBLY
   //Dia 18
-  //skip dia 22 for now -> Dia 23
+  //next button to Dia 22
   else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 23; //change to 22 for final version
+  pagestate = 22;
   sendWaitingStatus();
   }
   //info button
@@ -132,18 +125,12 @@ void mouseClicked(){
    pagestate = 18;
     }
   }
-  
-  //Dia 22
-  ////next button -> Dia 23
-  else if (pagestate == 22 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  checkWaiting();
-  } 
     
   //LOGISTICS  
   //Dia 23
-  //next button -> Dia 27
+  //next button -> Dia 26
   else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 27;
+    pagestate = 26;
     sendWaitingStatus();
   }
   //Ai advice cloud
@@ -168,12 +155,6 @@ void mouseClicked(){
   else if (pagestate == 24 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
   pagestate = 23;
   }
-  
-  //Dia 23
-  ////next dia 26
-  else if (pagestate == 26 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    checkWaiting();
-  }
 
   //TRANSPORT
   //Dia 27
@@ -195,7 +176,7 @@ void mouseClicked(){
   //Dia 29
   //next button -> 32 (change to 31 when waiting for opponent function written)
   else if (pagestate == 29 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 32;
+  pagestate = 31;
   sendWaitingStatus();
   }
   //info button
@@ -208,17 +189,13 @@ void mouseClicked(){
   else if (pagestate == 30 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
   pagestate = 29;
   }
-  
-  //Dia 31
-  else if (pagestate == 31 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    checkWaiting();
-  }
 
   //DEMAND
   //Dia 32
   //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 36;
+    pagestate = 35;
+    sendScore();
     sendWaitingStatus();
   }
   //info button
@@ -238,13 +215,6 @@ void mouseClicked(){
     if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
       pagestate = 32;
     }
-  }
-  
-  //Dia 35
-  ////next button
-  else if (pagestate == 35 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    sendScore();
-    checkWaiting();
   }
   
   //Dia 36
