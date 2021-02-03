@@ -44,6 +44,10 @@ String TRANSPORT1 = "3";
 String TRANSPORT2 = "4";
 String DEMAND = "5";
 
+//information codes
+String SCORE_QUERY = "1";
+String SCORE_ERASE = "2";
+
 void setup()
 {
  //set screen size, this is the pixel ratio of the build in screens
@@ -70,7 +74,7 @@ void setup()
  myArduinoPort.bufferUntil('>');
  myRPiPort.bufferUntil('>');
  
- myArduinoPort.write(createArduinoPacket(NONE,NONE));
+ newGameSetup();
 }
 
 void draw()
@@ -109,4 +113,8 @@ String createArduinoPacket(String arrow_phase, String score_query){
 String createRPiPacket(String opponent_waiting, String score_query){
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
+}
+
+void newGameSetup(){
+  myArduinoPort.write(createArduinoPacket(NONE,SCORE_ERASE));
 }

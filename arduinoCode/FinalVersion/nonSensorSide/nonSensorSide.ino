@@ -31,15 +31,16 @@ char messageFromPC[numChars] = {0};
 int integerFromPC = 0;
 
 //defining the arrow phase codings
-int NONE = 0;
-int ASSEMBLY = 1;
-int LOGISTICS = 2;
-int TRANSPORT1 = 3;
-int TRANSPORT2 = 4;
-int DEMAND = 5;
+const int NONE = 0;
+const int ASSEMBLY = 1;
+const int LOGISTICS = 2;
+const int TRANSPORT1 = 3;
+const int TRANSPORT2 = 4;
+const int DEMAND = 5;
 
-//defining the score query codings
-int SCORE = 1;
+//information codes
+const int SCORE_QUERY = 1;
+const int SCORE_ERASE = 2;
 
 //deciphered score
 int arrow_phase = -1;
@@ -119,8 +120,11 @@ void changeHardwareState(){
     }
     
     //score query statements
-    if (score_query == true){
+    if (score_query == SCORE_QUERY){
       Serial.print(createPacket(String(score)));
+    }
+    else if (score_query == SCORE_ERASE){
+      score=0;
     }
   }
   
