@@ -24,7 +24,7 @@ int baudRate = 115200;
 Serial myArduinoPort;
 Serial myRPiPort;
 
-/\new data for arduino and raspberry pi
+//new data for arduino and raspberry pi
 boolean ArduinoNewData = false;
 boolean RaspberryPiNewData = false;
 
