@@ -27,8 +27,9 @@ public void sendWaitingStatus(){
 }
 
 public void waitForArduinoData(){
-  while(!ArduinoNewData){
-     delay(10);
+  while(!ArduinoNewData){ 
+    delay(100);
+    myArduinoPort.write(createArduinoPacket(DEMAND,"1"));
   }
   ArduinoNewData = false;
 }
