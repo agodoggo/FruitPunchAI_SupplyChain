@@ -4,6 +4,7 @@ void mouseClicked(){
   //New game button
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
     pagestate = 2;
+    newGameSetup();
   }
   
   

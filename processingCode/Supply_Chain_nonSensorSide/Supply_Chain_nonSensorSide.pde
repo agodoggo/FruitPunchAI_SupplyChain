@@ -73,8 +73,6 @@ void setup()
  
  myArduinoPort.bufferUntil('>');
  myRPiPort.bufferUntil('>');
- 
- newGameSetup();
 }
 
 void draw()
@@ -113,8 +111,4 @@ String createArduinoPacket(String arrow_phase, String score_query){
 String createRPiPacket(String opponent_waiting, String score_query){
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
-}
-
-void newGameSetup(){
-  myArduinoPort.write(createArduinoPacket(NONE,SCORE_ERASE));
 }

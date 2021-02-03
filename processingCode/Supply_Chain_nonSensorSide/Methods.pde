@@ -68,3 +68,7 @@ char[] recvWithStartEndMarkers(Serial port) {
     }
     return receivedChars;
 }
+
+void newGameSetup(){
+  myArduinoPort.write(createArduinoPacket(NONE,SCORE_ERASE));
+}
