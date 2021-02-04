@@ -8,14 +8,16 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //Set the pagestate at 0 to begin the program at Dia1
 int pagestate = 1;
-boolean newpage = false;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
 int roundLim = 10; //default round limit
 
+//global int
+int oppWaiting = 0;
+
 //set serial baudrate
-int baudRate = 9600;
+int baudRate = 115200;
 
 //boolean for Serial registration
 Serial myArduinoPort_left;
@@ -23,20 +25,28 @@ Serial myArduinoPort_right;
 Serial myRPiPort;
 
 //score Strings
-String myScore;
-String oppScore;
+String myScore = "0";
+String oppScore = "0";
 
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
 
 //defining the instructions from RPi to Arduino
-//arrow phase codes
 String NONE = "0";
+
+//arrow phase codes
 String ASSEMBLY = "1";
 String LOGISTICS = "2";
 String TRANSPORT1 = "3";
 String TRANSPORT2 = "4";
 String DEMAND = "5";
+
+//information codes
+String SCORE_QUERY = "1";
+String SCORE_ERASE = "2";
+
+//Waiting codes
+String WAITING = "1";
 
 void setup()
 {
@@ -55,23 +65,22 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
- String arduinoPort_left = Serial.list()[1];
+ String arduinoPort_left = Serial.list()[1]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
-  String arduinoPort_right = Serial.list()[2];
+  String arduinoPort_right = Serial.list()[2]; //figure this out
  myArduinoPort_right = new Serial(this, arduinoPort_right, baudRate);
 
- String RPiPort = Serial.list()[3];
+ String RPiPort = Serial.list()[3]; //figure this out
  myRPiPort = new Serial(this, RPiPort, baudRate);
 }
 
 void draw()
 {
- background (0);
- if (newpage){
-    pagestate_change(pagestate);
-    newpage = false;
- }
+   //loop waiting if waiting
+  if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
+    checkWaiting();
+  }
 }
 
 char[] recvWithStartEndMarkers(Serial port) {

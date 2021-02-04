@@ -1,4 +1,6 @@
 public void pagestate_change(int pagestate) {
+  //clears out old frame
+  background(0);
   //change background picture
   if(pagestate == 1){
   image(Dia1,0,0);
@@ -120,79 +122,9 @@ public void pagestate_change(int pagestate) {
   //display score
   if(pagestate == 36){
     text("Your score ",350,600);
-    text(myScore,400,600);
+    fill(0);
+    text(myScore,500,600);
     text("Opponent's score ",350,750);
-    text(oppScore,450,750);
-  }
-  //Serial messages to arduino
-  if (pagestate >=1 && pagestate <= 17 && pagestate!=12){
-    myArduinoPort_left.write(createArduinoPacket(NONE,NONE,NONE));
-    myArduinoPort_right.write(createArduinoPacket(NONE,NONE,NONE));
-  }
-  else if (pagestate == 12){
-    myArduinoPort_left.write(createArduinoPacket(NONE,NONE,"1"));
-    myArduinoPort_right.write(createArduinoPacket(NONE,NONE,"1"));
-  }
-  else if (pagestate >=18 && pagestate <= 22 && pagestate!=18){
-    myArduinoPort_left.write(createArduinoPacket(ASSEMBLY,NONE,NONE));
-  }
-  else if (pagestate == 18){
-    myArduinoPort_left.write(createArduinoPacket(ASSEMBLY,NONE,"1"));
-    myArduinoPort_right.write(createArduinoPacket(NONE,NONE,"1"));
-  }
-  else if (pagestate >=23 && pagestate <= 26 && pagestate!=23){
-    myArduinoPort_right.write(createArduinoPacket(LOGISTICS,NONE,NONE));
-  }
-  else if (pagestate == 23){
-    myArduinoPort_left.write(createArduinoPacket(NONE,NONE,"1"));
-    myArduinoPort_right.write(createArduinoPacket(LOGISTICS,NONE,"1"));
-  }
-  else if (pagestate >=27 && pagestate <= 28){
-    myArduinoPort_right.write(createArduinoPacket(TRANSPORT1,NONE,NONE));
-  }
-  else if (pagestate >=29 && pagestate <= 31){
-    myArduinoPort_left.write(createArduinoPacket(TRANSPORT2,NONE,NONE));
-  }
-  else if (pagestate >=32 && pagestate <= 35){
-    myArduinoPort_right.write(createArduinoPacket(DEMAND,NONE,NONE));
-  }
-  else if (pagestate == 36){//score query
-    myArduinoPort_right.write(createArduinoPacket(NONE,NONE,"1"));
-  }
-  
-  //Serial messages to other Raspberry Pi
-  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){ //waiting instances
-    myRPiPort.write(createRPiPacket("1",NONE));  
-  }
-  if(pagestate==36){
-    myRPiPort.write(createRPiPacket(NONE,myScore));
-  }
-  
-  //Serial receiving from Arduino - stone count
-  if (pagestate == 12){
-    int[] stoneVals = parseStoneValues();
-  }
-  
-  else if (pagestate == 18){
-    int[] stoneVals = parseStoneValues();
-  }
-  
-  else if (pagestate == 23){
-    int[] stoneVals = parseStoneValues();
-  }
-  else if (pagestate == 36){
-    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
-    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
-  }
-  
-  //Serial receiving from Raspberry Pi
-  
-  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
-    int oppWaiting = Integer.parseInt(split(new String(recvWithStartEndMarkers(myRPiPort)),",")[1]);
-    if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
-      pagestate = pagestate + 1;
-      pagestate_change(pagestate);
-    }
-  }
-  
+    text(oppScore,550,750);
+  }  
 }
