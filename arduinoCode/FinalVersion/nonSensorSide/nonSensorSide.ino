@@ -4,8 +4,8 @@
 //last modified 3 February 2021
 
 //slot counter variables
-int State;             // the current reading from the input pin
-int lastState = LOW;   // the previous reading from the input pin
+int State = HIGH;             // the current reading from the input pin
+int lastState = HIGH;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 2;    // the debounce time; increase if the output flickers
 
@@ -158,7 +158,8 @@ void slotCount(){
     if (reading != State) {
       State = reading;
       if (State == LOW) {
-        score++;
+        score=score+1;
+        Serial.print(createPacket(String(score)));
       }
     } 
   }
