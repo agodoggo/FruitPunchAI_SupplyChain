@@ -1,82 +1,32 @@
-  //Serial messages to other Raspberry Pi
-  
-  
-  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){ //waiting instances
-    myRPiPort.write(createRPiPacket("1",NONE));  
-  }
-  if(pagestate==36){
-    myRPiPort.write(createRPiPacket(NONE,myScore));
-  }
-  
-  //Serial receiving from Arduino - stone count
-  if (pagestate == 12){
-    int[] stoneVals = parseStoneValues();
-  }
-  
-  else if (pagestate == 18){
-    int[] stoneVals = parseStoneValues();
-  }
-  
-  else if (pagestate == 23){
-    int[] stoneVals = parseStoneValues();
-  }
-  else if (pagestate == 36){
-    myScore = new String(recvWithStartEndMarkers(myArduinoPort));
-    oppScore = split(new String(recvWithStartEndMarkers(myRPiPort)),',')[1];
-  }
-  
-  public void checkWaiting(){
+public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
-      myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(ASSEMBLY,NONE));
+      myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
     }
     else if(pagestate==22){
-      myArduinoPort.write(createArduinoPacket(LOGISTICS,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
+      myArduinoPort_right.write(createArduinoPacket_right(LOGISTICS,NONE,NONE));
     }
     else if(pagestate==26){
-      myArduinoPort.write(createArduinoPacket(TRANSPORT1,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(ASSEMBLY,NONE));
+      myArduinoPort_right.write(createArduinoPacket_right(TRANSPORT1,NONE,NONE));
     }
     else if(pagestate==31){
-      myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
+      myArduinoPort_right.write(createArduinoPacket_right(DEMAND,NONE,NONE));
     }
     else if(pagestate == 35){
-       myArduinoPort.write(createArduinoPacket(NONE,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
+      myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
     }
     pagestate = pagestate + 1;
     oppWaiting = 0;
+    pagestate_change(pagestate);
   }
 }
   
-  //Serial receiving from Raspberry Pi
-  
-  if(pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
-    int oppWaiting = Integer.parseInt(split(new String(recvWithStartEndMarkers(myRPiPort)),",")[1]);
-    if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
-      pagestate = pagestate + 1;
-      pagestate_change(pagestate);
-    }
-  }
-  
-  //serial sending to Raspberry Pi
-public void sendWaitingStatus(){
-  myRPiPort.write(createRPiPacket("1",NONE)); 
-}
-
-public void waitForArduinoData(){
-  while(!ArduinoNewData){ 
-    delay(100);
-    myArduinoPort.write(createArduinoPacket(DEMAND,SCORE_QUERY));
-  }
-  ArduinoNewData = false;
-}
-
-void newGameSetup(){
-  myArduinoPort_left.write(createArduinoPacket(NONE,SCORE_ERASE));
-  background (0);
-  pagestate_change(pagestate);
-}
-
-char[] recvWithStartEndMarkers(Serial port) {
+  char[] recvWithStartEndMarkers(Serial port) {
     int numChars = 128;
     char[] receivedChars = new char[numChars];
     
@@ -109,26 +59,30 @@ char[] recvWithStartEndMarkers(Serial port) {
         }
     }
     return receivedChars;
+  }
+
+public void send_waitForArduinoData(String direction, String arrow_phase, String score_query, String stone_query){
+  if(direction.equals("left")){
+    while(!ArduinoLeftNewData){ 
+      delay(100);
+      myArduinoPort_left.write(createArduinoPacket_left(arrow_phase,stone_query));
+    }
+    ArduinoLeftNewData = false;
+  }
+  else{
+    while(!ArduinoRightNewData){ 
+      delay(100);
+      myArduinoPort_right.write(createArduinoPacket_right(arrow_phase,score_query,stone_query));
+    }
+    ArduinoRightNewData = false;
+  }
 }
 
-String createArduinoPacket(String arrow_phase, String score_query, String stone_count_query){
-  return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
-}
-String createRPiPacket(String opponent_waiting, String score){
-  return "<"+opponent_waiting+","+score+">";
-}
-int[] parseStoneValues(){
-    int numBoards = 17;
-    int[] stoneCount = new int [numBoards];
-    String[] arduinoLeft = split(new String(recvWithStartEndMarkers(myArduinoPort_left)),",");
-    for(int i=0; i<=arduinoLeft.length;i++){
-      stoneCount[i] = Integer.parseInt(arduinoLeft[i]);
-    }
-    String[] arduinoRight = split(new String(recvWithStartEndMarkers(myArduinoPort_right)),",");
-    for(int i=0; i<=arduinoRight.length;i++){
-      stoneCount[i+11] = Integer.parseInt(arduinoRight[i]);
-    }
-    return stoneCount;
+void newGameSetup(){
+  myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
+  myArduinoPort_left.write(createArduinoPacket_right(NONE,SCORE_ERASE,NONE));
+  background (0);
+  pagestate_change(pagestate);
 }
 
 void serialEvent(Serial thisPort){
@@ -137,10 +91,24 @@ void serialEvent(Serial thisPort){
   tmp = recvWithStartEndMarkers(thisPort);
   
   //store in appropriate globals
-  if (thisPort == myArduinoPort){
-    print("Decoded message from Arduino: " + new String(tmp) +"\n");
-    myScore = new String(tmp);
-    ArduinoNewData = true;
+  if (thisPort == myArduinoPort_left){
+    String[] val = new String[numBoards_left];
+    val = split(new String(tmp),",");
+    print("Decoded message from Arduino left: " + new String(tmp) +"\n");
+    for(int i = 0; i < val.length; i++){
+      stoneCount[i] = val[i];
+    }
+    ArduinoLeftNewData = true;
+  }
+  if (thisPort == myArduinoPort_right){
+    String[] val = new String[numBoards_right+1];
+    val = split(new String(tmp),",");
+    print("Decoded message from Arduino right: " + new String(tmp) +"\n");
+    myScore = val[0];
+    for(int i = 1; i < val.length; i++){
+      stoneCount[numBoards_left+i-1] = val[i];
+    }
+    ArduinoRightNewData = true;
   }
   if(thisPort == myRPiPort){
     String[] val = new String[2];
@@ -152,4 +120,17 @@ void serialEvent(Serial thisPort){
     print("oppScore: " + oppScore +"\n");
     RaspberryPiNewData = true;
   }
+}
+
+String createArduinoPacket_left(String arrow_phase, String stone_count_query){ //direction purely for print statement
+  print("New message to left Arduino : " + "<"+arrow_phase+","+stone_count_query+">"+"\n");
+  return "<"+arrow_phase+","+stone_count_query+">";
+}
+String createArduinoPacket_right(String arrow_phase, String score_query, String stone_count_query){ //direction purely for print statement
+  print("New message to right Arduino " + " : " + "<"+arrow_phase+","+score_query+","+stone_count_query+">"+"\n");
+  return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
+}
+String createRPiPacket(String opponent_waiting, String score_query){
+  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
+  return "<"+opponent_waiting+","+score_query+">";
 }

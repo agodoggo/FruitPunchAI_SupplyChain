@@ -32,7 +32,6 @@ int phaseArrowStates[phaseNo] = {LOW,LOW};
 const byte numChars = 32;
 char receivedChars[numChars];
 char tempChars[numChars];
-int score = 0;
 
 //boolean for Serial registration
 boolean newData = false;
@@ -45,13 +44,8 @@ int TRANSPORT1 = 3;
 int TRANSPORT2 = 4;
 int DEMAND = 5;
 
-//information codes
-const int SCORE_QUERY = 1;
-const int SCORE_ERASE = 2;
-
 //deciphered score
 int arrow_phase = -1;
-int score_query = -1;
 int stone_query = -1;
 
 void setup() {
@@ -112,9 +106,6 @@ void parseData(){
 
     strtokIndx = strtok(tempChars,",");      // get the first part - the string
     arrow_phase = atoi(strtokIndx); // copy it to messageFromPC
- 
-    strtokIndx = strtok(NULL, ","); // this continues where the previous call left off
-    score_query = atoi(strtokIndx);     // convert this part to an integer
 
     strtokIndx = strtok(NULL, ","); // this continues where the previous call left off
     stone_query = atoi(strtokIndx);     // convert this part to an integer
@@ -137,18 +128,10 @@ void changeHardwareState(){
       phaseArrowStates[1] = HIGH;
     }
 
-    //score query
-    if (score_query == SCORE_QUERY){
-      Serial.print(createPacket(String(score)));
-    }
-    else if (score_query == SCORE_ERASE){
-      score=0;
-    }
-
     //stone query
     if (stone_query == 1){
       StoneCount();
-      sendStoneCount();
+      Serial.print(createPacket(board_sums));
     }
   }
   writeArrowStates();
@@ -175,16 +158,13 @@ void StoneCount(){
   board_sums[10] = board_vals[10][0] + board_vals[10][1];
 }
 
-String createPacket(String val){
-  return "<"+val+">";
-}
-
-void sendStoneCount(){
-  Serial.print("<");
+String createPacket(int stoneCountArr[]){
+  String msg = "<";
   for(int i = 0; i < BOARD_COUNT-1; i++){
-    Serial.print(board_sums[i]);
-    Serial.print(",");
+    msg+=String(stoneCountArr[i]);
+    msg+=",";
   }
-  Serial.print(board_sums[BOARD_COUNT-1]);
-  Serial.print(">");
+  msg+=String(stoneCountArr[BOARD_COUNT-1]);
+  msg+=">";
+  return msg;
 }

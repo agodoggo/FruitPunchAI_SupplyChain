@@ -147,7 +147,7 @@ void changeHardwareState(){
     
     //score query
     if (score_query == SCORE_QUERY){
-      Serial.print(createPacket(String(score)));
+      Serial.print(createPacket(String(score),board_sums));
     }
     else if (score_query == SCORE_ERASE){
       score=0;
@@ -156,7 +156,7 @@ void changeHardwareState(){
     //stone query
     if (stone_query == 1){
       StoneCount();
-      sendStoneCount();
+      Serial.print(createPacket(String(score),board_sums));
     }
   }
   writeArrowStates();
@@ -200,17 +200,15 @@ void StoneCount(){
       board_sums[BOARD_COUNT-1] = board_sums[BOARD_COUNT-1] + board_vals[BOARD_COUNT-1][j];
   }
 }
-void sendStoneCount(){
-  Serial.print("<");
+String createPacket(String score, int stoneCountArr[]){
+  String msg = "<"+score+",";
   for(int i = 0; i < BOARD_COUNT-1; i++){
-    Serial.print(board_sums[i]);
-    Serial.print(",");
+    msg+=String(stoneCountArr[i]);
+    msg+=",";
   }
-  Serial.print(board_sums[BOARD_COUNT-1]);
-  Serial.print(">");
-}
-String createPacket(String val){
-  return "<"+val+">";
+  msg+=String(stoneCountArr[BOARD_COUNT-1]);
+  msg+=">";
+  return msg;
 }
 void slotCount(){
   int reading = digitalRead(slotCount_dataPin);
@@ -222,6 +220,7 @@ void slotCount(){
       State = reading;
       if (State == LOW) {
         score++;
+        Serial.print(createPacket(String(score),board_sums));
       }
     } 
   }

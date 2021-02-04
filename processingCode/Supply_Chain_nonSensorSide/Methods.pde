@@ -24,15 +24,7 @@ public void checkWaiting(){
 
 //serial sending to Raspberry Pi
 public void sendWaitingStatus(){
-  myRPiPort.write(createRPiPacket("1",NONE)); 
-}
-
-public void waitForArduinoData(){
-  while(!ArduinoNewData){ 
-    delay(100);
-    myArduinoPort.write(createArduinoPacket(DEMAND,SCORE_QUERY));
-  }
-  ArduinoNewData = false;
+  myRPiPort.write(createRPiPacket(WAITING,NONE)); 
 }
 
 char[] recvWithStartEndMarkers(Serial port) {
@@ -68,6 +60,14 @@ char[] recvWithStartEndMarkers(Serial port) {
         }
     }
     return receivedChars;
+}
+
+public void waitForArduinoData(){
+  while(!ArduinoNewData){ 
+    delay(100);
+    myArduinoPort.write(createArduinoPacket(DEMAND,SCORE_QUERY));
+  }
+  ArduinoNewData = false;
 }
 
 void newGameSetup(){

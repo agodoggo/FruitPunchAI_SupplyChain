@@ -45,7 +45,7 @@ void mouseClicked(){
   //back buttons and exit the rules
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
     if (mouseX>500 && mouseX < 750 && mouseY > 1110 && mouseY < 1250) {
-     pagestate = 4;
+       pagestate = 4;
      }
   }
 
@@ -53,8 +53,8 @@ void mouseClicked(){
   //Dia 12
   //next button
   else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  pagestate = 17;
-  sendWaitingStatus();
+    pagestate = 17;
+    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
   }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
@@ -62,194 +62,175 @@ void mouseClicked(){
   }
   //Ai advice cloud
   else if (pagestate == 12 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-  pagestate = 16;
+    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
+    send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
+    //send stone count, phase, and roundnumber to c++ program
+    //get result and store in variable to be displayed on pagestate 16
+    pagestate = 16;
   }
   
   //Dia 16
   //go back to Dia 12 by clicking outside of bubble
   else if (pagestate == 16 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-  pagestate =12;
+    pagestate =12;
   }
     
   //Dia 13
   //next button
   else if (pagestate == 13 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 14;
+    pagestate = 14;
   }
     
   //Dia 14
   //next button
   else if (pagestate == 14 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 15;
+    pagestate = 15;
   }
     
   //Dias 13-15
   //back button
   else if (pagestate == 13 || pagestate == 14 ||pagestate == 15) {
   if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-   pagestate = 12;
+     pagestate = 12;
     }
   }
     
   //ASSEMBLY
   //Dia 18
+  //next button to Dia 22
+  else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    pagestate = 22;
+    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
+  }
+  //info button
+  else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
+  pagestate = 20;
+  }
   //Ai advice cloud
   else if (pagestate == 18 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-  pagestate = 19;
-  pagestate_change(19);
+    send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
+    send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
+    //send stone count, phase, and roundnumber to c++ program
+    //get result and store in variable to be displayed on pagestate 19
+    pagestate = 19;
   }
   
   //Dia 19
   //go back to Dia 18 by clicking outside of bubble
   else if (pagestate == 19 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-  pagestate =18;
-  pagestate_change(18);}
-  
-  //Dia 18
-  //info button
-  else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 20;
-  pagestate_change(20);
+    pagestate =18;
   }
   
   //Dia 20
   //next button
   else if (pagestate == 20 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 21;
-  pagestate_change(21);
+    pagestate = 21;
   }
   
   //Dia 20-21
   //back button -> Dia 18
   else if (pagestate == 20 || pagestate == 21) {
   if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-   pagestate = 18;
-   pagestate_change(18);}
-  }
-  
-  //Dia 18
-  ////next button -> Dia 22
-  //else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 22;
-  //pagestate_change(22);
-  //}
-  //skip dia 22 for now -> Dia 23
-  else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 23;
-  pagestate_change(23);
+     pagestate = 18;
+    }
   }
     
     
   //LOGISTICS  
   //Dia 23
+  //next button -> Dia 26
+  else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
+    pagestate = 26;
+    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
+  }
   //Ai advice cloud
   else if (pagestate == 23 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-  pagestate = 25;
-  pagestate_change(25);
+    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
+    send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
+    //send stone count, phase, and roundnumber to c++ program
+    //get result and store in variable to be displayed on pagestate 19
+    pagestate = 25;
   }
   
   //Dia 25
   //go back to Dia 23 by clicking outside of bubble
   else if (pagestate == 25 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-  pagestate =23;
-  pagestate_change(23);}
+    pagestate =23;
+  }
   
   //Dia 23
   //info button
   else if (pagestate == 23 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 24;
-  pagestate_change(24);
+    pagestate = 24;
   }
   
   //Dia 24
   //back button
   else if (pagestate == 24 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
-  pagestate = 23;
-  pagestate_change(23);
-  }
-  
-  //Dia 23
-  ////next dia 26
-  //else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 26;
-  //pagestate_change(26);
-  //}
-  //skip dia 26 for now -> Dia 27
-  else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 27;
-  pagestate_change(27);
+    pagestate = 23;
   }
 
   //TRANSPORT
   //Dia 27
   //next button
   else if (pagestate == 27 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 29;
-  pagestate_change(29);
+    pagestate = 29;
+    myArduinoPort_left.write(createArduinoPacket_left(TRANSPORT2,NONE));
   }
   //info button
   else if (pagestate == 27 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
   pagestate = 28;
-  pagestate_change(28);
   }
   
   //Dia 28
   //back button
   else if (pagestate == 28 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
   pagestate = 27;
-  pagestate_change(27);
   }
   
   //Dia 29
   //next button -> 32 (change to 31 when waiting for opponent function written)
   else if (pagestate == 29 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 32;
-  pagestate_change(32);
+    pagestate = 31;
+    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
   }
   //info button
   else if (pagestate == 29 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 30;
-  pagestate_change(30);
+    pagestate = 30;
   }
   
   //Dia 30
   //back button
   else if (pagestate == 30 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
-  pagestate = 29;
-  pagestate_change(29);
+    pagestate = 29;
   }
 
   //DEMAND
   //Dia 32
-  ////next button
-  //else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  //pagestate = 35;
-  //pagestate_change(35);
-  //}
-  //skip dia 35 for now -> 36
+  //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 36;
-  pagestate_change(36);
+    send_waitForArduinoData("left", NONE,NONE,NONE);
+    send_waitForArduinoData("right", DEMAND, SCORE_QUERY, NONE);
+    createRPiPacket(WAITING, myScore); //send score and waiting status together
+    pagestate = 35;
   }
   //info button
   else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 33;
-  pagestate_change(33);
+    pagestate = 33;
   }
   
   //Dia 33
   //next button
   else if (pagestate == 33 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-  pagestate = 34;
-  pagestate_change(34);
+    pagestate = 34;
   }
   
   //Dias 33-34
   //back button
   else if (pagestate == 33 || pagestate == 34) {
-  if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-   pagestate = 32;
-   pagestate_change(32);}
+    if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+      pagestate = 32;
+    }
   }
   
   //Dia 36
@@ -257,16 +238,15 @@ void mouseClicked(){
   else if (pagestate == 36 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
     if(roundNo <= roundLim){
       pagestate = 12;
-      pagestate_change(12);
       roundNo = roundNo + 1;
+      myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
     }
     else{
       //display game over and return to homescreen
       pagestate = 1;
-      pagestate_change(1);
     }
   }
-    
-    
-}
   
+  //change to correct pagestate
+  pagestate_change(pagestate);
+}
