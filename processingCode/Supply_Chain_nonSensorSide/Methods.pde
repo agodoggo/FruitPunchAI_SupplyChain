@@ -18,6 +18,7 @@ public void checkWaiting(){
     }
     pagestate = pagestate + 1;
     oppWaiting = 0;
+    pagestate_change(pagestate);
   }
 }
 

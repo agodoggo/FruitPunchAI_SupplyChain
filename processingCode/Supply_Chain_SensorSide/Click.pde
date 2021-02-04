@@ -1,18 +1,17 @@
 void mouseClicked(){
   
-  //Dia 1 buttons
+//Dia 1 buttons
   //New game button
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
     pagestate = 2;
-    pagestate_change(2);
+    newGameSetup();
   }
   
   
   //Dia 2 buttons
   //next button
   else if (pagestate == 2 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
-    pagestate =4;
-    pagestate_change(4);
+    pagestate = 4;
   }
   //Minus button should decrease number in system
   else if (pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
@@ -27,12 +26,10 @@ void mouseClicked(){
   //next button
   else if (pagestate == 4 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
     pagestate =12;
-    pagestate_change(12);
   }  
   //Question mark
    else if (pagestate == 4 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
-    pagestate = 5;
-    pagestate_change(5);   
+    pagestate = 5;  
   }
   //rewind logo for seeing the video again
    else if (pagestate == 4 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
@@ -43,54 +40,47 @@ void mouseClicked(){
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10) {
     if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
       pagestate += 1;
-      pagestate_change(pagestate);
     }
   }
   //back buttons and exit the rules
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
     if (mouseX>500 && mouseX < 750 && mouseY > 1110 && mouseY < 1250) {
      pagestate = 4;
-     pagestate_change(4);
      }
   }
 
   //SUPPLY PHASE
-  //Dia 12  
+  //Dia 12
+  //next button
+  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
+  pagestate = 17;
+  sendWaitingStatus();
+  }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
-    pagestate =13;
-    pagestate_change(13);
+    pagestate = 13;
   }
-  //next button
-  //else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  //pagestate = 17;
-  //pagestate_change(17);
-  //}
   //Ai advice cloud
   else if (pagestate == 12 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
   pagestate = 16;
-  pagestate_change(16);
   }
   
   //Dia 16
   //go back to Dia 12 by clicking outside of bubble
   else if (pagestate == 16 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
   pagestate =12;
-  pagestate_change(12);
   }
     
   //Dia 13
   //next button
   else if (pagestate == 13 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 14;
-  pagestate_change(14);
   }
     
   //Dia 14
   //next button
   else if (pagestate == 14 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
   pagestate = 15;
-  pagestate_change(15);
   }
     
   //Dias 13-15
@@ -98,12 +88,7 @@ void mouseClicked(){
   else if (pagestate == 13 || pagestate == 14 ||pagestate == 15) {
   if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
    pagestate = 12;
-   pagestate_change(12);}
-  }
-  //skip waiting page for now (Dia 17), go to next phase (Dia 18)
-  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-  pagestate = 18;
-  pagestate_change(18);
+    }
   }
     
   //ASSEMBLY

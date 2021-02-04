@@ -24,6 +24,10 @@ Serial myArduinoPort_left;
 Serial myArduinoPort_right;
 Serial myRPiPort;
 
+//new data for arduino and raspberry pi
+boolean ArduinoNewData = false;
+boolean RaspberryPiNewData = false;
+
 //score Strings
 String myScore = "0";
 String oppScore = "0";
@@ -81,59 +85,4 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
-}
-
-char[] recvWithStartEndMarkers(Serial port) {
-    int numChars = 128;
-    char[] receivedChars = new char[numChars];
-    
-    boolean recvInProgress = false;
-    int ndx = 0;
-    char startMarker = '<';
-    char endMarker = '>';
-    char rc;
- 
-    while (port.available() > 0) {
-        rc = port.readChar();
-
-        if (recvInProgress == true) {
-            if (rc != endMarker) {
-                receivedChars[ndx] = rc;
-                ndx++;
-                if (ndx >= numChars) {
-                    ndx = numChars - 1;
-                }
-            }
-            else {
-                receivedChars[ndx] = '\0'; // terminate the string
-                recvInProgress = false;
-                ndx = 0;
-            }
-        }
-
-        else if (rc == startMarker) {
-            recvInProgress = true;
-        }
-    }
-    return receivedChars;
-}
-
-String createArduinoPacket(String arrow_phase, String score_query, String stone_count_query){
-  return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
-}
-String createRPiPacket(String opponent_waiting, String score){
-  return "<"+opponent_waiting+","+score+">";
-}
-int[] parseStoneValues(){
-    int numBoards = 17;
-    int[] stoneCount = new int [numBoards];
-    String[] arduinoLeft = split(new String(recvWithStartEndMarkers(myArduinoPort_left)),",");
-    for(int i=0; i<=arduinoLeft.length;i++){
-      stoneCount[i] = Integer.parseInt(arduinoLeft[i]);
-    }
-    String[] arduinoRight = split(new String(recvWithStartEndMarkers(myArduinoPort_right)),",");
-    for(int i=0; i<=arduinoRight.length;i++){
-      stoneCount[i+11] = Integer.parseInt(arduinoRight[i]);
-    }
-    return stoneCount;
 }
