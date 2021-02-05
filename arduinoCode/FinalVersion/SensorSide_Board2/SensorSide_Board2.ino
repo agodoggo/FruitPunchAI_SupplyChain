@@ -77,9 +77,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  StoneCount();
-//  recvWithStartEndMarkers();
-//  changeHardwareState();
+  recvWithStartEndMarkers();
+  changeHardwareState();
 }
 
 void recvWithStartEndMarkers() {
@@ -200,11 +199,6 @@ void StoneCount(){
       board_vals[BOARD_COUNT-1][j] = digitalRead(board_pins[5][j]);
       board_sums[BOARD_COUNT-1] = board_sums[BOARD_COUNT-1] + board_vals[BOARD_COUNT-1][j];
   }
-  for(int i = 0; i < BOARD_COUNT; i++){
-    Serial.println(board_sums[i]);
-  }
-  Serial.println();
-  
 }
 String createPacket(String score, int stoneCountArr[]){
   String msg = "<"+score+",";
