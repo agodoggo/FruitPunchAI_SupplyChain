@@ -160,6 +160,7 @@ void changeHardwareState(){
     }
   }
   writeArrowStates();
+  slotCount();
 }
 
 
@@ -212,7 +213,6 @@ String createPacket(String score, int stoneCountArr[]){
 }
 void slotCount(){
   int reading = digitalRead(slotCount_dataPin);
-  Serial.println(reading);
   if (reading != lastState) {
     lastDebounceTime = millis();
   }
