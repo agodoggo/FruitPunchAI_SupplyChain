@@ -45,7 +45,7 @@ int score = 0;
 //boolean for Serial registration
 boolean newData = false;
 
-/instruction packet components <ARROW_PHASE,SCORE_QUERY>
+//instruction packet components <ARROW_PHASE,SCORE_QUERY>
 //defining the arrow phase codings
 const int NONE = 0;
 const int ASSEMBLY = 1;
