@@ -212,6 +212,7 @@ String createPacket(String score, int stoneCountArr[]){
 }
 void slotCount(){
   int reading = digitalRead(slotCount_dataPin);
+  Serial.println(reading);
   if (reading != lastState) {
     lastDebounceTime = millis();
   }
@@ -219,7 +220,7 @@ void slotCount(){
     if (reading != State) {
       State = reading;
       if (State == LOW) {
-        score++;
+        score=score+1;
         Serial.print(createPacket(String(score),board_sums));
       }
     } 
