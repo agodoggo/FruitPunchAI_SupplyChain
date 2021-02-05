@@ -128,5 +128,5 @@ public void pagestate_change(int pagestate) {
     text(myScore,500,600);
     text("Opponent's score ",350,750);
     text(oppScore,550,750);
-  }  
+  }
 }

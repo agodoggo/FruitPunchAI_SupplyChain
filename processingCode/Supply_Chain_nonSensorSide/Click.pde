@@ -236,8 +236,10 @@ void mouseClicked(){
       myArduinoPort.write(createArduinoPacket(NONE,NONE));
     }
     else{
-      //display game over and return to homescreen
+      //save score and return to homescreen
       pagestate = 1;
+      addHighScore(name,Integer.parseInt(myScore));
+      saveHighScore();
     }
   }
   
