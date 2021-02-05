@@ -17,7 +17,7 @@ int board_pins[BOARD_COUNT][TEN_STONE_BOARD] = {
   {23,25,27,29,31,33,35,37,39,41},
   {42,44,46,48,50,52},
   {A0,A1,A2,A3,A4,A5},
-  {A6,A7}
+  {A13,A14}
 };
 
 //slot counter variables
