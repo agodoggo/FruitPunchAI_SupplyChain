@@ -2,7 +2,7 @@
 
 //demand LED blink test
 const int demand_LED = 2;
-const int LED_COUNT = 8;
+const int LED_COUNT = 4;
 
 Adafruit_NeoPixel strip(LED_COUNT, demand_LED, NEO_GRB+NEO_KHZ800);
 void setup() {
