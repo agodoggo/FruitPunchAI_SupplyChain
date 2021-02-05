@@ -6,5 +6,5 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(analogRead(A14));
+  Serial.println(analogRead(A14)*(5.0)/(1023.0));
 }
