@@ -23,7 +23,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   int reading = digitalRead(slotCount);
-
+  Serial.print("reading");
   // If the switch changed, due to noise or pressing:
   if (reading != lastState) {
     // reset the debouncing timer
