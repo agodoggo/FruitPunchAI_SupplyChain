@@ -20,6 +20,13 @@ void mouseClicked(){
   //plus button should increase number in system
   else if (pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
+  else if(pagestate==2||pagestate==3){
+    key_pressed();
+    textAlign(CENTER);
+    fill(0);
+    textSize(26);
+    text(name,400,770);
+  }
   
   
   // Dia 4 buttons
@@ -136,19 +143,19 @@ void mouseClicked(){
   }
   //Ai advice cloud
   else if (pagestate == 23 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-  pagestate = 25;
+    pagestate = 25;
   }
   
   //Dia 25
   //go back to Dia 23 by clicking outside of bubble
   else if (pagestate == 25 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-  pagestate =23;
+    pagestate =23;
   }
   
   //Dia 23
   //info button
   else if (pagestate == 23 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 24;
+    pagestate = 24;
   }
   
   //Dia 24
@@ -196,10 +203,10 @@ void mouseClicked(){
   //Dia 32
   //next button skip dia 35 for now -> 36
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 35;
     myArduinoPort.write(createArduinoPacket(DEMAND,"1")); //ask for score before proceeding to dia36
     waitForArduinoData();
     createRPiPacket(WAITING, myScore); //send score and waiting status together
+    pagestate = 35;
   }
   //info button
   else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {

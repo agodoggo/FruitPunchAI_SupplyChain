@@ -115,6 +115,7 @@ public void pagestate_change(int pagestate) {
   image(Dia37,0,0);
   }
   
+  
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
     text(roundNo, 100, 75);
