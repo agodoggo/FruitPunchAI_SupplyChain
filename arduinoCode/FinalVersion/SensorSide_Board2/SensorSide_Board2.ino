@@ -203,6 +203,7 @@ void StoneCount(){
   for(int i = 0; i < BOARD_COUNT; i++){
     Serial.println(board_sums[i]);
   }
+  Serial.println();
   
 }
 String createPacket(String score, int stoneCountArr[]){
