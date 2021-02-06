@@ -96,7 +96,9 @@ void setup()
 void draw()
 {
    //loop waiting if waiting
+  print("O");
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
+    print("I");
     checkWaiting();
   }
 }

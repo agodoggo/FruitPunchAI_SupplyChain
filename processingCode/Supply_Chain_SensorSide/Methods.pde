@@ -10,7 +10,7 @@ public void checkWaiting(){
       myArduinoPort_right.write(createArduinoPacket_right(LOGISTICS,NONE,NONE));
     }
     else if(pagestate==26){
-      myArduinoPort_left.write(createArduinoPacket_left(ASSEMBLY,NONE));
+      myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
       myArduinoPort_right.write(createArduinoPacket_right(TRANSPORT1,NONE,NONE));
     }
     else if(pagestate==31){
