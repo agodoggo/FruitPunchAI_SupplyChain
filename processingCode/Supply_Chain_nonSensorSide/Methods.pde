@@ -1,5 +1,6 @@
 //Serial receiving from Raspberry Pi
 public void checkWaiting(){
+  print(oppWaiting);
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
       myArduinoPort.write(createArduinoPacket(ASSEMBLY,NONE));
