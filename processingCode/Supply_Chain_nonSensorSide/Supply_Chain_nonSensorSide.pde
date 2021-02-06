@@ -84,6 +84,7 @@ void setup()
  
  myArduinoPort.write(createArduinoPacket(NONE,NONE));
  pagestate_change(pagestate);
+ displayHighScores();
 }
 
 void draw()
