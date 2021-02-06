@@ -10,7 +10,7 @@ void mouseClicked(){
   
   //Dia 2 buttons
   //next button
-  else if (pagestate == 2 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
+  else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
     pagestate = 4;
   }
   //Minus button should decrease number in system
@@ -26,7 +26,7 @@ void mouseClicked(){
   }
   
   //Dia 3 next button
-  else if (pagestate == 3 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
+  else if (pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
     pagestate = 4;
   }
   
