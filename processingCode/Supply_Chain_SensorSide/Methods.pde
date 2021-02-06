@@ -1,5 +1,4 @@
 public void checkWaiting(){
-  print(oppWaiting);
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
       myArduinoPort_left.write(createArduinoPacket_left(ASSEMBLY,NONE));
