@@ -182,23 +182,23 @@ void setupStoneBoards(){
 
 void StoneCount(){
   for(int i = 0; i < BOARD_COUNT-3; i++){
-    board_sums[i] = 0;
+    board_sums[i] = TEN_STONE_BOARD;
     for(int j = 0; j < TEN_STONE_BOARD; j++){
-      board_vals[i][j] = !digitalRead(board_pins[i][j]);
-      board_sums[i] = board_sums[i] + board_vals[i][j];
+      board_vals[i][j] = digitalRead(board_pins[i][j]);
+      board_sums[i] = board_sums[i] - board_vals[i][j];
     }
   }
   for(int i = 3; i < BOARD_COUNT-1; i++){
-    board_sums[i] = 0;
+    board_sums[i] = SIX_STONE_BOARD;
     for(int j = 0; j < SIX_STONE_BOARD; j++){
-      board_vals[i][j] = !digitalRead(board_pins[i][j]);
-      board_sums[i] = board_sums[i] + board_vals[i][j];
+      board_vals[i][j] = digitalRead(board_pins[i][j]);
+      board_sums[i] = board_sums[i] - board_vals[i][j];
     }
   }
-  board_sums[BOARD_COUNT-1] = 0;
+  board_sums[BOARD_COUNT-1] = TWO_STONE_BOARD;
   for(int j = 0; j < TWO_STONE_BOARD; j++){
-      board_vals[BOARD_COUNT-1][j] = !digitalRead(board_pins[5][j]);
-      board_sums[BOARD_COUNT-1] = board_sums[BOARD_COUNT-1] + board_vals[BOARD_COUNT-1][j];
+      board_vals[BOARD_COUNT-1][j] = digitalRead(board_pins[BOARD_COUNT-1][j]);
+      board_sums[BOARD_COUNT-1] = board_sums[BOARD_COUNT-1] - board_vals[BOARD_COUNT-1][j];
   }
 }
 String createPacket(String score, int stoneCountArr[]){

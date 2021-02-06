@@ -145,17 +145,17 @@ void writeArrowStates(){
 
 void StoneCount(){
   for(int i = 0; i < BOARD_COUNT-1; i++){
-    board_sums[i] = 0;
+    board_sums[i] = SIX_STONE_BOARD;
     for(int j = 0; j < SIX_STONE_BOARD; j++){
-      board_vals[i][j] = !digitalRead(board_pins[i][j]);
-      board_sums[i] = board_sums[i] + board_vals[i][j]; 
+      board_vals[i][j] = digitalRead(board_pins[i][j]);
+      board_sums[i] = board_sums[i] - board_vals[i][j]; 
     }
   }
   
-  board_sums[10] = 0;
-  board_vals[10][0] = !digitalRead(board_pins[10][0]);
-  board_vals[10][1] = !digitalRead(board_pins[10][1]);
-  board_sums[10] = board_vals[10][0] + board_vals[10][1];
+  board_sums[10] = TWO_STONE_BOARD;
+  board_vals[10][0] = digitalRead(board_pins[10][0]);
+  board_vals[10][1] = digitalRead(board_pins[10][1]);
+  board_sums[10] = board_sums[10] - board_vals[10][0] - board_vals[10][1];
 }
 
 String createPacket(int stoneCountArr[]){
