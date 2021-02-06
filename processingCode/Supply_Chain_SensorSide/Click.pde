@@ -216,7 +216,7 @@ void mouseClicked(){
   else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
     myArduinoPort_left.write("<"+NONE+","+NONE+">");
     send_waitForArduinoData("right", DEMAND, SCORE_QUERY, NONE);
-    createRPiPacket(WAITING, myScore); //send score and waiting status together
+    myRPiPort.write(createRPiPacket(WAITING, myScore)); //send score and waiting status together
     pagestate = 35;
   }
   //info button
