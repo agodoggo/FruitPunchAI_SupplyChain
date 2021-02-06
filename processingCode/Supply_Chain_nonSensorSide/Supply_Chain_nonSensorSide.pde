@@ -80,6 +80,7 @@ void setup()
  myRPiPort.bufferUntil('>');
  
  myArduinoPort.write(createArduinoPacket(NONE,NONE));
+ pagestate_change(pagestate);
 }
 
 void draw()

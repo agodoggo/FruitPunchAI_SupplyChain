@@ -94,6 +94,7 @@ void setup()
  
  myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
  myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
+ pagestate_change(pagestate);
 }
 
 void draw()
