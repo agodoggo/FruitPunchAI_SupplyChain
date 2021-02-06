@@ -79,8 +79,6 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
- print(Serial.list());
- 
  String arduinoPort_left = Serial.list()[2]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
@@ -89,6 +87,10 @@ void setup()
 
  String RPiPort = Serial.list()[5]; //figure this out
  myRPiPort = new Serial(this, RPiPort, baudRate);
+ 
+ myArduinoPort_left.bufferUntil('>');
+ myArduinoPort_right.bufferUntil('>');
+ myRPiPort.bufferUntil('>');
 }
 
 void draw()
