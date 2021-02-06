@@ -63,16 +63,16 @@ public void checkWaiting(){
 
 public void send_waitForArduinoData(String direction, String arrow_phase, String score_query, String stone_query){
   if(direction.equals("left")){
-    while(!ArduinoLeftNewData){ 
-      delay(100);
+    while(!ArduinoLeftNewData){
       myArduinoPort_left.write(createArduinoPacket_left(arrow_phase,stone_query));
+      delay(100);
     }
     ArduinoLeftNewData = false;
   }
   else{
-    while(!ArduinoRightNewData){ 
-      delay(100);
+    while(!ArduinoRightNewData){
       myArduinoPort_right.write(createArduinoPacket_right(arrow_phase,score_query,stone_query));
+      delay(100);
     }
     ArduinoRightNewData = false;
   }
