@@ -91,6 +91,9 @@ void setup()
  myArduinoPort_left.bufferUntil('>');
  myArduinoPort_right.bufferUntil('>');
  myRPiPort.bufferUntil('>');
+ 
+ myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
+ myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
 }
 
 void draw()

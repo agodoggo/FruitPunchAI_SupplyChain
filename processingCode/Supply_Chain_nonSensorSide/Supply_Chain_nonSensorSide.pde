@@ -78,6 +78,8 @@ void setup()
  
  myArduinoPort.bufferUntil('>');
  myRPiPort.bufferUntil('>');
+ 
+ myArduinoPort.write(createArduinoPacket(NONE,NONE));
 }
 
 void draw()
