@@ -14,6 +14,7 @@ public void pagestate_change(int pagestate) {
   }
   else if(pagestate == 4){
   image(Dia4,0,0);
+  addHighScore(name,Integer.parseInt(myScore));
   saveHighScore();
   }
   else if(pagestate == 5){
