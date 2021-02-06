@@ -79,6 +79,8 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
+ print(Serial.list());
+ 
  String arduinoPort_left = Serial.list()[1]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
