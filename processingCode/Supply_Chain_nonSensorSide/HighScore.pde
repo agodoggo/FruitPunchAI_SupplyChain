@@ -43,8 +43,12 @@ public void displayHighScores(){
   textAlign(LEFT);
   for(int i = 0; i < 5; i++){
     tmpNode = tmpQueue.poll();
-    text(tmpNode.getname(),70,673+120*i);
-    text(tmpNode.getscore(),550,673+120*i);
+    if(tmpNode.getname() != null){
+      text(tmpNode.getname(),70,673+120*i);
+    }
+    if (str(tmpNode.getscore()) != null){
+      text(str(tmpNode.getscore()),550,673+120*i);
+    }
   }
 }
 
