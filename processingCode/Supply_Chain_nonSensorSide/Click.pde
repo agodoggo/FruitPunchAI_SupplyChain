@@ -25,6 +25,11 @@ void mouseClicked(){
     key_pressed();
   }
   
+  //Dia 3 next button
+  else if (pagestate == 3 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
+    pagestate = 4;
+  }
+  
   
   // Dia 4 buttons
   //next button
