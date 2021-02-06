@@ -29,7 +29,7 @@ public void sendWaitingStatus(){
 }
 
 char[] recvWithStartEndMarkers(Serial port) {
-    int numChars = 32;
+    int numChars = 128;
     char[] receivedChars = new char[numChars];
     
     boolean recvInProgress = false;
@@ -79,7 +79,7 @@ void newGameSetup(){
 
 void serialEvent(Serial thisPort){
   //store received transmission in variable
-  char[] tmp = new char[32];
+  char[] tmp = new char[128];
   tmp = recvWithStartEndMarkers(thisPort);
   
   //store in appropriate globals

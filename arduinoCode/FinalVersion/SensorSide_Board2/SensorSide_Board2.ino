@@ -37,7 +37,7 @@ const int phaseNo = 2;
 int phasePins[phaseNo] = {3,A8}; // {Logistics, Transport1}
 int slotCount_dataPin = A9; //make sure to pullup to 20k
 int phaseArrowStates[phaseNo] = {LOW,LOW};
-const byte numChars = 32;
+const byte numChars = 128;
 char receivedChars[numChars];
 char tempChars[numChars];
 int score = 0;
@@ -66,7 +66,7 @@ int stone_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(slotCount_dataPin, INPUT_PULLUP);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);

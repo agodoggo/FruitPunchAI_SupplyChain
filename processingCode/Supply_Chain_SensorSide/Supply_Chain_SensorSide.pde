@@ -17,7 +17,7 @@ int roundLim = 10; //default round limit
 int oppWaiting = 0;
 
 //set serial baudrate
-int baudRate = 115200;
+int baudRate = 9600;
 
 //boolean for Serial registration
 Serial myArduinoPort_left;

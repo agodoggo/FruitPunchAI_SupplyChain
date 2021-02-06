@@ -20,7 +20,7 @@ const int phaseNo = 4;
 int phasePins[phaseNo] = {4,7,3,2}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int phaseArrowStates[phaseNo] = {LOW,LOW,LOW,LOW}; // {Assembly, Logistics, Transport1, Transport2, Demand}
 int slotCount_dataPin = 5; //make sure to pullup to 20k
-const byte numChars = 32;
+const byte numChars = 128;
 char receivedChars[numChars];
 char tempChars[numChars];
 boolean newData = false;
@@ -48,7 +48,7 @@ int score_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }

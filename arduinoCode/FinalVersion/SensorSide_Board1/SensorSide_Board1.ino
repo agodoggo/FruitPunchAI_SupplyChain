@@ -29,7 +29,7 @@ int board_pins[BOARD_COUNT][SIX_STONE_BOARD] = {
 const int phaseNo = 2;
 int phasePins[phaseNo] = {22,23}; // {Assembly, Transport2}
 int phaseArrowStates[phaseNo] = {LOW,LOW};
-const byte numChars = 32;
+const byte numChars = 128;
 char receivedChars[numChars];
 char tempChars[numChars];
 
@@ -50,7 +50,7 @@ int stone_query = -1;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   for (int i = 0; i < phaseNo; i++){
     pinMode(phasePins[i],OUTPUT);
   }
