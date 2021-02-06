@@ -175,7 +175,7 @@ public void key_pressed(){
   }
   
   //key r
-  else if(mouseX<222 && mouseX < 282 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if(mouseX>222 && mouseX < 282 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 2){
       name+="R";
     }
