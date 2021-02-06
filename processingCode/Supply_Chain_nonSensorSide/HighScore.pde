@@ -43,11 +43,13 @@ public void displayHighScores(){
   textAlign(LEFT);
   for(int i = 0; i < 5; i++){
     tmpNode = tmpQueue.poll();
-    if(tmpNode.name != null){
+    if (tmpNode != null){
+      if(tmpNode.name != null){
       text(tmpNode.name,70,673+120*i);
-    }
-    if (str(tmpNode.score) != null){
-      text(str(tmpNode.score),550,673+120*i);
+      }
+      if (str(tmpNode.score) != null){
+        text(str(tmpNode.score),550,673+120*i);
+      }
     }
   }
 }
