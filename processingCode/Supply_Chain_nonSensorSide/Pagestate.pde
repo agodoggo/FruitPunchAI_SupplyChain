@@ -5,6 +5,7 @@ public void pagestate_change(int pagestate) {
   //change background picture
   if(pagestate == 1){
   image(Dia1,0,0);
+  displayHighScores();
   }
   else if(pagestate == 2){
   image(Dia2,0,0);
