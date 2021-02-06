@@ -147,14 +147,14 @@ void StoneCount(){
   for(int i = 0; i < BOARD_COUNT-1; i++){
     board_sums[i] = 0;
     for(int j = 0; j < SIX_STONE_BOARD; j++){
-      board_vals[i][j] = digitalRead(board_pins[i][j]);
+      board_vals[i][j] = !digitalRead(board_pins[i][j]);
       board_sums[i] = board_sums[i] + board_vals[i][j]; 
     }
   }
   
   board_sums[10] = 0;
-  board_vals[10][0] = digitalRead(board_pins[10][0]);
-  board_vals[10][1] = digitalRead(board_pins[10][1]);
+  board_vals[10][0] = !digitalRead(board_pins[10][0]);
+  board_vals[10][1] = !digitalRead(board_pins[10][1]);
   board_sums[10] = board_vals[10][0] + board_vals[10][1];
 }
 
