@@ -42,8 +42,10 @@ public void displayHighScores(){
   textSize(26);
   textAlign(LEFT);
   tmpNode = tmpQueue.poll();
+  int index = 0;
   while(tmpNode==null){
     tmpNode = tmpQueue.poll();
+    println(index);
   }
   if(tmpNode.name != null){
     text(tmpNode.name,70,673);
