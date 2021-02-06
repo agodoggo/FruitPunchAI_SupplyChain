@@ -21,6 +21,7 @@ void mouseClicked(){
   else if (pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
   else if(pagestate==2||pagestate==3){
+    print("pagestate: " + pagestate);
     key_pressed();
     if(name!=null){
       print("Name: " + name);
