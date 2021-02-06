@@ -26,7 +26,7 @@ public void addHighScore(String name, int score){
 
 public void saveHighScore(){
   String[] tmp = new String[MAX_HIGHSCORES];
-  Node[] tmpNodeList = highScoreList_WriteMem.toArray();
+  Node[] tmpNodeList = highScoreList_WriteMem.toArray(new Node[highScoreList_WriteMem.size()]);
   for(int i = 0; i < tmpNodeList.length; i++){
     tmp[i]+=tmpNodeList[i].getname();
     tmp[i]+=",";
