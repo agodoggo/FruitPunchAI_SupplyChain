@@ -31,6 +31,9 @@ boolean RaspberryPiNewData = false;
 String myScore = "0";
 String oppScore = "0";
 
+//data variables
+String name = "";
+
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
 

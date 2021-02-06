@@ -1,6 +1,3 @@
-//data variables
-String name = "";
-
 //y pixel ranges
 int y_1row_bot = 815;
 int y_1row_top = 875;
