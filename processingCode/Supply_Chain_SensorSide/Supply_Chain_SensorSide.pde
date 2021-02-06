@@ -81,13 +81,13 @@ void setup()
  
  print(Serial.list());
  
- String arduinoPort_left = Serial.list()[1]; // figure this out
+ String arduinoPort_left = Serial.list()[2]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
-  String arduinoPort_right = Serial.list()[2]; //figure this out
+  String arduinoPort_right = Serial.list()[3]; //figure this out
  myArduinoPort_right = new Serial(this, arduinoPort_right, baudRate);
 
- String RPiPort = Serial.list()[3]; //figure this out
+ String RPiPort = Serial.list()[5]; //figure this out
  myRPiPort = new Serial(this, RPiPort, baudRate);
 }
 
