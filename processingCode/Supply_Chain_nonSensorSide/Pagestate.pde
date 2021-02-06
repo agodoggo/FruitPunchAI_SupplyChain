@@ -38,6 +38,7 @@ public void pagestate_change(int pagestate) {
   }
   else if(pagestate == 12){
   image(Dia12,0,0);
+  saveHighScore();
   }
   else if(pagestate == 13){
   image(Dia13,0,0);
