@@ -23,13 +23,6 @@ void mouseClicked(){
   else if(pagestate==2||pagestate==3){
     println("pagestate: " + pagestate);
     key_pressed();
-    if(name!=null){
-      print("Name: " + name);
-      textAlign(CENTER);
-      fill(0);
-      textSize(26);
-      text(name,400,770);
-    }
   }
   
   

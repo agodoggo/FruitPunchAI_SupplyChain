@@ -129,4 +129,14 @@ public void pagestate_change(int pagestate) {
     text("Opponent's score ",350,750);
     text(oppScore,550,750);
   }
+  //display name
+  if (pagestate == 2 || pagestate == 3){
+    if(name!=null){
+      print("Name: " + name);
+      textAlign(CENTER);
+      fill(0);
+      textSize(26);
+      text(name,400,770);
+    }
+  }
 }
