@@ -21,9 +21,9 @@ void mouseClicked(){
   else if (pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
   //keyboard
-  else if(pagestate==2){
-    keyboard_pressed();
-  }
+  //else if(pagestate==2){
+  //  keyboard_pressed();
+  //}
   
   
   // Dia 4 buttons
