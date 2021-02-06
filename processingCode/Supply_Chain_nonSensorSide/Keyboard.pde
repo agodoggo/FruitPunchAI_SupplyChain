@@ -2,14 +2,14 @@
 String name;
 
 //y pixel ranges
-int y_1row_top = 815;
-int y_1row_bot = 875;
-int y_2row_top = 885;
-int y_2row_bot = 945;
-int y_3row_top = 955;
-int y_3row_bot = 1015;
-int y_4row_top = 1025;
-int y_4row_bot = 1085;
+int y_1row_bot = 815;
+int y_1row_top = 875;
+int y_2row_bot = 885;
+int y_2row_top = 945;
+int y_3row_bot = 955;
+int y_3row_top = 1015;
+int y_4row_bot = 1025;
+int y_4row_top = 1085;
 
 public void key_pressed(){
   
