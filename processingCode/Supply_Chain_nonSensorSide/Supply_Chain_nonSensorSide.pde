@@ -89,8 +89,8 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
-  int percent = (int)(100*(double)usedMem()/totalMem());
-  println(percent + "%");
+  //int percent = (int)(100*(double)usedMem()/totalMem());
+  //println(percent + "%");
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
