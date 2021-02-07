@@ -72,7 +72,6 @@ public void waitForArduinoData(){
 
 void newGameSetup(){
   myArduinoPort.write(createArduinoPacket(NONE,SCORE_ERASE));
-  pagestate_change(pagestate);
 }
 
 void serialEvent(Serial thisPort){
