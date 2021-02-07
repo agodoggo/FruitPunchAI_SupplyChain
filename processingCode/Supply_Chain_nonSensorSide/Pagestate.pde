@@ -121,10 +121,10 @@ public void pagestate_change(int pagestate) {
   
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
-    textSize(40);
+    textSize(45);
     fill(255,255,255);
     textAlign(CENTER);
-    text(roundNo+"/10", 113, 85);
+    text(roundNo+"/10", 100, 100);
   }
   
   //display score on score page
