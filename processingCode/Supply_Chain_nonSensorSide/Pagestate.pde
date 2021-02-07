@@ -169,7 +169,8 @@ public void pagestate_change(int pagestate) {
     }
     textAlign(CENTER);
     textSize(30);
-    text(name,100,25); //display name
-    text("Score: "+ myScore,618,25); //display score
+    text(name,100,30); //display name
+    textAlign(LEFT);
+    text("Score: "+ myScore,618,30); //display score
   }
 }
