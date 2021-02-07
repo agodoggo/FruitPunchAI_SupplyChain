@@ -61,7 +61,7 @@ public void displayHighScores(){
   PriorityQueue<Node> tmpQueue = highScoreList_ReadOnly;
   Node tmpNode;
   fill(0);
-  textSize(26);
+  textSize(40);
   textAlign(LEFT);
   for(int i = 0; i < 5; i++){
     tmpNode = tmpQueue.poll();
