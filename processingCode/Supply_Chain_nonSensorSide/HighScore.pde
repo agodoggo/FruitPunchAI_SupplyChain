@@ -67,23 +67,24 @@ public void saveHighScore(){
 }
 
 public void displayHighScores(){
-  PriorityQueue<Node> tmpQueue = new PriorityQueue<>(highScoreList_ReadOnly);
-  Node tmpNode;
+  Node [] NodesDisp = new Node[5];
   fill(0);
   textSize(60);
   textAlign(LEFT);
   for(int i = 0; i < 5; i++){
-    tmpNode = tmpQueue.poll();
-    if(tmpNode !=null){
-      if(tmpNode.name != null){
-          text(tmpNode.name,70,690+130*i);
+    NodesDisp[i] = highScoreList_ReadOnly.poll();
+    if(NodesDisp[i] !=null){
+      if(NodesDisp[i].name != null){
+          text(NodesDisp[i].name,70,690+130*i);
         }
-      if (str(tmpNode.score) != null){
-          text(str(tmpNode.score),675,690+130*i);
+      if (str(NodesDisp[i].score) != null){
+          text(str(NodesDisp[i].score),675,690+130*i);
         } 
       }
     }
-    tmpQueue = new PriorityQueue<>(highScoreList_ReadOnly);
+    for(int i = 0; i < 5; i++){
+      highScoreList_ReadOnly.add(NodesDisp[i]);
+    }
   }
 
 class Node{
