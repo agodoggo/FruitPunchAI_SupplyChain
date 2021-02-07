@@ -13,7 +13,6 @@ public void initHighScore(){
   println(hS_filePath + " is " + highScoresFile.exists());
   if(highScoresFile.isFile()){
     String[] pastScores = loadStrings(hS_filePath);
-    print("past scores" + pastScores);
     for(int i = 0; i < pastScores.length; i++){
       println("past score: "+ pastScores[i]);
       String[] tmp = split(pastScores[i],",");
