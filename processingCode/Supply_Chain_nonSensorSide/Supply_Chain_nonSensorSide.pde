@@ -95,6 +95,7 @@ void setup()
  
  myArduinoPort.write(createArduinoPacket(NONE,NONE));
  pagestate_change(pagestate);
+ initHighScore();
  displayHighScores();
 }
 
