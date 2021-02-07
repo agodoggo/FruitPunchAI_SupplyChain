@@ -54,6 +54,7 @@ void mouseClicked(){
   //back buttons and exit the rules
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
     if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+        println("if statement entered");
        pagestate = 4;
      }
   }
