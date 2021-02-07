@@ -124,7 +124,7 @@ public void pagestate_change(int pagestate) {
     textSize(45);
     fill(255,255,255);
     textAlign(CENTER);
-    text(roundNo+"/10", 90, 110);
+    text(roundNo+"/10", 110, 90);
   }
   
   //display score on score page
