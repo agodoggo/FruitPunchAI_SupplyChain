@@ -4,11 +4,11 @@ import java.util.*;
 PriorityQueue<Node> highScoreList_ReadOnly = new PriorityQueue<Node>(11, new ScoreComparator_dec()); //top of heap is maximum score 
 PriorityQueue<Node> highScoreList_WriteMem = new PriorityQueue<Node>(11, new ScoreComparator_asc());// top of heap is minimum score
 int MAX_HIGHSCORES = 1024;
-File highScoresFile = new File("Data/highScores.txt");
+File highScoresFile = sketchFile("Data/highScores.txt");
 String hS_filePath = highScoresFile.getPath();
 
 public void initHighScore(){
-  println(hS_filePath + " is " + highScoresFile.isFile());
+  println(hS_filePath + " is " + highScoresFile.exists());
   if(highScoresFile.isFile()){
     String[] pastScores = loadStrings(hS_filePath);
     print("past scores" + pastScores);
