@@ -67,7 +67,7 @@ public void saveHighScore(){
 }
 
 public void displayHighScores(){
-  PriorityQueue<Node> tmpQueue = highScoreList_ReadOnly;
+  PriorityQueue<Node> tmpQueue = new PriorityQueue<>(highScoreList_ReadOnly);
   Node tmpNode;
   fill(0);
   textSize(60);
@@ -83,6 +83,7 @@ public void displayHighScores(){
         } 
       }
     }
+    tmpQueue = new PriorityQueue<>(highScoreList_ReadOnly);
   }
 
 class Node{
