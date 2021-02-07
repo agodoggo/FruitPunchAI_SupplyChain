@@ -1,5 +1,6 @@
 void mouseClicked(){
   
+   println("mouseX: " + mouseX + ", mouseY: " + mouseY);
   //Dia 1 buttons
   //New game button
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
