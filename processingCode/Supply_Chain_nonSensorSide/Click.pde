@@ -51,10 +51,10 @@ void mouseClicked(){
     else if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
       pagestate += 1;
     }
-    else if(pagestate == 11){
+  }
+  else if(pagestate == 11){
       pagestate = 4;
     }
-  }
 
   //SUPPLY PHASE
   //Dia 12
