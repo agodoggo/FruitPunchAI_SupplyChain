@@ -129,12 +129,12 @@ public void pagestate_change(int pagestate) {
   
   //display score on score page
   if(pagestate == 36){
-    textSize(36);
+    textSize(50);
     fill(0);
     text("Your score ",350,600);
-    text(trim(myScore),500,600);
+    text(trim(myScore),700,600);
     text("Opponent's score ",350,750);
-    text(trim(oppScore),550,750);
+    text(trim(oppScore),700,750);
   }
   //display name on name enter page
   if (pagestate == 2 || pagestate == 3){
