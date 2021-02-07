@@ -20,10 +20,14 @@ void mouseClicked(){
   //plus button should increase number in system
   else if (pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
-  //keyboard
-  //else if(pagestate==2){
-  //  keyboard_pressed();
-  //}
+  else if(pagestate==2||pagestate==3){
+    key_pressed();
+  }
+  
+  //Dia 3 next button
+  else if (pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
+    pagestate = 4;
+  }
   
   
   // Dia 4 buttons

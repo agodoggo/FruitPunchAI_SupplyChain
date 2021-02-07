@@ -6,6 +6,13 @@ PImage Dia11;PImage Dia12;PImage Dia13;PImage Dia14;PImage Dia15;PImage Dia16;PI
 PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PImage Dia26;PImage Dia27;PImage Dia28;PImage Dia29;
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
+//colors
+Color SUPPLY_col = new Color(170,11,35);
+Color ASSEMBLY_col = new Color(87,40,88);
+Color LOGISTICS_col = new Color(17,125,163);
+Color TRANSPORT_col = new Color(125,29,29);
+Color DEMAND_col = new Color(80,110,35);
+
 //Set the pagestate at 0 to begin the program at Dia1
 int pagestate = 1;
 
@@ -71,6 +78,10 @@ void setup()
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
  
+ //set aesthetics
+ PFont erasDemi_font;
+ erasDemi_font = loadFont("ERASDEMI.TTF");
+ textFont(erasDemi_font);
  
  //setup serial ports
  String arduinoPort = Serial.list()[2];
@@ -102,4 +113,16 @@ public long totalMem() {
  
 public long usedMem() {
   return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+}
+class Color{
+
+    int r;        // the red color vaulue (0-255)
+    int g;       // the yellow color vaulue (0-255
+    int b;       // the blue color vaulue (0-255)
+
+    public Color(int r, int g, int b){
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
 }

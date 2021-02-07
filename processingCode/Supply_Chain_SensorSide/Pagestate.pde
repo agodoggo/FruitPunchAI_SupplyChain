@@ -1,9 +1,11 @@
+//git test
 public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
   if(pagestate == 1){
   image(Dia1,0,0);
+  displayHighScores();
   }
   else if(pagestate == 2){
   image(Dia2,0,0);
@@ -13,6 +15,8 @@ public void pagestate_change(int pagestate) {
   }
   else if(pagestate == 4){
   image(Dia4,0,0);
+  addHighScore(name,Integer.parseInt(myScore));
+  saveHighScore();
   }
   else if(pagestate == 5){
   image(Dia5,0,0);
@@ -114,17 +118,58 @@ public void pagestate_change(int pagestate) {
   image(Dia37,0,0);
   }
   
+  
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
-    text(roundNo, 100, 75);
+    textSize(20);
+    fill(255,255,255);
+    text(roundNo+"/10", 100, 75);
   }
   
-  //display score
+  //display score on score page
   if(pagestate == 36){
+    textSize(26);
     fill(0);
     text("Your score ",350,600);
     text(myScore,500,600);
     text("Opponent's score ",350,750);
     text(oppScore,550,750);
-  }  
+  }
+  //display name on name enter page
+  if (pagestate == 2 || pagestate == 3){
+    if(name!=null){
+      print("Name: " + name);
+      textAlign(CENTER);
+      fill(0);
+      textSize(26);
+      text(name,400,770);
+    }
+  }
+  //display name and score for each phase in phase color
+  if(pagestate>=12 && pagestate <= 36){
+    //supply phase color
+    if(pagestate>= 12 && pagestate <= 17){    
+        fill(SUPPLY_col.r,SUPPLY_col.g,SUPPLY_col.b);
+    }
+    //assembly phase color
+    else if(pagestate>= 18 && pagestate <= 22){
+        fill(ASSEMBLY_col.r,ASSEMBLY_col.g,ASSEMBLY_col.b);
+    }
+    //logistics phase color
+    else if(pagestate>= 23 && pagestate <= 26){
+      fill(LOGISTICS_col.r,LOGISTICS_col.g,LOGISTICS_col.b);
+    }
+    //transport phase color
+    else if(pagestate>= 27 && pagestate <= 31){
+      fill(TRANSPORT_col.r,TRANSPORT_col.g,TRANSPORT_col.b);
+    }
+    //demand phase color
+    else if(pagestate>= 32 && pagestate <= 37){
+        fill(DEMAND_col.r,DEMAND_col.g,DEMAND_col.b);
+    }
+    textAlign(CENTER);
+    textSize(20);
+    text(name,100,25); //display name
+    text("Score: "+ myScore,618,25); //display score
+  }
 }
