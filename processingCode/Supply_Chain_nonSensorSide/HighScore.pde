@@ -11,8 +11,16 @@ public void initHighScore(){
   highScoresFile = new File(sketchPath("Data/highScores.txt"));
   hS_filePath = highScoresFile.getPath();
   println(hS_filePath + " is " + highScoresFile.exists());
+  println("highScoreList_ReadOnly size is " + highScoreList_ReadOnly.size());
+  println("highScoreList_WriteMem size is " + highScoreList_WriteMem.size());
   if(highScoresFile.isFile()){
     String[] pastScores = loadStrings(hS_filePath);
+    while(highScoreList_ReadOnly.size()>0){
+      highScoreList_ReadOnly.poll();
+    }
+    while(highScoreList_WriteMem.size()>0){
+      highScoreList_WriteMem.poll();
+    }
     for(int i = 0; i < pastScores.length; i++){
       println("past score: "+ pastScores[i]);
       String[] tmp = split(pastScores[i],",");
@@ -26,6 +34,7 @@ public void initHighScore(){
 }
 
 public void addHighScore(String name, int score){
+  println();
   
   while(highScoreList_WriteMem.size()>MAX_HIGHSCORES){
     highScoreList_WriteMem.poll();
