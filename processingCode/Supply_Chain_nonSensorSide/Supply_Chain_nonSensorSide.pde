@@ -80,7 +80,7 @@ void setup()
  
  //set aesthetics
  PFont erasDemi_font;
- erasDemi_font = createFont("ERASDEMI.TTF",20.0);
+ erasDemi_font = createFont("/Data/ERASDEMI.TTF",20.0);
  textFont(erasDemi_font);
  
  //setup serial ports
