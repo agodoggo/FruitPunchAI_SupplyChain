@@ -70,7 +70,7 @@ public void displayHighScores(){
           text(tmpNode.name,70,690+130*i);
         }
       if (str(tmpNode.score) != null){
-          text(str(tmpNode.score),700,690+130*i);
+          text(str(tmpNode.score),675,690+130*i);
         } 
       }
     }
