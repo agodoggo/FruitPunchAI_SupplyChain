@@ -8,7 +8,7 @@ File highScoresFile;
 String hS_filePath;
 
 public void initHighScore(){
-  highScoresFile = new File("Data/highScores.txt");
+  highScoresFile = new File(sketchPath("Data/highScores.txt"));
   hS_filePath = highScoresFile.getPath();
   println(hS_filePath + " is " + highScoresFile.exists());
   if(highScoresFile.isFile()){
