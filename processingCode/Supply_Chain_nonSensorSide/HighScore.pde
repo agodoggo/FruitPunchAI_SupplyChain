@@ -67,10 +67,10 @@ public void displayHighScores(){
     tmpNode = tmpQueue.poll();
     if(tmpNode !=null){
       if(tmpNode.name != null){
-          text(tmpNode.name,70,673+120*i);
+          text(tmpNode.name,70,688+120*i);
         }
       if (str(tmpNode.score) != null){
-          text(str(tmpNode.score),550,673+120*i);
+          text(str(tmpNode.score),550,688+120*i);
         } 
       }
     }
