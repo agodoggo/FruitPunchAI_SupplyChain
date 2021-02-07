@@ -120,6 +120,24 @@ void serialEvent(Serial thisPort){
   }
 }
 
+String demandMsg(){
+  int dice_roll = int(random(-0.5,2.5));
+  if(dice_roll == 0){
+    return "Dutch Retail demands" + quantDemand() + "Game Computers";
+  }
+  else if(dice_roll == 1){
+    return "Dutch Retail demands" + quantDemand() + "Tablets";
+  }
+  else if(dice_roll == 2){
+    return "German Retail demands" + quantDemand() + "Game Computers";
+  }
+  return "No country";
+}
+
+String quantDemand(){
+  return str(int(random(0.5,6.5)));
+}
+
 String createArduinoPacket_left(String arrow_phase, String stone_count_query){ //direction purely for print statement
   print("New message to left Arduino : " + "<"+arrow_phase+","+stone_count_query+">"+"\n");
   return "<"+arrow_phase+","+stone_count_query+">";

@@ -14,9 +14,8 @@ public void pagestate_change(int pagestate) {
   image(Dia2,0,0);
   }
   else if(pagestate == 3){
-  image(Dia3,0,0);
-  addHighScore(name,Integer.parseInt(myScore)); //remove for final versions
-  saveHighScore();
+    myIntroMov.play();
+    image(Dia3,0,0);
   }
   else if(pagestate == 4){
   image(Dia4,0,0);
@@ -103,7 +102,18 @@ public void pagestate_change(int pagestate) {
   image(Dia31,0,0);
   }
   else if(pagestate == 32){
-  image(Dia32,0,0);
+    String demandMsg = demandMsg();
+    myDemandMov.play();
+    textAlign(CENTER);
+    fill(0);
+    textSize(30);
+    text(demandMsg,400,400); //display name
+    delay(5000);
+    image(Dia32,0,0);
+     textAlign(CENTER);
+    fill(0);
+    textSize(30);
+    text(demandMsg,375,375); //display demand
   }
   else if(pagestate == 33){
   image(Dia33,0,0);

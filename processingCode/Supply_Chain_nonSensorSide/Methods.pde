@@ -97,6 +97,24 @@ void serialEvent(Serial thisPort){
   }
 }
 
+String demandMsg(){
+  int dice_roll = int(random(-0.5,2.5));
+  if(dice_roll == 0){
+    return "Dutch Retail demands" + quantDemand() + "Game Computers";
+  }
+  else if(dice_roll == 1){
+    return "Dutch Retail demands" + quantDemand() + "Tablets";
+  }
+  else if(dice_roll == 2){
+    return "German Retail demands" + quantDemand() + "Game Computers";
+  }
+  return "No country";
+}
+
+String quantDemand(){
+  return str(int(random(0.5,6.5)));
+}
+
 String createArduinoPacket(String arrow_phase, String score_query){
   print("New message to Arduino: " + "<"+arrow_phase+","+score_query+">"+"\n");
   return "<"+arrow_phase+","+score_query+">";

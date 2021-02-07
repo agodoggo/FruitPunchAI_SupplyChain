@@ -1,10 +1,14 @@
 import processing.serial.*;
+import processing.video.*;
 
 //Path to images, path is the data folder next to the processing sketch
 PImage Dia0; PImage Dia1;PImage Dia2;PImage Dia3;PImage Dia4;PImage Dia5;PImage Dia6;PImage Dia7;PImage Dia8;PImage Dia9;PImage Dia10;
 PImage Dia11;PImage Dia12;PImage Dia13;PImage Dia14;PImage Dia15;PImage Dia16;PImage Dia17;PImage Dia18;PImage Dia19;
 PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PImage Dia26;PImage Dia27;PImage Dia28;PImage Dia29;
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
+
+//videos
+Movie myIntroMov; Movie myDemandMov;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -88,6 +92,10 @@ void setup()
  Dia29 = loadImage("Data/Dia29.PNG");Dia30 = loadImage("Data/Dia30.PNG");Dia31 = loadImage("Data/Dia31.PNG");Dia32 = loadImage("Data/Dia32.PNG");
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
+ 
+  //preload all movies
+ myIntroMov = new Movie(this, "Data/UI Intro_video_co-op.mp4"); 
+ myDemandMov = new Movie(this, "Data/UI_Demand_boxes_fast.mp4");
  
  //set aesthetics
  PFont erasDemi_font;

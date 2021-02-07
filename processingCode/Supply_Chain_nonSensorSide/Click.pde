@@ -39,6 +39,7 @@ void mouseClicked(){
   }
   //rewind logo for seeing the video again
    else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
+     pagestate = 3;
   }
   
   //Dias 4-11
@@ -236,7 +237,7 @@ void mouseClicked(){
     }
     else{
       //save score and return to homescreen
-      pagestate = 1;
+      pagestate = 0;
       addHighScore(name,Integer.parseInt(myScore));
       saveHighScore();
     }
