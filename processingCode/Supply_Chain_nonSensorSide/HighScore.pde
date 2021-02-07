@@ -8,7 +8,7 @@ File highScoresFile = new File(dataPath("highScores.txt"));
 String hS_filePath = highScoresFile.getPath();
 
 public void initHighScore(){
-  println("highScores.txt is " + highScoresFile.isFile());
+  println(hS_filePath + " is " + highScoresFile.isFile());
   if(highScoresFile.isFile()){
     String[] pastScores = loadStrings(hS_filePath);
     print("past scores" + pastScores);
