@@ -128,7 +128,7 @@ public void pagestate_change(int pagestate) {
   
   //display score on score page
   if(pagestate == 36){
-    textSize(50);
+    textSize(36);
     fill(0);
     text("Your score ",350,600);
     text(myScore,500,600);
@@ -141,7 +141,7 @@ public void pagestate_change(int pagestate) {
       print("Name: " + name);
       textAlign(CENTER);
       fill(0);
-      textSize(26);
+      textSize(30);
       text(name,400,770);
     }
   }
@@ -168,7 +168,7 @@ public void pagestate_change(int pagestate) {
         fill(DEMAND_col.r,DEMAND_col.g,DEMAND_col.b);
     }
     textAlign(CENTER);
-    textSize(100);
+    textSize(30);
     text(name,100,25); //display name
     text("Score: "+ myScore,618,25); //display score
   }
