@@ -5,9 +5,9 @@ PriorityQueue<Node> highScoreList_ReadOnly = new PriorityQueue<Node>(11, new Sco
 PriorityQueue<Node> highScoreList_WriteMem = new PriorityQueue<Node>(11, new ScoreComparator_asc());// top of heap is minimum score
 int MAX_HIGHSCORES = 1024;
 File highScoresFile = dataFile("Data/HighScores.txt");
+String hS_filePath = highScoresFile.getPath();
 
 public void initHighScore(){
-  String hS_filePath = highScoresFile.getPath();
   if(highScoresFile.isFile()){
     String[] pastScores = loadStrings(hS_filePath);
     print("past scores" + pastScores);
@@ -45,12 +45,10 @@ public void saveHighScore(){
   String[] tmp = new String[highScoreList_WriteMem.size()];
   Node[] tmpNodeList = highScoreList_WriteMem.toArray(new Node[highScoreList_WriteMem.size()]);
   for(int i = 0; i < tmpNodeList.length; i++){
-    tmp[i]+=tmpNodeList[i].getname();
-    tmp[i]+=",";
-    tmp[i]+=tmpNodeList[i].getscore();
+    tmp[i]=tmpNodeList[i].name+","+tmpNodeList[i].score;
     println("entry "+ i + ": " + tmp[i]);
   }
-  saveStrings(filePath,tmp);
+  saveStrings(hS_filePath,tmp);
 }
 
 public void displayHighScores(){
