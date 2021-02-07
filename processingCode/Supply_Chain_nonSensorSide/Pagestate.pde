@@ -121,14 +121,14 @@ public void pagestate_change(int pagestate) {
   
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
-    textSize(20);
+    textSize(50);
     fill(255,255,255);
-    text(roundNo+"/10", 100, 75);
+    text(roundNo+"/10", 100, 90);
   }
   
   //display score on score page
   if(pagestate == 36){
-    textSize(26);
+    textSize(50);
     fill(0);
     text("Your score ",350,600);
     text(myScore,500,600);
@@ -168,7 +168,7 @@ public void pagestate_change(int pagestate) {
         fill(DEMAND_col.r,DEMAND_col.g,DEMAND_col.b);
     }
     textAlign(CENTER);
-    textSize(20);
+    textSize(100);
     text(name,100,25); //display name
     text("Score: "+ myScore,618,25); //display score
   }

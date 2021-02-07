@@ -7,7 +7,7 @@ PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PI
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
 //colors
-Color SUPPLY_col = new Color(170,11,35);
+Color SUPPLY_col = new Color(170,111,35);
 Color ASSEMBLY_col = new Color(87,40,88);
 Color LOGISTICS_col = new Color(17,125,163);
 Color TRANSPORT_col = new Color(125,29,29);
