@@ -172,7 +172,7 @@ public void pagestate_change(int pagestate) {
     textSize(30);
     text(name,100,35); //display name
     textAlign(LEFT);
-    String score = "Score: " + myScore;
+    String score = "Score: " + trim(myScore);
     text(score,618,35); //display score
   }
 }
