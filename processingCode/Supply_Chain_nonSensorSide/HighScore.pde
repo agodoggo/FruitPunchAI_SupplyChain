@@ -4,16 +4,19 @@ import java.util.*;
 PriorityQueue<Node> highScoreList_ReadOnly = new PriorityQueue<Node>(11, new ScoreComparator_dec()); //top of heap is maximum score 
 PriorityQueue<Node> highScoreList_WriteMem = new PriorityQueue<Node>(11, new ScoreComparator_asc());// top of heap is minimum score
 int MAX_HIGHSCORES = 1024;
-String filePath = "Data/HighScores.txt";
+File highScoresFile = dataFile("Data/HighScores.txt");
 
 public void initHighScore(){
-  String[] pastScores = loadStrings(filePath);
-  print("past scores" + pastScores);
-  for(int i = 0; i < pastScores.length; i++){
-    println("past score: "+ pastScores[i]);
-    String[] tmp = split(pastScores[i],",");
-    highScoreList_ReadOnly.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
-    highScoreList_WriteMem.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
+  String hS_filePath = highScoresFile.getPath();
+  if(highScoresFile.isFile()){
+    String[] pastScores = loadStrings(hS_filePath);
+    print("past scores" + pastScores);
+    for(int i = 0; i < pastScores.length; i++){
+      println("past score: "+ pastScores[i]);
+      String[] tmp = split(pastScores[i],",");
+      highScoreList_ReadOnly.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
+      highScoreList_WriteMem.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
+    }
   }
 }
 
