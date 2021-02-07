@@ -1,6 +1,4 @@
 void mouseClicked(){
-  
-   println("mouseX: " + mouseX + ", mouseY: " + mouseY);
   //Dia 1 buttons
   //New game button
   if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
@@ -47,18 +45,15 @@ void mouseClicked(){
   //Dias 5-11
   //next buttons - going through the pages after the question button
   else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10) {
-    println("pagestate check");
     if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-        println("if statement entered");
        pagestate = 4;
      }
     else if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
       pagestate += 1;
     }
-  }
-  //back buttons and exit the rules
-  else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
-    
+    else if(pagestate == 11){
+      pagestate = 4;
+    }
   }
 
   //SUPPLY PHASE
