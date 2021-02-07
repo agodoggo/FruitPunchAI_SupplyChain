@@ -4,7 +4,7 @@ import java.util.*;
 PriorityQueue<Node> highScoreList_ReadOnly = new PriorityQueue<Node>(11, new ScoreComparator_dec()); //top of heap is maximum score 
 PriorityQueue<Node> highScoreList_WriteMem = new PriorityQueue<Node>(11, new ScoreComparator_asc());// top of heap is minimum score
 int MAX_HIGHSCORES = 1024;
-String filePath = "/Data/HighScores.txt";
+String filePath = "Data/HighScores.txt";
 
 public void initHighScore(){
   String[] pastScores = loadStrings(filePath);
