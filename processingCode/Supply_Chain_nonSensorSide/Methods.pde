@@ -72,7 +72,7 @@ public void waitForArduinoData(){
 
 void newGameSetup(){
   myArduinoPort.write(createArduinoPacket(NONE,SCORE_ERASE));
-  background (0);
+  initHighScore();
   pagestate_change(pagestate);
 }
 

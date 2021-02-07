@@ -8,6 +8,7 @@ String filePath = "Data/HighScores.txt";
 
 public void initHighScore(){
   String[] pastScores = loadStrings(filePath);
+  print("past scores" + pastScores);
   for(int i = 0; i < pastScores.length; i++){
     String[] tmp = split(pastScores[i],",");
     highScoreList_ReadOnly.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
@@ -16,6 +17,7 @@ public void initHighScore(){
 }
 
 public void addHighScore(String name, int score){
+  
   while(highScoreList_WriteMem.size()>MAX_HIGHSCORES){
     highScoreList_WriteMem.poll();
   }
