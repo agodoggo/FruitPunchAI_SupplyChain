@@ -18,6 +18,9 @@ public void initHighScore(){
       highScoreList_WriteMem.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
     }
   }
+  else{
+    hS_filePath = "Data/highScores.txt";
+  }
 }
 
 public void addHighScore(String name, int score){
@@ -49,6 +52,7 @@ public void saveHighScore(){
     println("entry "+ i + ": " + tmp[i]);
   }
   saveStrings(hS_filePath,tmp);
+  println("Strings saved to: " + hS_filePath);
 }
 
 public void displayHighScores(){
