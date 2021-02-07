@@ -3,20 +3,23 @@ public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
-  if(pagestate == 1){
-  image(Dia1,0,0);
+  if(pagestate == 0){
+  image(Dia0,0,0);
   displayHighScores();
   }
-  else if(pagestate == 2){
+  else if(pagestate == 1){
+  image(Dia1,0,0);
+  }
+  if(pagestate == 2){
   image(Dia2,0,0);
   }
-  if(pagestate == 3){
+  else if(pagestate == 3){
   image(Dia3,0,0);
+  addHighScore(name,Integer.parseInt(myScore)); //remove for final versions
+  saveHighScore();
   }
   else if(pagestate == 4){
   image(Dia4,0,0);
-  addHighScore(name,Integer.parseInt(myScore));
-  saveHighScore();
   }
   else if(pagestate == 5){
   image(Dia5,0,0);

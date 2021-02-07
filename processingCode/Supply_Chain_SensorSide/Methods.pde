@@ -81,8 +81,6 @@ public void send_waitForArduinoData(String direction, String arrow_phase, String
 void newGameSetup(){
   myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
   myArduinoPort_right.write(createArduinoPacket_right(NONE,SCORE_ERASE,NONE));
-  background (0);
-  pagestate_change(pagestate);
 }
 
 void serialEvent(Serial thisPort){

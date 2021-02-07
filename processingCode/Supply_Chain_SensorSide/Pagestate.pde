@@ -3,20 +3,23 @@ public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
-  if(pagestate == 1){
-  image(Dia1,0,0);
+  if(pagestate == 0){
+  image(Dia0,0,0);
   displayHighScores();
   }
-  else if(pagestate == 2){
+  else if(pagestate == 1){
+  image(Dia1,0,0);
+  }
+  if(pagestate == 2){
   image(Dia2,0,0);
   }
-  if(pagestate == 3){
+  else if(pagestate == 3){
   image(Dia3,0,0);
+  addHighScore(name,Integer.parseInt(myScore)); //remove for final versions
+  saveHighScore();
   }
   else if(pagestate == 4){
   image(Dia4,0,0);
-  addHighScore(name,Integer.parseInt(myScore));
-  saveHighScore();
   }
   else if(pagestate == 5){
   image(Dia5,0,0);
@@ -121,19 +124,20 @@ public void pagestate_change(int pagestate) {
   
   //display round number
   if (pagestate >= 12 && pagestate <= 35){
-    textSize(20);
+    textSize(45);
     fill(255,255,255);
-    text(roundNo+"/10", 100, 75);
+    textAlign(CENTER);
+    text(roundNo+"/10", 105, 95);
   }
   
   //display score on score page
   if(pagestate == 36){
-    textSize(26);
+    textSize(50);
     fill(0);
     text("Your score ",350,600);
-    text(myScore,500,600);
+    text(trim(myScore),700,600);
     text("Opponent's score ",350,750);
-    text(oppScore,550,750);
+    text(trim(oppScore),700,750);
   }
   //display name on name enter page
   if (pagestate == 2 || pagestate == 3){
@@ -141,7 +145,7 @@ public void pagestate_change(int pagestate) {
       print("Name: " + name);
       textAlign(CENTER);
       fill(0);
-      textSize(26);
+      textSize(30);
       text(name,400,770);
     }
   }
@@ -168,8 +172,10 @@ public void pagestate_change(int pagestate) {
         fill(DEMAND_col.r,DEMAND_col.g,DEMAND_col.b);
     }
     textAlign(CENTER);
-    textSize(20);
-    text(name,100,25); //display name
-    text("Score: "+ myScore,618,25); //display score
+    textSize(30);
+    text(name,100,35); //display name
+    textAlign(LEFT);
+    String score = "Score: " + trim(myScore);
+    text(score,618,35); //display score
   }
 }

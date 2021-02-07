@@ -12,7 +12,7 @@ public void key_pressed(){
   
   //letter keys
   //key a
-  if(mouseX>5 && mouseX <65 && mouseY >y_2row_bot && mouseY < y_2row_top){
+  if(mouseX>35 && mouseX <95 && mouseY >y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 2){
       name+="A";
     }

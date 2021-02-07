@@ -1,61 +1,60 @@
 void mouseClicked(){
   
-//Dia 1 buttons
+//Dia 0 buttons
   //New game button
-  if (pagestate == 1 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
-    pagestate = 2;
+  if (pagestate == 0 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
+    pagestate = 1;
     newGameSetup();
   }
   
   
   //Dia 2 buttons
   //next button
-  else if (pagestate == 2 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
-    pagestate = 4;
+  else if (pagestate == 1 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
+    pagestate = 3;
   }
   //Minus button should decrease number in system
-  else if (pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
-  
+  else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
   } 
   //plus button should increase number in system
-  else if (pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
+  else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
   else if(pagestate==2||pagestate==3){
     key_pressed();
   }
   
   //Dia 3 next button
-  else if (pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
-    pagestate = 4;
+  else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
+    pagestate = 3;
   }
   
   
   // Dia 4 buttons
   //next button
-  else if (pagestate == 4 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
+  else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
     pagestate =12;
   }  
   //Question mark
-   else if (pagestate == 4 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
-    pagestate = 5;  
+   else if (pagestate == 3 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
+    pagestate = 4;  
   }
   //rewind logo for seeing the video again
-   else if (pagestate == 4 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
+   else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
   }
   
   //Dias 5-11
   //next buttons - going through the pages after the question button
-  else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10) {
-    if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
+  else if (pagestate == 4 || pagestate == 5 ||pagestate == 6 ||pagestate == 7||pagestate == 8||pagestate == 9 || pagestate == 10) {
+    if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+       pagestate = 3;
+     }
+    else if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
       pagestate += 1;
     }
   }
-  //back buttons and exit the rules
-  else if (pagestate == 5 || pagestate == 6 ||pagestate == 7 ||pagestate == 8||pagestate == 9||pagestate == 10||pagestate == 11) {
-    if (mouseX>500 && mouseX < 750 && mouseY > 1110 && mouseY < 1250) {
-       pagestate = 4;
-     }
-  }
+  else if(pagestate == 11 && mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250){
+      pagestate = 3;
+    }
 
   //SUPPLY PHASE
   //Dia 12
