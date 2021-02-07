@@ -1,260 +1,297 @@
-void mouseClicked(){
-  
-//Dia 0 buttons
-  //New game button
-  if (pagestate == 0 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
-    pagestate = 1;
-    newGameSetup();
-  }
-  
-  
-  //Dia 2 buttons
-  //next button
-  else if (pagestate == 1 && mouseX>55 && mouseX < 1180 && mouseY > 1110 && mouseY < 1244) {
-    pagestate = 3;
-  }
-  //Minus button should decrease number in system
-  else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
-  } 
-  //plus button should increase number in system
-  else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
-  }
-  else if(pagestate==2||pagestate==3){
-    key_pressed();
-  }
-  
-  //Dia 3 next button
-  else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
-    pagestate = 3;
-  }
-  
-  
-  // Dia 4 buttons
-  //next button
-  else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
-    pagestate =12;
-  }  
-  //Question mark
-   else if (pagestate == 3 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
-    pagestate = 4;  
-  }
-  //rewind logo for seeing the video again
-   else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
-  }
-  
-  //Dias 5-11
-  //next buttons - going through the pages after the question button
-  else if (pagestate == 4 || pagestate == 5 ||pagestate == 6 ||pagestate == 7||pagestate == 8||pagestate == 9 || pagestate == 10) {
-    if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-       pagestate = 3;
-     }
-    else if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
-      pagestate += 1;
-    }
-  }
-  else if(pagestate == 11 && mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250){
-      pagestate = 3;
-    }
+//y pixel ranges
+int y_1row_bot = 815;
+int y_1row_top = 875;
+int y_2row_bot = 885;
+int y_2row_top = 945;
+int y_3row_bot = 955;
+int y_3row_top = 1015;
+int y_4row_bot = 1025;
+int y_4row_top = 1085;
 
-  //SUPPLY PHASE
-  //Dia 12
-  //next button
-  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
-    pagestate = 17;
-    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
-  }  
-  //info button on dia 12
-  else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
-    pagestate = 13;
-  }
-  //Ai advice cloud
-  else if (pagestate == 12 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
-    send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-    //send stone count, phase, and roundnumber to c++ program
-    //get result and store in variable to be displayed on pagestate 16
-    pagestate = 16;
-  }
+public void key_pressed(){
   
-  //Dia 16
-  //go back to Dia 12 by clicking outside of bubble
-  else if (pagestate == 16 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-    pagestate =12;
-  }
-    
-  //Dia 13
-  //next button
-  else if (pagestate == 13 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 14;
-  }
-    
-  //Dia 14
-  //next button
-  else if (pagestate == 14 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 15;
-  }
-    
-  //Dias 13-15
-  //back button
-  else if (pagestate == 13 || pagestate == 14 ||pagestate == 15) {
-  if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-     pagestate = 12;
+  //letter keys
+  //key a
+  if(pagestate == 1 || pagestate ==2 && mouseX>35 && mouseX <95 && mouseY >y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="A";
     }
-  }
-    
-  //ASSEMBLY
-  //Dia 18
-  //next button to Dia 22
-  else if (pagestate == 18 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 22;
-    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
-  }
-  //info button
-  else if (pagestate == 18 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 20;
-  }
-  //Ai advice cloud
-  else if (pagestate == 18 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-    send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
-    send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-    //send stone count, phase, and roundnumber to c++ program
-    //get result and store in variable to be displayed on pagestate 19
-    pagestate = 19;
-  }
-  
-  //Dia 19
-  //go back to Dia 18 by clicking outside of bubble
-  else if (pagestate == 19 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-    pagestate =18;
-  }
-  
-  //Dia 20
-  //next button
-  else if (pagestate == 20 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 21;
-  }
-  
-  //Dia 20-21
-  //back button -> Dia 18
-  else if (pagestate == 20 || pagestate == 21) {
-  if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-     pagestate = 18;
-    }
-  }
-    
-    
-  //LOGISTICS  
-  //Dia 23
-  //next button -> Dia 26
-  else if (pagestate == 23 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 26;
-    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
-  }
-  //Ai advice cloud
-  else if (pagestate == 23 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
-    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
-    send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
-    //send stone count, phase, and roundnumber to c++ program
-    //get result and store in variable to be displayed on pagestate 19
-    pagestate = 25;
-  }
-  
-  //Dia 25
-  //go back to Dia 23 by clicking outside of bubble
-  else if (pagestate == 25 && !( mouseX>40 && mouseX < 650 && mouseY > 800 && mouseY < 1080)) {
-    pagestate =23;
-  }
-  
-  //Dia 23
-  //info button
-  else if (pagestate == 23 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-    pagestate = 24;
-  }
-  
-  //Dia 24
-  //back button
-  else if (pagestate == 24 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
-    pagestate = 23;
-  }
-
-  //TRANSPORT
-  //Dia 27
-  //next button
-  else if (pagestate == 27 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 29;
-    myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
-    myArduinoPort_left.write(createArduinoPacket_left(TRANSPORT2,NONE));
-  }
-  //info button
-  else if (pagestate == 27 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-  pagestate = 28;
-  }
-  
-  //Dia 28
-  //back button
-  else if (pagestate == 28 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
-  pagestate = 27;
-  }
-  
-  //Dia 29
-  //next button -> 32 (change to 31 when waiting for opponent function written)
-  else if (pagestate == 29 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 31;
-    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
-  }
-  //info button
-  else if (pagestate == 29 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-    pagestate = 30;
-  }
-  
-  //Dia 30
-  //back button
-  else if (pagestate == 30 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240){
-    pagestate = 29;
-  }
-
-  //DEMAND
-  //Dia 32
-  //next button skip dia 35 for now -> 36
-  else if (pagestate == 32 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    myArduinoPort_left.write("<"+NONE+","+NONE+">");
-    send_waitForArduinoData("right", DEMAND, SCORE_QUERY, NONE);
-    myRPiPort.write(createRPiPacket(WAITING, myScore)); //send score and waiting status together
-    pagestate = 35;
-  }
-  //info button
-  else if (pagestate == 32 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
-    pagestate = 33;
-  }
-  
-  //Dia 33
-  //next button
-  else if (pagestate == 33 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    pagestate = 34;
-  }
-  
-  //Dias 33-34
-  //back button
-  else if (pagestate == 33 || pagestate == 34) {
-    if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-      pagestate = 32;
+    else if(pagestate == 2){
+      name+="a";
     }
   }
   
-  //Dia 36
-  //go back to beginning
-  else if (pagestate == 36 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
-    if(roundNo <= roundLim){
-      pagestate = 12;
-      roundNo = roundNo + 1;
-      myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
+  //key b
+  else if(pagestate == 1 || pagestate ==2 && mouseX>360 && mouseX < 420 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="B";
     }
-    else{
-      //display game over and return to homescreen
-      pagestate = 1;
+    else if(pagestate == 2){
+      name+="b";
+    }
+  }
+  //key c
+  else if(pagestate == 1 || pagestate ==2 && mouseX>220 && mouseX <280 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="C";
+    }
+    else if(pagestate == 2){
+      name+="c";
     }
   }
   
-  //change to correct pagestate
-  pagestate_change(pagestate);
+  //key d
+  else if(pagestate == 1 || pagestate ==2 && mouseX>180 && mouseX < 240 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="D";
+    }
+    else if(pagestate == 2){
+      name+="d";
+    }
+  }
+  //key e
+  if(pagestate == 1 || pagestate ==2 && mouseX>150 && mouseX < 210 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="E";
+    }
+    else if(pagestate == 2){
+      name+="e";
+    }
+  }
+  
+  //key f
+  else if(pagestate == 1 || pagestate ==2 && mouseX>250 && mouseX < 310 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="F";
+    }
+    else if(pagestate == 2){
+      name+="f";
+    }
+  }
+  //key g
+  else if(pagestate == 1 || pagestate ==2 && mouseX>325 && mouseX <385 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="G";
+    }
+    else if(pagestate == 2){
+      name+="g";
+    }
+  }
+  
+  //key h
+  if(pagestate == 1 || pagestate ==2 && mouseX>395 && mouseX < 455 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="H";
+    }
+    else if(pagestate == 2){
+      name+="h";
+    }
+  }
+  //key i
+  else if(pagestate == 1 || pagestate ==2 && mouseX>510 && mouseX < 570 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="I";
+    }
+    else if(pagestate == 2){
+      name+="i";
+    }
+  }
+  
+  //key j
+  if(pagestate == 1 || pagestate ==2 && mouseX>467 && mouseX < 527 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="J";
+    }
+    else if(pagestate == 2){
+      name+="j";
+    }
+  }
+  //key k
+  else if(pagestate == 1 || pagestate ==2 && mouseX>540 && mouseX <600 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="K";
+    }
+    else if(pagestate == 2){
+      name+="k";
+    }
+  }
+  
+  //key l
+  else if(pagestate == 1 || pagestate ==2 && mouseX>610 && mouseX < 670 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="L";
+    }
+    else if(pagestate == 2){
+      name+="l";
+    }
+  }
+  //key m
+  else if(pagestate == 1 || pagestate ==2 && mouseX>500 && mouseX <560 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="M";
+    }
+    else if(pagestate == 2){
+      name+="m";
+    }
+  }
+  
+  //key n
+  else if(pagestate == 1 || pagestate ==2 && mouseX>430 && mouseX < 490 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="N";
+    }
+    else if(pagestate == 2){
+      name+="n";
+    }
+  }
+  //key o
+  else if(pagestate == 1 || pagestate ==2 && mouseX>585 && mouseX <645 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="O";
+    }
+    else if(pagestate == 2){
+      name+="o";
+    }
+  }
+  
+  //key p
+  else if(mouseX>657 && mouseX < 717 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 2){
+      name+="P";
+    }
+    else if(pagestate == 3){
+      name+="p";
+    }
+  }
+  //key q
+  else if(pagestate == 1 || pagestate ==2 && mouseX>5 && mouseX <65 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="Q";
+    }
+    else if(pagestate == 2){
+      name+="q";
+    }
+  }
+  
+  //key r
+  else if(pagestate == 1 || pagestate ==2 && mouseX>222 && mouseX < 282 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="R";
+    }
+    else if(pagestate == 2){
+      name+="r";
+    }
+  }
+  //key s
+  else if(pagestate == 1 || pagestate ==2 && mouseX>108 && mouseX <168 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    if(pagestate == 1){
+      name+="S";
+    }
+    else if(pagestate == 2){
+      name+="s";
+    }
+  }
+  
+  //key t
+  else if(pagestate == 1 || pagestate ==2 && mouseX>295 && mouseX < 365 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="T";
+    }
+    else if(pagestate == 2){
+      name+="t";
+    }
+  }
+  //key u
+  else if(pagestate == 1 || pagestate ==2 && mouseX>440 && mouseX <500 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="U";
+    }
+    else if(pagestate == 2){
+      name+="u";
+    }
+  }
+  
+  //key v
+  else if(pagestate == 1 || pagestate ==2 && mouseX>290 && mouseX < 350 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="V";
+    }
+    else if(pagestate == 2){
+      name+="v";
+    }
+  }
+  //key w
+  else if(pagestate == 1 || pagestate ==2 && mouseX>77 && mouseX <137 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="W";
+    }
+    else if(pagestate == 2){
+      name+="w";
+    }
+  }
+  
+  //key x
+  else if(pagestate == 1 || pagestate ==2 && mouseX>147 && mouseX < 207 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="X";
+    }
+    else if(pagestate == 2){
+      name+="x";
+    }
+  }
+  //key y
+  else if(pagestate == 1 || pagestate ==2 && mouseX>367 && mouseX <427 && mouseY > y_1row_bot && mouseY < y_1row_top){
+    if(pagestate == 1){
+      name+="Y";
+    }
+    else if(pagestate == 2){
+      name+="y";
+    }
+  }
+  
+  //key z
+  else if(pagestate == 1 || pagestate ==2 && mouseX>77 && mouseX < 137 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      name+="Z";
+    }
+    else if(pagestate == 2){
+      name+="z";
+    }
+  }
+  
+  //misc keys
+  //shift left
+  else if(pagestate == 1 || pagestate ==2 && mouseX>5 && mouseX < 65 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      pagestate=2;
+    }
+    else if(pagestate == 2){
+      pagestate=1;
+    }
+  }
+  //shift right
+  else if(pagestate == 1 || pagestate ==2 && mouseX>645 && mouseX < 705 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    if(pagestate == 1){
+      pagestate=2;
+    }
+    else if(pagestate == 2){
+      pagestate=1;
+    }
+  }
+  //hyphen
+  else if(pagestate == 1 || pagestate ==2 && mouseX>573 && mouseX < 631 && mouseY > y_3row_bot && mouseY < y_3row_top){
+    name+="-";
+  }
+  //return
+  else if(pagestate == 1 || pagestate ==2 && mouseX>683 && mouseX < 793 && mouseY > y_2row_bot && mouseY < y_2row_top){
+    name+="\n";
+  }
+  //backspace
+  else if(pagestate == 1 || pagestate ==2 && mouseX>730 && mouseX < 793 && mouseY > y_1row_bot && mouseY < y_1row_top){
+      name = name.substring(0,name.length()-1);
+  }
+  //space
+  else if(pagestate == 1 || pagestate ==2 && mouseX>218 && mouseX < 631 && mouseY > y_4row_bot && mouseY < y_4row_top){
+    name+=" ";
+  }
 }

@@ -123,7 +123,7 @@ public void pagestate_change(int pagestate) {
   
   
   //display round number
-  if (pagestate >= 12 && pagestate <= 35){
+  if (pagestate >= 12 && pagestate <= 36){
     textSize(45);
     fill(255,255,255);
     textAlign(CENTER);
@@ -140,7 +140,7 @@ public void pagestate_change(int pagestate) {
     text(trim(oppScore),700,750);
   }
   //display name on name enter page
-  if (pagestate == 2 || pagestate == 3){
+  if (pagestate == 1 || pagestate == 2){
     if(name!=null){
       print("Name: " + name);
       textAlign(CENTER);
