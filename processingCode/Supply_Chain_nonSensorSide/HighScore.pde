@@ -23,10 +23,18 @@ public void addHighScore(String name, int score){
     highScoreList_WriteMem.poll();
   }
   Node tmpNode = new Node(name, score);
-  if(tmpNode.score>highScoreList_WriteMem.peek().score){
-     highScoreList_ReadOnly.add(tmpNode);
-     highScoreList_WriteMem.add(tmpNode);
-     println("Node " + name + "," + score + " added");
+  if(highScoreList_WriteMem.size() == MAX_HIGHSCORES){
+    if(tmpNode.score>highScoreList_WriteMem.peek().score){
+      highScoreList_WriteMem.poll();
+      highScoreList_ReadOnly.add(tmpNode);
+      highScoreList_WriteMem.add(tmpNode);
+      println("Node " + name + "," + score + " added");
+    }
+  }
+  else if(highScoreList_WriteMem.size() < MAX_HIGHSCORES){
+      highScoreList_ReadOnly.add(tmpNode);
+      highScoreList_WriteMem.add(tmpNode);
+      println("Node " + name + "," + score + " added");
   }
 }
 
