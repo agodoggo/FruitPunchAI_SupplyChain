@@ -10,6 +10,7 @@ public void initHighScore(){
   String[] pastScores = loadStrings(filePath);
   print("past scores" + pastScores);
   for(int i = 0; i < pastScores.length; i++){
+    println("past score: "+ pastScores[i]);
     String[] tmp = split(pastScores[i],",");
     highScoreList_ReadOnly.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
     highScoreList_WriteMem.add(new Node(tmp[0],Integer.parseInt(tmp[1])));
@@ -25,6 +26,7 @@ public void addHighScore(String name, int score){
   if(tmpNode.score>highScoreList_WriteMem.peek().score){
      highScoreList_ReadOnly.add(tmpNode);
      highScoreList_WriteMem.add(tmpNode);
+     println("Node " + name + "," + score + " added");
   }
 }
 
@@ -35,6 +37,7 @@ public void saveHighScore(){
     tmp[i]+=tmpNodeList[i].getname();
     tmp[i]+=",";
     tmp[i]+=tmpNodeList[i].getscore();
+    println("entry "+ i + ": " + tmp[i]);
   }
   saveStrings(filePath,tmp);
 }
