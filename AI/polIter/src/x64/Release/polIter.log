@@ -1,0 +1,31 @@
+﻿  TestFunctionalities.cpp
+C:\Users\wjaarsveld\source\repos\polIter\polIter\ApproximatePolicyIterationSolver.h(36,1): warning C4244: '/=': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\wjaarsveld\source\repos\polIter\polIter\ApproximatePolicyIterationSolver.h(128): message : see reference to function template instantiation 'void ApproximatePolicyIterationSolver<InfoAcqMDP>::GenerateSamples<BaselineAgent>(Agent &,size_t,__int64,bool)' being compiled
+          with
+          [
+              BaselineAgent=RandomAgent<InfoAcqMDP>,
+              Agent=RandomAgent<InfoAcqMDP>
+          ]
+C:\Users\wjaarsveld\source\repos\polIter\polIter\ApproximatePolicyIterationSolver.h(128): message : see reference to function template instantiation 'void ApproximatePolicyIterationSolver<InfoAcqMDP>::GenerateSamples<BaselineAgent>(Agent &,size_t,__int64,bool)' being compiled
+          with
+          [
+              BaselineAgent=RandomAgent<InfoAcqMDP>,
+              Agent=RandomAgent<InfoAcqMDP>
+          ]
+C:\Users\wjaarsveld\source\repos\polIter\polIter\TestFunctionalities.cpp(294): message : see reference to function template instantiation 'void ApproximatePolicyIterationSolver<InfoAcqMDP>::Solve<RandomAgent<InfoAcqMDP>>(BaselineAgent &,size_t,double)' being compiled
+          with
+          [
+              BaselineAgent=RandomAgent<InfoAcqMDP>
+          ]
+C:\Users\wjaarsveld\source\repos\polIter\polIter\TestFunctionalities.cpp(294): message : see reference to function template instantiation 'void ApproximatePolicyIterationSolver<InfoAcqMDP>::Solve<RandomAgent<InfoAcqMDP>>(BaselineAgent &,size_t,double)' being compiled
+          with
+          [
+              BaselineAgent=RandomAgent<InfoAcqMDP>
+          ]
+C:\Users\wjaarsveld\source\repos\polIter\polIter\ApproximatePolicyIterationSolver.h(44,1): warning C4244: '*=': conversion from 'double' to 'size_t', possible loss of data
+  Generating code
+  2 of 1625 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    6 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  polIter.vcxproj -> C:\Users\wjaarsveld\source\repos\polIter\x64\Release\polIter.exe

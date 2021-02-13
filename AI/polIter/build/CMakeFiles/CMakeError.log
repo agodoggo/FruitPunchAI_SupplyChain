@@ -1,0 +1,51 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/waltera/polIter/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_a2d05/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_a2d05.dir/build.make CMakeFiles/cmTC_a2d05.dir/build
+gmake[1]: Entering directory `/nfs/home6/waltera/polIter/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a2d05.dir/CheckSymbolExists.c.o
+/sw/arch/RedHatEnterpriseServer7/EB_production/2019/software/GCCcore/7.3.0/bin/cc    -o CMakeFiles/cmTC_a2d05.dir/CheckSymbolExists.c.o   -c /home/waltera/polIter/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_a2d05
+/nfs/admin/hpc/arch/AVX/RedHatEnterpriseServer7/EB_production/2019/software/CMake/3.12.1-GCCcore-7.3.0/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a2d05.dir/link.txt --verbose=1
+/sw/arch/RedHatEnterpriseServer7/EB_production/2019/software/GCCcore/7.3.0/bin/cc      -rdynamic CMakeFiles/cmTC_a2d05.dir/CheckSymbolExists.c.o  -o cmTC_a2d05 
+CMakeFiles/cmTC_a2d05.dir/CheckSymbolExists.c.o:CheckSymbolExists.c:function main: error: undefined reference to 'pthread_create'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_a2d05] Error 1
+gmake[1]: Leaving directory `/nfs/home6/waltera/polIter/build/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_a2d05/fast] Error 2
+
+File /home/waltera/polIter/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/waltera/polIter/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_e1845/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_e1845.dir/build.make CMakeFiles/cmTC_e1845.dir/build
+gmake[1]: Entering directory `/nfs/home6/waltera/polIter/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e1845.dir/CheckFunctionExists.c.o
+/sw/arch/RedHatEnterpriseServer7/EB_production/2019/software/GCCcore/7.3.0/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e1845.dir/CheckFunctionExists.c.o   -c /nfs/admin/hpc/arch/AVX/RedHatEnterpriseServer7/EB_production/2019/software/CMake/3.12.1-GCCcore-7.3.0/share/cmake-3.12/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e1845
+/nfs/admin/hpc/arch/AVX/RedHatEnterpriseServer7/EB_production/2019/software/CMake/3.12.1-GCCcore-7.3.0/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1845.dir/link.txt --verbose=1
+/sw/arch/RedHatEnterpriseServer7/EB_production/2019/software/GCCcore/7.3.0/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e1845.dir/CheckFunctionExists.c.o  -o cmTC_e1845 -lpthreads 
+/sw/arch/RedHatEnterpriseServer7/EB_production/2019/software/binutils/2.30-GCCcore-7.3.0/bin/ld.gold: error: cannot find -lpthreads
+CMakeFiles/cmTC_e1845.dir/CheckFunctionExists.c.o:CheckFunctionExists.c:function main: error: undefined reference to 'pthread_create'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_e1845] Error 1
+gmake[1]: Leaving directory `/nfs/home6/waltera/polIter/build/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_e1845/fast] Error 2
+
+
