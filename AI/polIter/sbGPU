@@ -1,8 +1,0 @@
-#execute with "source sbGPU" to ensure execution in this bash instance. 
-rm build -r
-mkdir build
-cd build
-
-#cmake -DCMAKE_PREFIX_PATH=~/libtorchCUDA10MOD -DCUDNN_LIBRARY_PATH=$EBROOTCUDNN/include/lib64 -DCUDNN_INCLUDE_DIR=$EBROOTCUDNN/include -DCUDNN_LIBRARY=$EBROOTCUDNN/lib64/libcudnn.so.7 ..
-cmake -DCMAKE_PREFIX_PATH=~/libtorchCUDA10MOD/share/cmake/Torch/ -DCMAKE_MODULE_PATH=/home/willemvj/libtorchCUDA10MOD/share/cmake/Torch/ -DCUDNN_LIBRARY_PATH=$EBROOTCUDNN/include/lib64 -DCUDNN_INCLUDE_DIR=$EBROOTCUDNN/include -DCUDNN_LIBRARY=$EBROOTCUDNN/lib64/libcudnn.so.7 ..
-#cmake -DCMAKE_PREFIX_PATH=~/libtorchCUDA10MOD -DCUDNN_LIBRARY_PATH=$EBROOTCUDNN/include/lib64 -DCUDNN_INCLUDE_DIR=$EBROOTCUDNN/include -DCUDNN_LIBRARY=$EBROOTCUDNN/lib64/libcudnn.so.7 ..

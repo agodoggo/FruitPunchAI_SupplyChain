@@ -1,3 +1,0 @@
-/home/waltera/polIter/build/CMakeFiles/rebuild_cache.dir
-/home/waltera/polIter/build/CMakeFiles/edit_cache.dir
-/home/waltera/polIter/build/CMakeFiles/polIter.dir
