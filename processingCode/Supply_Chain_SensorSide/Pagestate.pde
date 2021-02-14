@@ -42,7 +42,14 @@ public void pagestate_change(int pagestate) {
   image(Dia11,0,0);
   }
   else if(pagestate == 12){
-  image(Dia12,0,0);
+    mySetupMov0.play();
+    mySetupMov1.play();
+    mySetupMov2.play();
+    mySetupMov3.play();
+    mySetupMov4.play();
+    mySetupMov5.play();
+    mySetupMov6.play();
+    image(Dia12,0,0);
   }
   else if(pagestate == 13){
   image(Dia13,0,0);
