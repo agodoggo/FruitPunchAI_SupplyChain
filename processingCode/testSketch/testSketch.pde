@@ -3,7 +3,7 @@ Movie myMovie;
 
 void setup() {
   size(1600, 800);
-  String filePath = dataPath("UI_Intro_video_co-op.mp4");
+  String filePath = sketchPath("/Data/UI_Intro_video_co-op.mp4");
   myMovie = new Movie(this, filePath);
   myMovie.play();
 }
