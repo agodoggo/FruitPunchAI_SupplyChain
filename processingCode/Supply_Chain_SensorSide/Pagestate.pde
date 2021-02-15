@@ -15,6 +15,7 @@ public void pagestate_change(int pagestate) {
   }
   else if(pagestate == 3){
     myIntroMov.play();
+    image(myIntroMov,0,0);
     image(Dia3,0,0);
   }
   else if(pagestate == 4){
@@ -43,12 +44,19 @@ public void pagestate_change(int pagestate) {
   }
   else if(pagestate == 12){
     mySetupMov0.play();
+    image(mySetupMov0,0,0);
     mySetupMov1.play();
+    image(mySetupMov1,0,0);
     mySetupMov2.play();
+    image(mySetupMov2,0,0);
     mySetupMov3.play();
+    image(mySetupMov3,0,0);
     mySetupMov4.play();
+    image(mySetupMov4,0,0);
     mySetupMov5.play();
+    image(mySetupMov5,0,0);
     mySetupMov6.play();
+    image(mySetupMov6,0,0);
     image(Dia12,0,0);
   }
   else if(pagestate == 13){
@@ -111,6 +119,7 @@ public void pagestate_change(int pagestate) {
   else if(pagestate == 32){
     String demandMsg = demandMsg();
     myDemandMov.play();
+    image(myDemandMov,0,0);
     textAlign(CENTER);
     fill(0);
     textSize(30);
