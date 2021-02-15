@@ -21,6 +21,9 @@ public void checkWaiting(){
       myArduinoPort_right.write(createArduinoPacket_right(NONE,NONE,NONE));
     }
     pagestate = pagestate + 1;
+    if(pagestate==32){
+       playMovie(myDemandMov);
+    }
     oppWaiting = 0;
     pagestate_change(pagestate);
   }

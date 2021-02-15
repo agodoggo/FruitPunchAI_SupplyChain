@@ -18,12 +18,13 @@ void mouseClicked(){
   //plus button should increase number in system
   else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   }
-  else if(pagestate==2||pagestate==3){
+  else if(pagestate==1||pagestate==2){
     key_pressed();
   }
   
   //Dia 2 next button
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
+    playMovie(myIntroMov);
     pagestate = 3;
   }
   
@@ -31,6 +32,13 @@ void mouseClicked(){
   // Dia 3 buttons
   //next button
   else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
+    playMovie(mySetupMov0);
+    playMovie(mySetupMov1);
+    playMovie(mySetupMov2);
+    playMovie(mySetupMov3);
+    playMovie(mySetupMov4);
+    playMovie(mySetupMov5);
+    playMovie(mySetupMov6);
     pagestate =12;
   }  
   //Question mark
@@ -39,6 +47,7 @@ void mouseClicked(){
   }
   //rewind logo for seeing the video again
    else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
+     playMovie(myIntroMov);
      pagestate = 3;
   }
   
