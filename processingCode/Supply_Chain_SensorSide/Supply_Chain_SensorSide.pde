@@ -110,6 +110,8 @@ void setup()
  erasDemi_font = createFont("Data/ERASDEMI.TTF",20.0);
  textFont(erasDemi_font);
  
+ println(Serial.list());
+ 
  String arduinoPort_left = Serial.list()[2]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
