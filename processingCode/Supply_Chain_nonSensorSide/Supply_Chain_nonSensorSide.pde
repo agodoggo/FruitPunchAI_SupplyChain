@@ -84,15 +84,15 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
  //preload all movies
- myIntroMov = new Movie(this, "Data/UI_Intro_video_solo.mp4"); 
- myDemandMov = new Movie(this, "Data/UI_Demand_boxes_fast.mp4");
- mySetupMov0 = new Movie(this,"Data/setup_0.mp4");
- mySetupMov1 = new Movie(this,"Data/setup_1.mp4");
- mySetupMov2 = new Movie(this,"Data/setup_2.mp4");
- mySetupMov3 = new Movie(this,"Data/setup_3.mp4");
- mySetupMov4 = new Movie(this,"Data/setup_4.mp4");
- mySetupMov5 = new Movie(this,"Data/setup_5.mp4");
- mySetupMov6 = new Movie(this,"Data/setup_6.mp4");
+ myIntroMov = new Movie(this, "UI_Intro_video_solo.mp4"); 
+ myDemandMov = new Movie(this, "UI_Demand_boxes_fast.mp4");
+ mySetupMov0 = new Movie(this,"setup_0.mp4");
+ mySetupMov1 = new Movie(this,"setup_1.mp4");
+ mySetupMov2 = new Movie(this,"setup_2.mp4");
+ mySetupMov3 = new Movie(this,"setup_3.mp4");
+ mySetupMov4 = new Movie(this,"setup_4.mp4");
+ mySetupMov5 = new Movie(this,"setup_5.mp4");
+ mySetupMov6 = new Movie(this,"setup_6.mp4");
  
  //set aesthetics
  PFont erasDemi_font;
@@ -142,4 +142,8 @@ class Color{
         this.g = g;
         this.b = b;
     }
+}
+// Called every time a new frame is available to read
+void movieEvent(Movie m) {
+  m.read();
 }

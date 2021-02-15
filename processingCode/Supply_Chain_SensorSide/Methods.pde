@@ -150,3 +150,9 @@ String createRPiPacket(String opponent_waiting, String score_query){
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
 }
+void playMovie(Movie mov){
+    mov.play();
+    while(mov.available()){
+      image(mov,0,0);
+    }
+}
