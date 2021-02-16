@@ -19,14 +19,12 @@ void mouseClicked(){
   ////plus button should increase number in system
   //else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   //}
-  else if(pagestate==1||pagestate==2){
-    key_pressed();
-  }
-  
-  //Dia 2 next button
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
-    playMovie(myIntroMov);
-    pagestate = 3;
+      playMovie(myIntroMov);
+      pagestate = 3;
+    }
+  else if((pagestate==1||pagestate==2) ){
+    key_pressed();
   }
   
   

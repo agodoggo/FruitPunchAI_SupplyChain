@@ -148,7 +148,7 @@ public void pagestate_change(int pagestate) {
     text(trim(oppScore),700,750);
   }
   //display name on name enter page
-  if (pagestate == 2 || pagestate == 3){
+  if (pagestate == 1 || pagestate == 2){
     if(name!=null){
       print("Name: " + name);
       textAlign(CENTER);
