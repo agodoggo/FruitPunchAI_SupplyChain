@@ -13,7 +13,7 @@ public void key_pressed(){
   //letter keys
   //key a
   println("key pressed");
-  if(pagestate == 1 || pagestate ==2 && mouseX>35 && mouseX <95 && mouseY >y_2row_bot && mouseY < y_2row_top){
+  if((pagestate == 1 || pagestate ==2) && mouseX>35 && mouseX <95 && mouseY >y_2row_bot && mouseY < y_2row_top){
     println("if statement entered");
     if(pagestate == 1){
       name+="A";
@@ -24,7 +24,7 @@ public void key_pressed(){
   }
   
   //key b
-  else if(pagestate == 1 || pagestate ==2 && mouseX>360 && mouseX < 420 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>360 && mouseX < 420 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="B";
     }
@@ -33,7 +33,7 @@ public void key_pressed(){
     }
   }
   //key c
-  else if(pagestate == 1 || pagestate ==2 && mouseX>220 && mouseX <280 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>220 && mouseX <280 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="C";
     }
@@ -43,7 +43,7 @@ public void key_pressed(){
   }
   
   //key d
-  else if(pagestate == 1 || pagestate ==2 && mouseX>180 && mouseX < 240 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>180 && mouseX < 240 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="D";
     }
@@ -52,7 +52,7 @@ public void key_pressed(){
     }
   }
   //key e
-  if(pagestate == 1 || pagestate ==2 && mouseX>150 && mouseX < 210 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  if((pagestate == 1 || pagestate ==2) && mouseX>150 && mouseX < 210 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="E";
     }
@@ -62,7 +62,7 @@ public void key_pressed(){
   }
   
   //key f
-  else if(pagestate == 1 || pagestate ==2 && mouseX>250 && mouseX < 310 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>250 && mouseX < 310 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="F";
     }
@@ -71,7 +71,7 @@ public void key_pressed(){
     }
   }
   //key g
-  else if(pagestate == 1 || pagestate ==2 && mouseX>325 && mouseX <385 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>325 && mouseX <385 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="G";
     }
@@ -81,7 +81,7 @@ public void key_pressed(){
   }
   
   //key h
-  if(pagestate == 1 || pagestate ==2 && mouseX>395 && mouseX < 455 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  if((pagestate == 1 || pagestate ==2) && mouseX>395 && mouseX < 455 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="H";
     }
@@ -90,7 +90,7 @@ public void key_pressed(){
     }
   }
   //key i
-  else if(pagestate == 1 || pagestate ==2 && mouseX>510 && mouseX < 570 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>510 && mouseX < 570 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="I";
     }
@@ -100,7 +100,7 @@ public void key_pressed(){
   }
   
   //key j
-  if(pagestate == 1 || pagestate ==2 && mouseX>467 && mouseX < 527 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  if((pagestate == 1 || pagestate ==2) && mouseX>467 && mouseX < 527 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="J";
     }
@@ -109,7 +109,7 @@ public void key_pressed(){
     }
   }
   //key k
-  else if(pagestate == 1 || pagestate ==2 && mouseX>540 && mouseX <600 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>540 && mouseX <600 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="K";
     }
@@ -119,7 +119,7 @@ public void key_pressed(){
   }
   
   //key l
-  else if(pagestate == 1 || pagestate ==2 && mouseX>610 && mouseX < 670 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>610 && mouseX < 670 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="L";
     }
@@ -128,7 +128,7 @@ public void key_pressed(){
     }
   }
   //key m
-  else if(pagestate == 1 || pagestate ==2 && mouseX>500 && mouseX <560 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>500 && mouseX <560 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="M";
     }
@@ -138,7 +138,7 @@ public void key_pressed(){
   }
   
   //key n
-  else if(pagestate == 1 || pagestate ==2 && mouseX>430 && mouseX < 490 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>430 && mouseX < 490 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="N";
     }
@@ -147,7 +147,7 @@ public void key_pressed(){
     }
   }
   //key o
-  else if(pagestate == 1 || pagestate ==2 && mouseX>585 && mouseX <645 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>585 && mouseX <645 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="O";
     }
@@ -166,7 +166,7 @@ public void key_pressed(){
     }
   }
   //key q
-  else if(pagestate == 1 || pagestate ==2 && mouseX>5 && mouseX <65 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>5 && mouseX <65 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="Q";
     }
@@ -176,7 +176,7 @@ public void key_pressed(){
   }
   
   //key r
-  else if(pagestate == 1 || pagestate ==2 && mouseX>222 && mouseX < 282 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>222 && mouseX < 282 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="R";
     }
@@ -185,7 +185,7 @@ public void key_pressed(){
     }
   }
   //key s
-  else if(pagestate == 1 || pagestate ==2 && mouseX>108 && mouseX <168 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>108 && mouseX <168 && mouseY > y_2row_bot && mouseY < y_2row_top){
     if(pagestate == 1){
       name+="S";
     }
@@ -195,7 +195,7 @@ public void key_pressed(){
   }
   
   //key t
-  else if(pagestate == 1 || pagestate ==2 && mouseX>295 && mouseX < 365 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>295 && mouseX < 365 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="T";
     }
@@ -204,7 +204,7 @@ public void key_pressed(){
     }
   }
   //key u
-  else if(pagestate == 1 || pagestate ==2 && mouseX>440 && mouseX <500 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>440 && mouseX <500 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="U";
     }
@@ -214,7 +214,7 @@ public void key_pressed(){
   }
   
   //key v
-  else if(pagestate == 1 || pagestate ==2 && mouseX>290 && mouseX < 350 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>290 && mouseX < 350 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="V";
     }
@@ -223,7 +223,7 @@ public void key_pressed(){
     }
   }
   //key w
-  else if(pagestate == 1 || pagestate ==2 && mouseX>77 && mouseX <137 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>77 && mouseX <137 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="W";
     }
@@ -233,7 +233,7 @@ public void key_pressed(){
   }
   
   //key x
-  else if(pagestate == 1 || pagestate ==2 && mouseX>147 && mouseX < 207 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>147 && mouseX < 207 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="X";
     }
@@ -242,7 +242,7 @@ public void key_pressed(){
     }
   }
   //key y
-  else if(pagestate == 1 || pagestate ==2 && mouseX>367 && mouseX <427 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>367 && mouseX <427 && mouseY > y_1row_bot && mouseY < y_1row_top){
     if(pagestate == 1){
       name+="Y";
     }
@@ -252,7 +252,7 @@ public void key_pressed(){
   }
   
   //key z
-  else if(pagestate == 1 || pagestate ==2 && mouseX>77 && mouseX < 137 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>77 && mouseX < 137 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       name+="Z";
     }
@@ -263,7 +263,7 @@ public void key_pressed(){
   
   //misc keys
   //shift left
-  else if(pagestate == 1 || pagestate ==2 && mouseX>5 && mouseX < 65 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>5 && mouseX < 65 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       pagestate=2;
     }
@@ -272,7 +272,7 @@ public void key_pressed(){
     }
   }
   //shift right
-  else if(pagestate == 1 || pagestate ==2 && mouseX>645 && mouseX < 705 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>645 && mouseX < 705 && mouseY > y_3row_bot && mouseY < y_3row_top){
     if(pagestate == 1){
       pagestate=2;
     }
@@ -281,19 +281,19 @@ public void key_pressed(){
     }
   }
   //hyphen
-  else if(pagestate == 1 || pagestate ==2 && mouseX>573 && mouseX < 631 && mouseY > y_3row_bot && mouseY < y_3row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>573 && mouseX < 631 && mouseY > y_3row_bot && mouseY < y_3row_top){
     name+="-";
   }
   //return
-  else if(pagestate == 1 || pagestate ==2 && mouseX>683 && mouseX < 793 && mouseY > y_2row_bot && mouseY < y_2row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>683 && mouseX < 793 && mouseY > y_2row_bot && mouseY < y_2row_top){
     name+="\n";
   }
   //backspace
-  else if(pagestate == 1 || pagestate ==2 && mouseX>730 && mouseX < 793 && mouseY > y_1row_bot && mouseY < y_1row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>730 && mouseX < 793 && mouseY > y_1row_bot && mouseY < y_1row_top){
       name = name.substring(0,name.length()-1);
   }
   //space
-  else if(pagestate == 1 || pagestate ==2 && mouseX>218 && mouseX < 631 && mouseY > y_4row_bot && mouseY < y_4row_top){
+  else if((pagestate == 1 || pagestate ==2) && mouseX>218 && mouseX < 631 && mouseY > y_4row_bot && mouseY < y_4row_top){
     name+=" ";
   }
 }
