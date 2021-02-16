@@ -12,7 +12,9 @@ public void key_pressed(){
   
   //letter keys
   //key a
+  println("key pressed");
   if(pagestate == 1 || pagestate ==2 && mouseX>35 && mouseX <95 && mouseY >y_2row_bot && mouseY < y_2row_top){
+    println("if statement entered");
     if(pagestate == 1){
       name+="A";
     }
