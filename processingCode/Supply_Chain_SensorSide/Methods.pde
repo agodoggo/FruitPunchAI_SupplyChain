@@ -156,6 +156,7 @@ String createRPiPacket(String opponent_waiting, String score_query){
 void playMovie(Movie mov){
     mov.play();
     while(mov.available()){
+      mov.read();
       image(mov,0,0);
     }
 }
