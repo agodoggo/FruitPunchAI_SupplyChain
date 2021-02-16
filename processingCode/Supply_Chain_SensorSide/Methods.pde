@@ -161,4 +161,5 @@ void playMovie(Movie mov){
       mov.read();
       image(mov,0,0);
     }
+    println("stopped playing movie");
 }
