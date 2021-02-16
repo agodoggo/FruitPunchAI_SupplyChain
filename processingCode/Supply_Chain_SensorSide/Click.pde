@@ -13,12 +13,12 @@ void mouseClicked(){
   else if (pagestate == 1 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
     pagestate = 3;
   }
-  //Minus button should decrease number in system
-  else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
-  } 
-  //plus button should increase number in system
-  else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
-  }
+  ////Minus button should decrease number in system
+  //else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
+  //} 
+  ////plus button should increase number in system
+  //else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
+  //}
   else if(pagestate==1||pagestate==2){
     key_pressed();
   }
