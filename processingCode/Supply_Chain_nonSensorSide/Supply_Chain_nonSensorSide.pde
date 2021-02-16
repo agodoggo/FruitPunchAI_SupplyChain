@@ -19,7 +19,7 @@ Color TRANSPORT_col = new Color(125,29,29);
 Color DEMAND_col = new Color(80,110,35);
 
 //Set the pagestate at 0 to begin the program at Dia1
-int pagestate = 1;
+int pagestate = 0;
 
 //set round number to 1 at the beignning of the program
 int roundNo = 1;
