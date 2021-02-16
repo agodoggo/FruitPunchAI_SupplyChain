@@ -41,6 +41,15 @@ boolean ArduinoLeftNewData = false;
 boolean ArduinoRightNewData = false;
 boolean RaspberryPiNewData = false;
 
+//movie variables
+boolean playMovie = false;
+boolean beginMov = false;
+int stp_ind = 0;
+float mdIntro = 0.0;
+float mdDem = 0.0;
+float md[] =  new float[7];
+float mt=0.0;
+
 //score Strings
 String myScore = "0";
 String oppScore = "0";
@@ -104,6 +113,7 @@ void setup()
  mySetupMov4 = new Movie(this,sketchPath()+"/Data/setup_4.mp4");
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
+ md[0] = mySetupMov0.duration();md[1] = mySetupMov1.duration();md[2] = mySetupMov2.duration();md[3] = mySetupMov3.duration();md[4] = mySetupMov4.duration();md[5] = mySetupMov5.duration();md[6] = mySetupMov6.duration();
  
  //set aesthetics
  PFont erasDemi_font;
@@ -138,6 +148,101 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
+  else if(playMovie == true){
+    if(pagestate==3){
+      mt=0;
+      if(beginMov==true){
+        myIntroMov.play();
+        beginMov=false;
+      }
+      mt = myIntroMov.time();
+      image(myIntroMov,0,0);
+    }
+    else if(pagestate==12){
+      mt=0;
+      if(stp_ind==0){
+        if(beginMov==true){
+          mySetupMov0.play();
+          beginMov=false;
+        } 
+        mt = mySetupMov0.time();
+        image(mySetupMov0,0,0);
+      }
+      else if(stp_ind==1){
+        if(beginMov==true){
+          mySetupMov1.play();
+          beginMov=false;
+        }
+        mt = mySetupMov1.time();
+        image(mySetupMov1,0,0);
+      }
+      else if(stp_ind==2){
+        if(beginMov==true){
+          mySetupMov2.play();
+          beginMov=false;
+        }
+        mt = mySetupMov2.time();
+        image(mySetupMov2,0,0);
+      }
+      else if(stp_ind==3){
+       if(beginMov==true){
+          mySetupMov3.play();
+          beginMov=false;
+        }
+        mt = mySetupMov3.time();
+        image(mySetupMov3,0,0);
+      }
+      else if(stp_ind==4){
+        if(beginMov==true){
+          mySetupMov4.play();
+          beginMov=false;
+        }
+        mt = mySetupMov4.time();
+        image(mySetupMov4,0,0);
+      }
+      else if(stp_ind==5){
+        if(beginMov==true){
+          mySetupMov5.play();
+          beginMov=false;
+        }
+        mt = mySetupMov5.time();
+        image(mySetupMov5,0,0);
+      }
+      else if(stp_ind==6){
+        if(beginMov==true){
+          mySetupMov6.play();
+          beginMov=false;
+        }
+        mt = mySetupMov6.time();
+        image(mySetupMov6,0,0);
+      }
+      
+      if(mt>md[stp_ind]){
+          if(stp_ind<6){
+            stp_ind=stp_ind+1;
+            beginMov=true;
+          }
+          else{
+            stp_ind=0;
+            beginMov=false;
+            playMovie = false;
+          } 
+      }
+      
+    }
+    else if(pagestate==32){
+      mt=0.0;
+      if(beginMov==true){
+        myDemandMov.play();
+        beginMov=false;
+      }
+      mt=myDemandMov.time();
+      image(myDemandMov,0,0);
+      if(mt>mdDem){
+        playMovie = false;
+      }
+    }
+  }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");
 }
@@ -159,4 +264,8 @@ class Color{
         this.g = g;
         this.b = b;
     }
+}
+// Called every time a new frame is available to read
+void movieEvent(Movie m) {
+  m.read();
 }
