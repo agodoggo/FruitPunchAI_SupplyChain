@@ -145,6 +145,7 @@ void draw()
     checkWaiting();
   }
   else if(setupMovs){
+    println(setupMovs);
     if(setupMovArr[0]){
       setupMovArr[0] = playMovie(mySetupMov0);
     }
@@ -174,9 +175,11 @@ void draw()
     }
   }
   else if(introMov){
+    println(introMov);
     introMov = playMovie(myIntroMov);
   }
   else if(demandMov){
+    println(demandMov);
     demandMov = playMovie(myDemandMov);
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
