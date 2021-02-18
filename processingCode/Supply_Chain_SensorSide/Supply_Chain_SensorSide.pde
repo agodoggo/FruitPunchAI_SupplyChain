@@ -42,13 +42,11 @@ boolean ArduinoRightNewData = false;
 boolean RaspberryPiNewData = false;
 
 //movie variables
-boolean playMovie = false;
-boolean beginMov = false;
+boolean setupMovs = false;
+boolean[] setupMovArr = {true,true,true,true,true,true,true};
+boolean introMov = false;
+boolean demandMov = false;
 int stp_ind = 0;
-float mdIntro = 0.0;
-float mdDem = 0.0;
-float md[] =  new float[7];
-float mt=0.0;
 
 //score Strings
 String myScore = "0";
@@ -147,6 +145,41 @@ void draw()
    //loop waiting if waiting
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
+  }
+  else if(setupMovs){
+    if(setupMovArr[0]){
+      setupMovArr[0] = playMovie(mySetupMov0);
+    }
+    else if(setupMovArr[1]){
+      setupMovArr[1] = playMovie(mySetupMov1);
+    }
+    else if(setupMovArr[2]){
+      setupMovArr[2] = playMovie(mySetupMov2);
+    }
+    else if(setupMovArr[3]){
+      setupMovArr[3] = playMovie(mySetupMov3);
+    }
+    else if(setupMovArr[4]){
+      setupMovArr[4] = playMovie(mySetupMov4);
+    }
+    else if(setupMovArr[5]){
+      setupMovArr[5] = playMovie(mySetupMov5);
+    }
+    else if(setupMovArr[6]){
+      setupMovArr[6] = playMovie(mySetupMov6);
+    }
+    else{
+      setupMovs = false;
+      for(int i = 0; i < setupMovArr.length; i++){
+        setupMovArr[i] = true;
+      }
+    }
+  }
+  else if(introMov){
+    introMov = playMovie(myIntroMov);
+  }
+  else if(demandMov){
+    demandMov = playMovie(myDemandMov);
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");

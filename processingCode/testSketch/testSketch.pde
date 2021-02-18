@@ -8,6 +8,7 @@ void setup() {
   String filePath = sketchPath()+"/Data/UI_Intro_video_co-op.mp4";
   println(filePath);
   myMovie = new Movie(this, filePath);
+  frameRate(30);
 }
 
 void draw() {
@@ -23,11 +24,17 @@ void movieEvent(Movie m) {
 }
 void mouseClicked(){
    myMovie.play();
+   image(myMovie,0,0);
    myMovie_md = myMovie.duration();
    println("My movie time " +str(myMovie.time()));
    println("My movie dur " +str(myMovie_md));
    while(myMovie.time()<myMovie_md){
        println(myMovie.time());
-      image(myMovie,0,0);
+       println(myMovie.available());
+       if(myMovie.available()){
+         myMovie.read();
+         image(myMovie,0,0);
+       }
+      delay(50);
    }
 }
