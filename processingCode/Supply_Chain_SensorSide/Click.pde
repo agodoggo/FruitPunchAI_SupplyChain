@@ -12,6 +12,7 @@ void mouseClicked(){
   //next button
   else if (pagestate == 1 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
     introMov=true;
+    myIntroMov.play();
     pagestate = 3;
   }
   ////Minus button should decrease number in system
