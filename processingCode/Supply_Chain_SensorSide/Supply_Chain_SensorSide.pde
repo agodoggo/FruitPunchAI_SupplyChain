@@ -44,6 +44,7 @@ boolean RaspberryPiNewData = false;
 //movie variables
 boolean setupMovs = false;
 boolean[] setupMovArr = {true,true,true,true,true,true,true};
+boolean[] setupMovArr_play = {true,true,true,true,true,true,true};
 boolean introMov = false;
 boolean demandMov = false;
 
@@ -147,30 +148,73 @@ void draw()
   else if(setupMovs){
     //println(setupMovs);
     if(setupMovArr[0]){
-      setupMovArr[0] = playMovie(mySetupMov0);
+      if(setupMovArr_play[0]){
+        mySetupMov0.play();
+        setupMovArr_play[0] = false;
+      }
+      else{
+       setupMovArr[0] = playMovie(mySetupMov0);
+      }
     }
     else if(setupMovArr[1]){
-      setupMovArr[1] = playMovie(mySetupMov1);
+      if(setupMovArr_play[1]){
+        mySetupMov1.play();
+        setupMovArr_play[1] = false;
+      }
+      else{
+       setupMovArr[1] = playMovie(mySetupMov1);
+      }
     }
     else if(setupMovArr[2]){
-      setupMovArr[2] = playMovie(mySetupMov2);
+      if(setupMovArr_play[2]){
+        mySetupMov2.play();
+        setupMovArr_play[2] = false;
+      }
+      else{
+       setupMovArr[2] = playMovie(mySetupMov2);
+      }
     }
     else if(setupMovArr[3]){
-      setupMovArr[3] = playMovie(mySetupMov3);
+      if(setupMovArr_play[3]){
+        mySetupMov3.play();
+        setupMovArr_play[3] = false;
+      }
+      else{
+       setupMovArr[3] = playMovie(mySetupMov3);
+      }
     }
     else if(setupMovArr[4]){
-      setupMovArr[4] = playMovie(mySetupMov4);
+      if(setupMovArr_play[4]){
+        mySetupMov4.play();
+        setupMovArr_play[4] = false;
+      }
+      else{
+       setupMovArr[4] = playMovie(mySetupMov4);
+      }
     }
     else if(setupMovArr[5]){
-      setupMovArr[5] = playMovie(mySetupMov5);
+      if(setupMovArr_play[5]){
+        mySetupMov5.play();
+        setupMovArr_play[5] = false;
+      }
+      else{
+       setupMovArr[5] = playMovie(mySetupMov5);
+      }
     }
     else if(setupMovArr[6]){
-      setupMovArr[6] = playMovie(mySetupMov6);
+      if(setupMovArr_play[6]){
+        mySetupMov6.play();
+        setupMovArr_play[6] = false;
+      }
+      else{
+       setupMovArr[6] = playMovie(mySetupMov6);
+      }
     }
     else{
       setupMovs = false;
       for(int i = 0; i < setupMovArr.length; i++){
         setupMovArr[i] = true;
+        setupMovArr_play[i] = true;
       }
     }
   }

@@ -22,6 +22,7 @@ void mouseClicked(){
   //}
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
       introMov = true;
+      myIntroMov.play();
       pagestate=3;
     }
   else if((pagestate==1||pagestate==2) ){
