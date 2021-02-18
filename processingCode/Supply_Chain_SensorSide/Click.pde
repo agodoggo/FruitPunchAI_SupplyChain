@@ -11,6 +11,7 @@ void mouseClicked(){
   //Dia 1 and 2 buttons
   //next button
   else if (pagestate == 1 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
+    introMov=true;
     pagestate = 3;
   }
   ////Minus button should decrease number in system
@@ -21,7 +22,7 @@ void mouseClicked(){
   //}
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
       introMov = true;
-      
+      pagestate=3;
     }
   else if((pagestate==1||pagestate==2) ){
     key_pressed();
@@ -40,7 +41,7 @@ void mouseClicked(){
   }
   //rewind logo for seeing the video again
    else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
-     playMovie(myIntroMov);
+     setupMovs = true;
      pagestate = 3;
   }
   
