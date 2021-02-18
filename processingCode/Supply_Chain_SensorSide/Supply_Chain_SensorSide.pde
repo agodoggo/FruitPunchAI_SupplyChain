@@ -112,15 +112,16 @@ void setup()
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
  
- myIntroMov.speed(5.0);
- myDemandMov.speed(5.0);
- mySetupMov0.speed(5.0);
- mySetupMov1.speed(5.0);
- mySetupMov2.speed(5.0);
- mySetupMov3.speed(5.0);
- mySetupMov4.speed(5.0);
- mySetupMov5.speed(5.0);
- mySetupMov6.speed(5.0);
+ float speed = 50.0;
+ myIntroMov.speed(speed);
+ myDemandMov.speed(speed);
+ mySetupMov0.speed(speed);
+ mySetupMov1.speed(speed);
+ mySetupMov2.speed(speed);
+ mySetupMov3.speed(speed);
+ mySetupMov4.speed(speed);
+ mySetupMov5.speed(speed);
+ mySetupMov6.speed(speed);
  
  //set aesthetics
  PFont erasDemi_font;
