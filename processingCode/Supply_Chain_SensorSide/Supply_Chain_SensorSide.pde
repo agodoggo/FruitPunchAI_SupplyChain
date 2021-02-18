@@ -112,16 +112,16 @@ void setup()
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
  
- int frameRate = 2;
- myIntroMov.frameRate(frameRate);
- myDemandMov.frameRate(frameRate);
- mySetupMov0.frameRate(frameRate);
- mySetupMov1.frameRate(frameRate);
- mySetupMov2.frameRate(frameRate);
- mySetupMov3.frameRate(frameRate);
- mySetupMov4.frameRate(frameRate);
- mySetupMov5.frameRate(frameRate);
- mySetupMov6.frameRate(frameRate);
+ //int frameRate = 2;
+ //myIntroMov.frameRate(frameRate);
+ //myDemandMov.frameRate(frameRate);
+ //mySetupMov0.frameRate(frameRate);
+ //mySetupMov1.frameRate(frameRate);
+ //mySetupMov2.frameRate(frameRate);
+ //mySetupMov3.frameRate(frameRate);
+ //mySetupMov4.frameRate(frameRate);
+ //mySetupMov5.frameRate(frameRate);
+ //mySetupMov6.frameRate(frameRate);
  
  //set aesthetics
  PFont erasDemi_font;
@@ -241,6 +241,7 @@ void draw()
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");
+  println("frameRate is " + frameRate);
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
