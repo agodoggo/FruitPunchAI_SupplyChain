@@ -46,7 +46,6 @@ boolean setupMovs = false;
 boolean[] setupMovArr = {true,true,true,true,true,true,true};
 boolean introMov = false;
 boolean demandMov = false;
-int stp_ind = 0;
 
 //score Strings
 String myScore = "0";
@@ -111,7 +110,6 @@ void setup()
  mySetupMov4 = new Movie(this,sketchPath()+"/Data/setup_4.mp4");
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
- md[0] = mySetupMov0.duration();md[1] = mySetupMov1.duration();md[2] = mySetupMov2.duration();md[3] = mySetupMov3.duration();md[4] = mySetupMov4.duration();md[5] = mySetupMov5.duration();md[6] = mySetupMov6.duration();
  
  //set aesthetics
  PFont erasDemi_font;
