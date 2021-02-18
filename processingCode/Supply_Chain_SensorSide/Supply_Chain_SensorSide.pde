@@ -112,7 +112,7 @@ void setup()
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
  
- float frameRate = 50.0;
+ float frameRate = 10.0;
  myIntroMov.frameRate(frameRate);
  myDemandMov.frameRate(frameRate);
  mySetupMov0.frameRate(frameRate);
