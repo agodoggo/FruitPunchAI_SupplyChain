@@ -111,6 +111,7 @@ void setup()
  mySetupMov4 = new Movie(this,sketchPath()+"/Data/setup_4.mp4");
  mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
  mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
+ frameRate(30);
  
  //set aesthetics
  PFont erasDemi_font;
