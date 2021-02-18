@@ -148,7 +148,7 @@ void draw()
   else if(setupMovs){
     //println(setupMovs);
     if(setupMovArr[0]){
-      print("ind 0" setupMovArr[0});
+      print("ind 0" +setupMovArr[0});
       if(setupMovArr_play[0]){
         mySetupMov0.play();
         setupMovArr_play[0] = false;
@@ -158,7 +158,7 @@ void draw()
       }
     }
     else if(setupMovArr[1]){
-      print("ind 1" setupMovArr[1});
+      print("ind 1" + setupMovArr[1});
       if(setupMovArr_play[1]){
         mySetupMov1.play();
         setupMovArr_play[1] = false;
