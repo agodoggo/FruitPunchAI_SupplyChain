@@ -154,11 +154,8 @@ String createRPiPacket(String opponent_waiting, String score_query){
   return "<"+opponent_waiting+","+score_query+">";
 }
 void playMovie(Movie mov){
-    println("Playing movie");
-    if(mov.available()){
-      println("frame available " + str(mov.available()));
+   mov.play();
+   while(mov.time()<mov.duration()){
       image(mov,0,0);
-    }
-    println("frame available " + str(mov.available()));
-    println("stopped playing movie");
+   }
 }
