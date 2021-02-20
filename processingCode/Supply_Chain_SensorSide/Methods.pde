@@ -24,6 +24,7 @@ public void checkWaiting(){
     if(pagestate==32){
       myDemandMov.play();
       demandMov = true;
+      movPlaying = true;
     }
     oppWaiting = 0;
     pagestate_change(pagestate);

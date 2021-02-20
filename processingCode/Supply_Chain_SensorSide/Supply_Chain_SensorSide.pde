@@ -47,6 +47,7 @@ boolean[] setupMovArr = {true,true,true,true,true,true,true,true};
 boolean[] setupMovArr_play = {true,true,true,true,true,true,true,true};
 boolean introMov = false;
 boolean demandMov = false;
+boolean movPlaying = false;
 
 //score Strings
 String myScore = "0";
@@ -159,16 +160,17 @@ void draw()
   }
   else if(setupMovs){
     //println(setupMovs);
-    if(setupMovArr[0]){
-      print("ind 0" +setupMovArr[0]);
-      if(setupMovArr_play[0]){
-        mySetupMov0.play();
-        setupMovArr_play[0] = false;
+    if(movPlaying){
+      if(setupMovArr[0]){
+        print("ind 0" +setupMovArr[0]);
+        if(setupMovArr_play[0]){
+          mySetupMov0.play();
+          setupMovArr_play[0] = false;
+        }
+        else{
+         setupMovArr[0] = playMovie(mySetupMov0);
+        }
       }
-      else{
-       setupMovArr[0] = playMovie(mySetupMov0);
-      }
-    }
     else if(setupMovArr[1]){
       print("ind 1" + setupMovArr[1]);
       if(setupMovArr_play[1]){
@@ -241,16 +243,41 @@ void draw()
         setupMovArr_play[i] = true;
       }
     }
+    }
+    else{
+      setupMovs = false;
+      for(int i = 0; i < setupMovArr.length; i++){
+        setupMovArr[i] = true;
+        setupMovArr_play[i] = true;
+      }
+      pagestate =12;
+      pagestate_change(pagestate);
+    }
   }
   else if(introMov){
     //println(introMov);
-    pagestate = 3;
-    introMov = playMovie(myIntroMov);
+    if(movPlaying){
+      pagestate = 3;
+      introMov = playMovie(myIntroMov);
+    }
+    else{
+      introMov = false;
+      pagestate = 3;
+      pagestate_change(pagestate);
+    }
   }
   else if(demandMov){
     //println(demandMov);
-    pagestate =32;
-    demandMov = playMovie(myDemandMov);
+    if(movPlaying){
+      pagestate =32;
+      demandMov = playMovie(myDemandMov);
+    }
+    else{
+      demandMov = false;
+      pagestate=32;
+      pagestate_change(pagestate);
+    }
+    
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");

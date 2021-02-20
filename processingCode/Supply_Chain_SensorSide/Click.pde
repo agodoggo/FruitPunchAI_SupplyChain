@@ -13,6 +13,7 @@ void mouseClicked(){
   else if (pagestate == 1 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
     introMov=true;
     myIntroMov.play();
+    movPlaying = true;
   }
   ////Minus button should decrease number in system
   //else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
@@ -23,6 +24,7 @@ void mouseClicked(){
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
       introMov = true;
       myIntroMov.play();
+      movPlaying = true;
     }
   else if((pagestate==1||pagestate==2) ){
     key_pressed();
@@ -33,6 +35,7 @@ void mouseClicked(){
   //next button
   else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
     setupMovs = true;
+    movPlaying = true;
   }  
   //Question mark
    else if (pagestate == 3 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
@@ -42,6 +45,7 @@ void mouseClicked(){
    else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
      introMov = true;
      myIntroMov.play();
+     movPlaying = true;
   }
   
   //Dias 4-11
@@ -257,6 +261,11 @@ void mouseClicked(){
       addHighScore(name,Integer.parseInt(myScore));
       saveHighScore();
     }
+  }
+  
+  //check if movie is playing, if so, stop movie
+  if(movPlaying){
+    movPlaying = false;
   }
   
   //change to correct pagestate
