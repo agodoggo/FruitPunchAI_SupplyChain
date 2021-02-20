@@ -168,16 +168,19 @@ void draw()
       }
        setupMovArr[0] = playMovie(mySetupMov0);
     }
-    //else if(setupMovArr[1]){
-    //  println("ind 1 " + setupMovArr[1]);
-    //  if(setupMovArr_play[1]){
-    //    mySetupMov1.jump(0.0);
-    //    mySetupMov1.play();
-    //    setupMovArr_play[1] = false;
-    //  }
-    //    //println("frame of setup 1 loaded");
-    //   setupMovArr[1] = playMovie(mySetupMov1);
-    //}
+    else if(setupMovArr[1]){
+      println("ind 1 " + setupMovArr[1]);
+      if(setupMovArr_play[1]){
+        mySetupMov1.jump(0.0);
+        println("post jump");
+        mySetupMov1.play();
+        println("post play");
+        setupMovArr_play[1] = false;
+      }
+        //println("frame of setup 1 loaded");
+       setupMovArr[1] = playMovie(mySetupMov1);
+       println("post playMovie");
+    }
     else if(setupMovArr[2]){
       println("ind 2 " + setupMovArr[2]);
       if(setupMovArr_play[2]){
