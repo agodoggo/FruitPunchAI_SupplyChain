@@ -254,7 +254,7 @@ void draw()
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");
-  println("frameRate is " + frameRate);
+  //println("frameRate is " + frameRate);
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
