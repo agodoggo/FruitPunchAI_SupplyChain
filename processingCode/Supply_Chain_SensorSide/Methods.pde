@@ -22,6 +22,7 @@ public void checkWaiting(){
     }
     pagestate = pagestate + 1;
     if(pagestate==32){
+      myDemandMov.jump(0.0);
       myDemandMov.play();
       demandMov = true;
       movPlaying = true;
