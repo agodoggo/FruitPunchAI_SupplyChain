@@ -23,7 +23,7 @@ public void checkWaiting(){
     pagestate = pagestate + 1;
     if(pagestate==32){
       myDemandMov.play();
-       demandMov = true;
+      demandMov = true;
     }
     oppWaiting = 0;
     pagestate_change(pagestate);
@@ -157,11 +157,12 @@ String createRPiPacket(String opponent_waiting, String score_query){
 boolean playMovie(Movie mov){
   println("movie time " + mov.time());
   println("movie duration " + mov.duration());
-   if(mov.time()<round(mov.duration())){
+   if((mov.duration()-mov.time()) < 0.1){
       image(mov,0,0);
       return true;
    }
    else{
+     pagestate_change(pagestate);
      return false;
    }
 }

@@ -9,7 +9,7 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //videos
 Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
-Movie mySetupMov6;
+Movie mySetupMov6;Movie mySetupMov7;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -43,8 +43,8 @@ boolean RaspberryPiNewData = false;
 
 //movie variables
 boolean setupMovs = false;
-boolean[] setupMovArr = {true,true,true,true,true,true,true};
-boolean[] setupMovArr_play = {true,true,true,true,true,true,true};
+boolean[] setupMovArr = {true,true,true,true,true,true,true,true};
+boolean[] setupMovArr_play = {true,true,true,true,true,true,true,true};
 boolean introMov = false;
 boolean demandMov = false;
 
@@ -104,13 +104,14 @@ void setup()
   //preload all movies
  myIntroMov = new Movie(this, sketchPath()+"/Data/UI_Intro_video_co-op.mp4"); 
  myDemandMov = new Movie(this, sketchPath()+"/Data/UI_Demand_boxes_fast.mp4");
- mySetupMov0 = new Movie(this,sketchPath()+"/Data/setup_0.mp4");
- mySetupMov1 = new Movie(this,sketchPath()+"/Data/setup_1.mp4");
- mySetupMov2 = new Movie(this,sketchPath()+"/Data/setup_2.mp4");
- mySetupMov3 = new Movie(this,sketchPath()+"/Data/setup_3.mp4");
- mySetupMov4 = new Movie(this,sketchPath()+"/Data/setup_4.mp4");
- mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
- mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
+ mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
+ mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
+ mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
+ mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
+ mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
+ mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
+ mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
+mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
  
  //int frameRate = 2;
  //myIntroMov.frameRate(frameRate);
@@ -220,7 +221,17 @@ void draw()
         setupMovArr_play[6] = false;
       }
       else{
-       setupMovArr[6] = playMovie(mySetupMov6);
+        setupMovArr[6] = playMovie(mySetupMov6);
+      }
+    }
+    else if(setupMovArr[7]){
+      if(setupMovArr_play[7]){
+        mySetupMov7.play();
+        setupMovArr_play[7] = false;
+      }
+      else{
+        pagestate =12;
+        setupMovArr[7] = playMovie(mySetupMov7);
       }
     }
     else{
@@ -233,10 +244,12 @@ void draw()
   }
   else if(introMov){
     //println(introMov);
+    pagestate = 3;
     introMov = playMovie(myIntroMov);
   }
   else if(demandMov){
     //println(demandMov);
+    pagestate =32;
     demandMov = playMovie(myDemandMov);
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
