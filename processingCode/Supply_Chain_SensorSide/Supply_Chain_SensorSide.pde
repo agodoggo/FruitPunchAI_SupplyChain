@@ -244,7 +244,7 @@ void draw()
         setupMovArr[7] = playMovie(mySetupMov7);
       }
     }
-    else{
+    else if(setupMovArr[7] == false){
       setupMovs = false;
       for(int i = 0; i < setupMovArr.length; i++){
         setupMovArr[i] = true;
