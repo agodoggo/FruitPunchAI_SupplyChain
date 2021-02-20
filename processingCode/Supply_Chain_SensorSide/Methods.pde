@@ -157,7 +157,8 @@ String createRPiPacket(String opponent_waiting, String score_query){
 boolean playMovie(Movie mov){
   println("movie time " + mov.time());
   println("movie duration " + mov.duration());
-   if((mov.duration()-mov.time()) < 0.1){
+  if((mov.duration()-mov.time()) < 0.1){
+      println("Movie image refreshed");
       image(mov,0,0);
       return true;
    }
