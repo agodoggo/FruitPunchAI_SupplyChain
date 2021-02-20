@@ -180,7 +180,7 @@ void draw()
         setupMovArr_play[1] = false;
       }
       else{
-        println("frame of setup 1 loaded");
+        //println("frame of setup 1 loaded");
        setupMovArr[1] = playMovie(mySetupMov1);
       }
     }
