@@ -162,7 +162,7 @@ void draw()
     //println(setupMovs);
     if(movPlaying){
       if(setupMovArr[0]){
-        print("ind 0" +setupMovArr[0]);
+        println("ind 0 " +setupMovArr[0]);
         if(setupMovArr_play[0]){
           mySetupMov0.jump(0.0);
           mySetupMov0.play();
@@ -173,7 +173,7 @@ void draw()
         }
       }
     else if(setupMovArr[1]){
-      print("ind 1" + setupMovArr[1]);
+      println("ind 1 " + setupMovArr[1]);
       if(setupMovArr_play[1]){
         mySetupMov1.jump(0.0);
         mySetupMov1.play();
@@ -184,6 +184,7 @@ void draw()
       }
     }
     else if(setupMovArr[2]){
+      println("ind 2 " + setupMovArr[2]);
       if(setupMovArr_play[2]){
         mySetupMov2.jump(0.0);
         mySetupMov2.play();
@@ -194,6 +195,7 @@ void draw()
       }
     }
     else if(setupMovArr[3]){
+      println("ind 3 " + setupMovArr[3]);
       if(setupMovArr_play[3]){
         mySetupMov3.jump(0.0);
         mySetupMov3.play();
@@ -204,6 +206,7 @@ void draw()
       }
     }
     else if(setupMovArr[4]){
+      println("ind 4 " + setupMovArr[4]);
       if(setupMovArr_play[4]){
         mySetupMov4.jump(0.0);
         mySetupMov4.play();
@@ -214,6 +217,7 @@ void draw()
       }
     }
     else if(setupMovArr[5]){
+      println("ind 5 " + setupMovArr[5]);
       if(setupMovArr_play[5]){
         mySetupMov5.jump(0.0);
         mySetupMov5.play();
@@ -224,6 +228,7 @@ void draw()
       }
     }
     else if(setupMovArr[6]){
+      println("ind 6 " + setupMovArr[6]);
       if(setupMovArr_play[6]){
         mySetupMov6.jump(0.0);
         mySetupMov6.play();
@@ -234,6 +239,7 @@ void draw()
       }
     }
     else if(setupMovArr[7]){
+      println("ind 7 " + setupMovArr[7]);
       if(setupMovArr_play[7]){
         mySetupMov7.jump(0.0);
         mySetupMov7.play();
