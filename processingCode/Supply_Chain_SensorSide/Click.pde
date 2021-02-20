@@ -264,7 +264,7 @@ void mouseClicked(){
   }
   
   //check if movie is playing, if so, stop movie
-  if(movPlaying){
+  else if(movPlaying){
     movPlaying = false;
   }
   
