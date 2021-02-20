@@ -159,38 +159,38 @@ void draw()
     checkWaiting();
   }
   else if(setupMovs && movPlaying){
-    //if(setupMovArr[0]){
-    //  println("ind 0 " +setupMovArr[0]);
-    //  if(setupMovArr_play[0]){
-    //    mySetupMov0.jump(0.0);
-    //    mySetupMov0.play();
-    //    setupMovArr_play[0] = false;
-    //  }
-    //   setupMovArr[0] = playMovie(mySetupMov0);
-    //}
-    //else if(setupMovArr[1]){
-    //  println("ind 1 " + setupMovArr[1]);
-    //  if(setupMovArr_play[1]){
-    //    mySetupMov1.jump(0.0);
-    //    println("post jump");
-    //    mySetupMov1.play();
-    //    println("post play");
-    //    setupMovArr_play[1] = false;
-    //  }
-    //    //println("frame of setup 1 loaded");
-    //   setupMovArr[1] = playMovie(mySetupMov1);
-    //   println("post playMovie");
-    //}
-    //else if(setupMovArr[2]){
-    //  println("ind 2 " + setupMovArr[2]);
-    //  if(setupMovArr_play[2]){
-    //    mySetupMov2.jump(0.0);
-    //    mySetupMov2.play();
-    //    setupMovArr_play[2] = false;
-    //  }
-    //   setupMovArr[2] = playMovie(mySetupMov2);
-    //}
-    if(setupMovArr[3]){
+    if(setupMovArr[0]){
+      println("ind 0 " +setupMovArr[0]);
+      if(setupMovArr_play[0]){
+        mySetupMov0.jump(0.0);
+        mySetupMov0.play();
+        setupMovArr_play[0] = false;
+      }
+       setupMovArr[0] = playMovie(mySetupMov0);
+    }
+    else if(setupMovArr[1]){
+      println("ind 1 " + setupMovArr[1]);
+      if(setupMovArr_play[1]){
+        mySetupMov1.jump(0.0);
+        println("post jump");
+        mySetupMov1.play();
+        println("post play");
+        setupMovArr_play[1] = false;
+      }
+        //println("frame of setup 1 loaded");
+       setupMovArr[1] = playMovie(mySetupMov1);
+       println("post playMovie");
+    }
+    else if(setupMovArr[2]){
+      println("ind 2 " + setupMovArr[2]);
+      if(setupMovArr_play[2]){
+        mySetupMov2.jump(0.0);
+        mySetupMov2.play();
+        setupMovArr_play[2] = false;
+      }
+       setupMovArr[2] = playMovie(mySetupMov2);
+    }
+    else if(setupMovArr[3]){
       println("ind 3 " + setupMovArr[3]);
       if(setupMovArr_play[3]){
         mySetupMov3.jump(0.0);

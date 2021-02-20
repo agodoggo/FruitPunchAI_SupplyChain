@@ -3,6 +3,7 @@ public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
+  println("pagestate refreshed");
   if(pagestate == 0){
   image(Dia0,0,0);
   displayHighScores();
