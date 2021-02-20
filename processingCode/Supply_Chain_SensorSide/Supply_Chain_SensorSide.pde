@@ -158,20 +158,16 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
-  else if(setupMovs){
-    //println(setupMovs);
-    if(movPlaying){
+  else if(setupMovs && movPlaying){
+    if(setupMovArr[0]){
+      println("ind 0 " +setupMovArr[0]);
       if(setupMovArr_play[0]){
-        println("ind 0 " +setupMovArr[0]);
-        if(setupMovArr_play[0]){
-          mySetupMov0.jump(0.0);
-          mySetupMov0.play();
-          setupMovArr_play[0] = false;
-        }
-        else{
-         setupMovArr[0] = playMovie(mySetupMov0);
-        }
+        mySetupMov0.jump(0.0);
+        mySetupMov0.play();
+        setupMovArr_play[0] = false;
       }
+       setupMovArr[0] = playMovie(mySetupMov0);
+    }
     else if(setupMovArr[1]){
       println("ind 1 " + setupMovArr[1]);
       if(setupMovArr_play[1]){
@@ -179,10 +175,8 @@ void draw()
         mySetupMov1.play();
         setupMovArr_play[1] = false;
       }
-      else{
         //println("frame of setup 1 loaded");
        setupMovArr[1] = playMovie(mySetupMov1);
-      }
     }
     else if(setupMovArr[2]){
       println("ind 2 " + setupMovArr[2]);
@@ -191,9 +185,7 @@ void draw()
         mySetupMov2.play();
         setupMovArr_play[2] = false;
       }
-      else{
        setupMovArr[2] = playMovie(mySetupMov2);
-      }
     }
     else if(setupMovArr[3]){
       println("ind 3 " + setupMovArr[3]);
@@ -202,9 +194,7 @@ void draw()
         mySetupMov3.play();
         setupMovArr_play[3] = false;
       }
-      else{
        setupMovArr[3] = playMovie(mySetupMov3);
-      }
     }
     else if(setupMovArr[4]){
       println("ind 4 " + setupMovArr[4]);
@@ -213,9 +203,7 @@ void draw()
         mySetupMov4.play();
         setupMovArr_play[4] = false;
       }
-      else{
        setupMovArr[4] = playMovie(mySetupMov4);
-      }
     }
     else if(setupMovArr[5]){
       println("ind 5 " + setupMovArr[5]);
@@ -224,9 +212,7 @@ void draw()
         mySetupMov5.play();
         setupMovArr_play[5] = false;
       }
-      else{
        setupMovArr[5] = playMovie(mySetupMov5);
-      }
     }
     else if(setupMovArr[6]){
       println("ind 6 " + setupMovArr[6]);
@@ -235,9 +221,7 @@ void draw()
         mySetupMov6.play();
         setupMovArr_play[6] = false;
       }
-      else{
         setupMovArr[6] = playMovie(mySetupMov6);
-      }
     }
     else if(setupMovArr[7]){
       println("ind 7 " + setupMovArr[7]);
@@ -246,21 +230,12 @@ void draw()
         mySetupMov7.play();
         setupMovArr_play[7] = false;
       }
-      else{
         pagestate =12;
         setupMovArr[7] = playMovie(mySetupMov7);
-      }
     }
     else if(setupMovArr[7] == false){
       setupMovs = false;
-      for(int i = 0; i < setupMovArr.length; i++){
-        setupMovArr[i] = true;
-        setupMovArr_play[i] = true;
-      }
-    }
-    }
-    else{
-      setupMovs = false;
+      movPlaying = false;
       for(int i = 0; i < setupMovArr.length; i++){
         setupMovArr[i] = true;
         setupMovArr_play[i] = true;
@@ -296,7 +271,7 @@ void draw()
   }
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");
-  println("frameRate is " + frameRate);
+  //println("frameRate is " + frameRate);
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
