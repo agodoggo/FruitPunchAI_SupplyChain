@@ -9,7 +9,7 @@ PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PI
 
 //movies
 Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
-Movie mySetupMov6;
+Movie mySetupMov6;Movie mySetupMov7;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -84,15 +84,16 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
  //preload all movies
- myIntroMov = new Movie(this, sketchPath()+"/Data/UI_Intro_video_solo.mp4"); 
- myDemandMov = new Movie(this, sketchPath()+"/Data/UI_Demand_boxes_fast.mp4");
- mySetupMov0 = new Movie(this,sketchPath()+"/Data/setup_0.mp4");
- mySetupMov1 = new Movie(this,sketchPath()+"/Data/setup_1.mp4");
- mySetupMov2 = new Movie(this,sketchPath()+"/Data/setup_2.mp4");
- mySetupMov3 = new Movie(this,sketchPath()+"/Data/setup_3.mp4");
- mySetupMov4 = new Movie(this,sketchPath()+"/Data/setup_4.mp4");
- mySetupMov5 = new Movie(this,sketchPath()+"/Data/setup_5.mp4");
- mySetupMov6 = new Movie(this,sketchPath()+"/Data/setup_6.mp4");
+ myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_Solo.mp4"); 
+ myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
+ mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
+ mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
+ mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
+ mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
+ mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
+ mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
+ mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
+mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
  
  //set aesthetics
  PFont erasDemi_font;
