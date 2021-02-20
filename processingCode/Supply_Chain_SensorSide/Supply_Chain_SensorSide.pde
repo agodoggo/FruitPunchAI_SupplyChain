@@ -161,7 +161,7 @@ void draw()
   else if(setupMovs){
     //println(setupMovs);
     if(movPlaying){
-      if(setupMovArr[0]){
+      if(setupMovArr_play[0]){
         println("ind 0 " +setupMovArr[0]);
         if(setupMovArr_play[0]){
           mySetupMov0.jump(0.0);
@@ -180,6 +180,7 @@ void draw()
         setupMovArr_play[1] = false;
       }
       else{
+        println("frame of setup 1 loaded");
        setupMovArr[1] = playMovie(mySetupMov1);
       }
     }
