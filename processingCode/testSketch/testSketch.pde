@@ -3,8 +3,9 @@ void setup() {
   String[] args = new String[2];
   args[0] = "omxplayer ";
   args[1]= new String(sketchPath()+"/Data/Board_set_up_video_0.mp4");
-  println(args[0]+args[1]);
-  launch(args);
+  //args[2] = " --rotation 90";
+  println(args[0]+args[1]+args[2]);
+  exec(args);
 }
 
 void draw() {
