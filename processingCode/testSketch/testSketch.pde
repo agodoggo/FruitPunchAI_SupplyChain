@@ -1,6 +1,6 @@
 void setup() {
   size(1600, 800);
-  String[] args = new String[2];
+  String[] args = new String[3];
   args[0] = "omxplayer ";
   args[1]= new String(sketchPath()+"/Data/Board_set_up_video_0.mp4");
   args[2] = " --orientation 90";
