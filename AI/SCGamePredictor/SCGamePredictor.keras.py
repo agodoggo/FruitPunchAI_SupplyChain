@@ -220,7 +220,7 @@ class SCGameRecommenderKeras:
     def argParse(self):
         state = [0]*18
         if(len(sys.argv)!=19):
-            print(len(sys.argv) + "inputs, not 18")
+            print(str(len(sys.argv)) + "inputs, not 18")
         else:
             i=1
             while(i<len(sys.argv)):
