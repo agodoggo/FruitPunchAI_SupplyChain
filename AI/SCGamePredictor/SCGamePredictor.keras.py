@@ -231,7 +231,7 @@ class SCGameRecommenderKeras:
         return state
     
 keras_model = SCGameRecommenderKeras("model.keras")
-state = keras_model.argParse
+state = keras_model.argParse()
 print(state)
 # recommendation = keras_model.get_recommendation(state)
 # print(recommendation)
