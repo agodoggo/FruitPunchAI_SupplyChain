@@ -221,7 +221,7 @@ class SCGameRecommenderKeras:
         parser = argparse.ArgumentParser(description='Supply Chain AI')
         parser.add_argument("-state", help ="returns recommendation based on inputted state, use -state as flag", nargs="*")
         args = parser.parse_args()
-        if(len(args)!=18)):
+        if(len(args)!=18):
             print("Incorrect number of state inputs, not 18")
         else:
             i=0
