@@ -225,6 +225,7 @@ class SCGameRecommenderKeras:
             i=1
             while(i<len(sys.argv)):
                 state[i-1] = sys.argv[i]
+                i=i+1
         return state
     
 keras_model = SCGameRecommenderKeras("model.keras")
