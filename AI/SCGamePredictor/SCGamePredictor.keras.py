@@ -3,7 +3,7 @@
 import random
 from tensorflow import keras
 import numpy as np
-import argparse
+import sys, getopt #https://www.tutorialspoint.com/python/python_command_line_arguments.htm
 
 # Implements the Supply Chain Game recommender agent.
 # Given a state of the game board, the recommender agent
@@ -218,16 +218,13 @@ class SCGameRecommenderKeras:
         return total_reward
      
     def argParse(self):
-        parser = argparse.ArgumentParser(description='Supply Chain AI')
-        parser.add_argument("-state", help ="returns recommendation based on inputted state, use -state as flag", nargs="*")
-        args = parser.parse_args()
-        if(len(args)!=18):
+        if(len(sys.argv)!=19):
             print("Incorrect number of state inputs, not 18")
         else:
-            i=0
+            i=1
             state = [0]*18
-            for arg in args:
-                state[i] = int(arg)
+            while(i<len(sys.argv))
+                state[i-1] = sys.argv[i]
         return state
     
 keras_model = SCGameRecommenderKeras("model.keras")
