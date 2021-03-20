@@ -224,7 +224,7 @@ class SCGameRecommenderKeras:
         else:
             i=1
             while(i<len(sys.argv)):
-                state[i-1] = sys.argv[i]
+                state[i-1] = int(sys.argv[i])
                 i=i+1
         return state
     
