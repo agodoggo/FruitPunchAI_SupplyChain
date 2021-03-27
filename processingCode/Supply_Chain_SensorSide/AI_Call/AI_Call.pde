@@ -9,13 +9,14 @@ void setup() {
   args[0] = "python3";
   args[1] = new String(sketchPath()+"/../../../AI/model.4.0/SCGamePredictor.keras.py");
   args[2] = new String(sketchPath()+"/../../../AI/model.4.0/model.4.0.keras");
-  args[3] = filePath
+  args[3] = filePath;
   for(int i = 4; i < numArgs; i++){
     args[i] = state[i-4];
   }
   print(args);
-  launch(args);
-  delay(5000);
+  exec(args);
+  //probably need to change this, sloppy! Need this because program takes about that long to call commmand.
+  delay(10000);
   String[] txtDat = loadStrings(filePath);
   String[] rec = txtDat[0].split(" ");
   print(rec);
