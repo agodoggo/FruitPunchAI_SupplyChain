@@ -239,7 +239,7 @@ print(state)
 recommendation = keras_model.get_recommendation(state)
 print(recommendation)
 filePath = sys.argv[2]
-keras_model.writeFile(filePath,state)
+keras_model.writeFile(filePath,recommendation)
 
 # keras_model.play()
 
