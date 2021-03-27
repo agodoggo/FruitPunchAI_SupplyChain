@@ -3,17 +3,22 @@ void setup() {
   int numArgs = 22;
   String[] args = new String[numArgs];
   String state[] = new String[18];
+  String filePath = new String(sketchPath()+"/../../../AI/model.4.0/log.txt");
   state = def_state(state);
  
   args[0] = "python3";
   args[1] = new String(sketchPath()+"/../../../AI/model.4.0/SCGamePredictor.keras.py");
   args[2] = new String(sketchPath()+"/../../../AI/model.4.0/model.4.0.keras");
-  args[3] = new String(sketchPath()+"/../../../AI/model.4.0/log.txt");
+  args[3] = filePath
   for(int i = 4; i < numArgs; i++){
     args[i] = state[i-4];
   }
   print(args);
   launch(args);
+  delay(5000);
+  String[] txtDat = loadStrings(filePath);
+  String[] rec = txtDat[0].split(" ");
+  print(rec);
 }
 
 void draw() {
