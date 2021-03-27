@@ -1,6 +1,6 @@
 void setup() {
   size(1600, 800);
-  int numArgs = 4;
+  int numArgs = 5;
   String[] args = new String[numArgs];
   String state[] = new String[18];
   state = def_state(state);
@@ -8,7 +8,8 @@ void setup() {
   args[0] = "python3";
   args[1] = new String(sketchPath()+"/../../../AI/model.4.0/SCGamePredictor.keras.py");
   args[2] = new String(sketchPath()+"/../../../AI/model.4.0/model.4.0.keras");
-  args[3] = returnList(state);
+  args[3] = new String(sketchPath()+"/../../../AI/model.4.0/log.txt");
+  args[4] = returnList(state);
   print(args);
   launch(args);
 }
