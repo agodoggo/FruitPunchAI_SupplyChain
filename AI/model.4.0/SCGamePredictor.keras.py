@@ -214,21 +214,22 @@ class SCGameRecommenderKeras:
         print("TOTAL REWARD: " + str(total_reward))
         
         return total_reward
-    def argParse(self):
+    def argParseState(self):
+        print(sys.argv)
         state = [0]*18
         if(len(sys.argv)!=19):
             print(str(len(sys.argv)) + "inputs, not 18")
         else:
-            i=1
+            i=2
             while(i<len(sys.argv)):
                 state[i-1] = int(sys.argv[i])
                 i=i+1
         return state
-            
-    
-keras_model = SCGameRecommenderKeras("model.4.0.keras")
 
-state = keras_model.argParse()
+model = sys.argv[1]
+keras_model = SCGameRecommenderKeras(model)
+
+state = keras_model.argParseState()
 print(state)
 recommendation = keras_model.get_recommendation(state)
 print(recommendation)

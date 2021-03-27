@@ -4,7 +4,7 @@ void setup() {
   String state[] = new String[18];
   state = def_state(state);
  
-  args[0] = "py3";
+  args[0] = "python3";
   args[1] = new String(sketchPath()+"/../../../AI/SCGamePredictor/SCGamePredictor.keras.py");
   args[2] = returnList(state);
   print(args);
@@ -47,3 +47,5 @@ String returnList(String[] arr){
   ret += arr[arr.length-1];
   return(ret);
 }
+
+// python3 SCGamePredictor.keras.py  /home/pi/Documents/SupplyChain/FruitPunchAI_SupplyChain/AI/model.4.0/model.4.0.keras 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
