@@ -220,11 +220,16 @@ class SCGameRecommenderKeras:
         if(len(sys.argv)!=19):
             print(str(len(sys.argv)) + "inputs, not 18")
         else:
-            i=2
+            i=3
             while(i<len(sys.argv)):
                 state[i-1] = int(sys.argv[i])
                 i=i+1
         return state
+    
+    def writeFile(self, filePath, arg):
+        file = open(filePath,"w")
+        file.write(arg)
+        file.close
 
 model = sys.argv[1]
 keras_model = SCGameRecommenderKeras(model)
@@ -233,6 +238,8 @@ state = keras_model.argParseState()
 print(state)
 recommendation = keras_model.get_recommendation(state)
 print(recommendation)
+filePath = sys.argv[2]
+writeFile(filePath,state)
 
 # keras_model.play()
 
