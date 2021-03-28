@@ -1,5 +1,5 @@
 import processing.serial.*;
-import processing.video.*;
+//import processing.video.*;
 
 //Path to images, path is the data folder next to the processing sketch
 PImage Dia0; PImage Dia1;PImage Dia2;PImage Dia3;PImage Dia4;PImage Dia5;PImage Dia6;PImage Dia7;PImage Dia8;PImage Dia9;PImage Dia10;
@@ -298,6 +298,6 @@ class Color{
     }
 }
 // Called every time a new frame is available to read
-void movieEvent(Movie m) {
-  m.read();
-}
+//void movieEvent(Movie m) {
+//  m.read();
+//}
