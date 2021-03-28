@@ -187,4 +187,24 @@ public void pagestate_change(int pagestate) {
     String score = "Score: " + trim(myScore);
     text(score,618,35); //display score
   }
+  
+  //display AI advice for each dia
+  if(pagestate == 16 || pagestate == 19 || pagestate ==25){
+    String text="";
+    if(pagestate == 16){
+      for(int i = 0; i < 5; i++){
+        text = text + rec[i];
+      }
+    }
+    else if(pagestate == 19){
+      text = text + rec[5];
+      text = text + rec[6];
+    }
+    else if(pagestate == 25){
+      text = rec[7];
+    }
+    textAlign(LEFT);
+    textSize(20);
+    text(text,80,850); //display name
+  }
 }

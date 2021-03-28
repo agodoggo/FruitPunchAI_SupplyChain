@@ -19,7 +19,7 @@ void setup() {
   delay(10000);
   String[] txtDat = loadStrings(filePath);
   String[] rec = txtDat[0].split(" ");
-  print(rec);
+  String parsedRec[] = parseRec(rec);
 }
 
 void draw() {
@@ -57,6 +57,19 @@ String returnList(String[] arr){
   }
   ret += arr[arr.length-1];
   return(ret);
+}
+
+String[] parseRec(String[] rec){
+  String[] ret = new String[rec.length];
+  ret[0] = "Order " + rec[1] + " phone components\n";
+  ret[1] = "Order " + rec[2] + " electronics components\n";
+  ret[2] = "Order " + rec[3] + " computer components\n";
+  ret[3] = "Order " + rec[4] + " finished phones\n";
+  ret[4] = "Order " + rec[5] + " finished computers\n";
+  ret[5] = "Produce " + rec[6] + " phones\n";
+  ret[6] = "Produce " + rec[7] + " computers\n";
+  ret[7] = "Move " + rec[8] + " phones from the Netherlands to Germany";
+  return ret;
 }
 
 // python3 SCGamePredictor.keras.py  /home/pi/Documents/SupplyChain/FruitPunchAI_SupplyChain/AI/model.4.0/model.4.0.keras 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

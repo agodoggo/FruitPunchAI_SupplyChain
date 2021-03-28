@@ -8,8 +8,8 @@ PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PI
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
 //videos
-Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
-Movie mySetupMov6;Movie mySetupMov7;
+//Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
+//Movie mySetupMov6;Movie mySetupMov7;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -42,12 +42,12 @@ boolean ArduinoRightNewData = false;
 boolean RaspberryPiNewData = false;
 
 //movie variables
-boolean setupMovs = false;
-boolean[] setupMovArr = {true,true,true,true,true,true,true,true};
-boolean[] setupMovArr_play = {true,true,true,true,true,true,true,true};
-boolean introMov = false;
-boolean demandMov = false;
-boolean movPlaying = false;
+//boolean setupMovs = false;
+//boolean[] setupMovArr = {true,true,true,true,true,true,true,true};
+//boolean[] setupMovArr_play = {true,true,true,true,true,true,true,true};
+//boolean introMov = false;
+//boolean demandMov = false;
+//boolean movPlaying = false;
 
 //score Strings
 String myScore = "0";
@@ -60,7 +60,8 @@ String name = "";
 int numBoards_left = 11;
 int numBoards_right = 6;
 int numBoards = 17;
-String[] stoneCount = new String[numBoards]; 
+String[] stoneCount = new String[numBoards];
+String rec[] = new String[8];
 
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
@@ -103,16 +104,16 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
   //preload all movies
- myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_AI_Co-op.mp4"); 
- myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
- mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
- mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
- mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
- mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
- mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
- mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
- mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
-mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
+// myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_AI_Co-op.mp4"); 
+// myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
+// mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
+// mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
+// mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
+// mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
+// mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
+// mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
+// mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
+//mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
  
  //int frameRate = 2;
  //myIntroMov.frameRate(frameRate);

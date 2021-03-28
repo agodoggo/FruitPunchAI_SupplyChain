@@ -70,7 +70,8 @@ void mouseClicked(){
   //next button
   else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
     pagestate = 17;
-    myRPiPort.write(createRPiPacket(WAITING,NONE)); 
+    myRPiPort.write(createRPiPacket(WAITING,NONE));
+    
   }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
@@ -81,6 +82,7 @@ void mouseClicked(){
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
     //send stone count, phase, and roundnumber to c++ program
+    rec = getRecommendation();
     //get result and store in variable to be displayed on pagestate 16
     pagestate = 16;
   }
