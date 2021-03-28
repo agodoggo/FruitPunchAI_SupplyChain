@@ -158,124 +158,125 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
-  else if(setupMovs && movPlaying){
-    if(setupMovArr[0]){
-      println("ind 0 " +setupMovArr[0]);
-      if(setupMovArr_play[0]){
-        mySetupMov0.jump(0.0);
-        mySetupMov0.play();
-        setupMovArr_play[0] = false;
-      }
-       setupMovArr[0] = playMovie(mySetupMov0);
-    }
-    else if(setupMovArr[1]){
-      println("ind 1 " + setupMovArr[1]);
-      if(setupMovArr_play[1]){
-        mySetupMov1.jump(0.0);
-        println("post jump");
-        mySetupMov1.play();
-        println("post play");
-        setupMovArr_play[1] = false;
-      }
-        //println("frame of setup 1 loaded");
-       setupMovArr[1] = playMovie(mySetupMov1);
-       println("post playMovie");
-    }
-    else if(setupMovArr[2]){
-      println("ind 2 " + setupMovArr[2]);
-      if(setupMovArr_play[2]){
-        mySetupMov2.jump(0.0);
-        mySetupMov2.play();
-        setupMovArr_play[2] = false;
-      }
-       setupMovArr[2] = playMovie(mySetupMov2);
-    }
-    else if(setupMovArr[3]){
-      println("ind 3 " + setupMovArr[3]);
-      if(setupMovArr_play[3]){
-        mySetupMov3.jump(0.0);
-        mySetupMov3.play();
-        setupMovArr_play[3] = false;
-      }
-       setupMovArr[3] = playMovie(mySetupMov3);
-    }
-    else if(setupMovArr[4]){
-      println("ind 4 " + setupMovArr[4]);
-      if(setupMovArr_play[4]){
-        mySetupMov4.jump(0.0);
-        mySetupMov4.play();
-        setupMovArr_play[4] = false;
-      }
-       setupMovArr[4] = playMovie(mySetupMov4);
-    }
-    else if(setupMovArr[5]){
-      println("ind 5 " + setupMovArr[5]);
-      if(setupMovArr_play[5]){
-        mySetupMov5.jump(0.0);
-        mySetupMov5.play();
-        setupMovArr_play[5] = false;
-      }
-       setupMovArr[5] = playMovie(mySetupMov5);
-    }
-    else if(setupMovArr[6]){
-      println("ind 6 " + setupMovArr[6]);
-      if(setupMovArr_play[6]){
-        mySetupMov6.jump(0.0);
-        mySetupMov6.play();
-        setupMovArr_play[6] = false;
-      }
-        setupMovArr[6] = playMovie(mySetupMov6);
-    }
-    else if(setupMovArr[7]){
-      println("ind 7 " + setupMovArr[7]);
-      if(setupMovArr_play[7]){
-        mySetupMov7.jump(0.0);
-        mySetupMov7.play();
-        setupMovArr_play[7] = false;
-      }
-        pagestate =12;
-        setupMovArr[7] = playMovie(mySetupMov7);
-    }
-    else if(setupMovArr[7] == false){
-      setupMovs = false;
-      movPlaying = false;
-      for(int i = 0; i < setupMovArr.length; i++){
-        setupMovArr[i] = true;
-        setupMovArr_play[i] = true;
-      }
-      pagestate =12;
-      pagestate_change(pagestate);
-    }
-  }
-  else if(introMov){
-    //println(introMov);
-    if(movPlaying){
-      pagestate = 3;
-      introMov = playMovie(myIntroMov);
-    }
-    else{
-      introMov = false;
-      pagestate = 3;
-      pagestate_change(pagestate);
-    }
-  }
-  else if(demandMov){
-    //println(demandMov);
-    if(movPlaying){
-      pagestate =32;
-      demandMov = playMovie(myDemandMov);
-    }
-    else{
-      demandMov = false;
-      pagestate=32;
-      pagestate_change(pagestate);
-    }
+}
+  //else if(setupMovs && movPlaying){
+  //  if(setupMovArr[0]){
+  //    println("ind 0 " +setupMovArr[0]);
+  //    if(setupMovArr_play[0]){
+  //      mySetupMov0.jump(0.0);
+  //      mySetupMov0.play();
+  //      setupMovArr_play[0] = false;
+  //    }
+  //     setupMovArr[0] = playMovie(mySetupMov0);
+  //  }
+  //  else if(setupMovArr[1]){
+  //    println("ind 1 " + setupMovArr[1]);
+  //    if(setupMovArr_play[1]){
+  //      mySetupMov1.jump(0.0);
+  //      println("post jump");
+  //      mySetupMov1.play();
+  //      println("post play");
+  //      setupMovArr_play[1] = false;
+  //    }
+  //      //println("frame of setup 1 loaded");
+  //     setupMovArr[1] = playMovie(mySetupMov1);
+  //     println("post playMovie");
+  //  }
+  //  else if(setupMovArr[2]){
+  //    println("ind 2 " + setupMovArr[2]);
+  //    if(setupMovArr_play[2]){
+  //      mySetupMov2.jump(0.0);
+  //      mySetupMov2.play();
+  //      setupMovArr_play[2] = false;
+  //    }
+  //     setupMovArr[2] = playMovie(mySetupMov2);
+  //  }
+  //  else if(setupMovArr[3]){
+  //    println("ind 3 " + setupMovArr[3]);
+  //    if(setupMovArr_play[3]){
+  //      mySetupMov3.jump(0.0);
+  //      mySetupMov3.play();
+  //      setupMovArr_play[3] = false;
+  //    }
+  //     setupMovArr[3] = playMovie(mySetupMov3);
+  //  }
+  //  else if(setupMovArr[4]){
+  //    println("ind 4 " + setupMovArr[4]);
+  //    if(setupMovArr_play[4]){
+  //      mySetupMov4.jump(0.0);
+  //      mySetupMov4.play();
+  //      setupMovArr_play[4] = false;
+  //    }
+  //     setupMovArr[4] = playMovie(mySetupMov4);
+  //  }
+  //  else if(setupMovArr[5]){
+  //    println("ind 5 " + setupMovArr[5]);
+  //    if(setupMovArr_play[5]){
+  //      mySetupMov5.jump(0.0);
+  //      mySetupMov5.play();
+  //      setupMovArr_play[5] = false;
+  //    }
+  //     setupMovArr[5] = playMovie(mySetupMov5);
+  //  }
+  //  else if(setupMovArr[6]){
+  //    println("ind 6 " + setupMovArr[6]);
+  //    if(setupMovArr_play[6]){
+  //      mySetupMov6.jump(0.0);
+  //      mySetupMov6.play();
+  //      setupMovArr_play[6] = false;
+  //    }
+  //      setupMovArr[6] = playMovie(mySetupMov6);
+  //  }
+  //  else if(setupMovArr[7]){
+  //    println("ind 7 " + setupMovArr[7]);
+  //    if(setupMovArr_play[7]){
+  //      mySetupMov7.jump(0.0);
+  //      mySetupMov7.play();
+  //      setupMovArr_play[7] = false;
+  //    }
+  //      pagestate =12;
+  //      setupMovArr[7] = playMovie(mySetupMov7);
+  //  }
+  //  else if(setupMovArr[7] == false){
+  //    setupMovs = false;
+  //    movPlaying = false;
+  //    for(int i = 0; i < setupMovArr.length; i++){
+  //      setupMovArr[i] = true;
+  //      setupMovArr_play[i] = true;
+  //    }
+  //    pagestate =12;
+  //    pagestate_change(pagestate);
+  //  }
+  //}
+  //else if(introMov){
+  //  //println(introMov);
+  //  if(movPlaying){
+  //    pagestate = 3;
+  //    introMov = playMovie(myIntroMov);
+  //  }
+  //  else{
+  //    introMov = false;
+  //    pagestate = 3;
+  //    pagestate_change(pagestate);
+  //  }
+  //}
+  //else if(demandMov){
+  //  //println(demandMov);
+  //  if(movPlaying){
+  //    pagestate =32;
+  //    demandMov = playMovie(myDemandMov);
+  //  }
+  //  else{
+  //    demandMov = false;
+  //    pagestate=32;
+  //    pagestate_change(pagestate);
+  //  }
     
-  }
+  //}
 //  int percent = (int)(100*(double)usedMem()/totalMem());
 //  println(percent + "%");
   //println("frameRate is " + frameRate);
-}
+//}
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
 }
