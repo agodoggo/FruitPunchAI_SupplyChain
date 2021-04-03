@@ -1,5 +1,5 @@
 import processing.serial.*;
-import processing.video.*;
+//import processing.video.*;
 
 //Path to images, path is the data folder next to the processing sketch
 PImage Dia0; PImage Dia1;PImage Dia2;PImage Dia3;PImage Dia4;PImage Dia5;PImage Dia6;PImage Dia7;PImage Dia8;PImage Dia9;PImage Dia10;
@@ -8,8 +8,8 @@ PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PI
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
 
 //movies
-Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
-Movie mySetupMov6;Movie mySetupMov7;
+//Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
+//Movie mySetupMov6;Movie mySetupMov7;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -72,7 +72,7 @@ void setup()
  size (800, 1280);
  
  //preload all the images in the program, this should make the entire programm fast by not loading a picture per pagestate
- Dia1 = loadImage("Data/Dia1.PNG");Dia2 = loadImage("Data/Dia2.PNG");Dia3 = loadImage("Data/Dia3.PNG");Dia4 = loadImage("Data/Dia4.PNG");
+ Dia0 = loadImage("Data/Dia0.PNG");Dia1 = loadImage("Data/Dia1.PNG");Dia2 = loadImage("Data/Dia2.PNG");Dia3 = loadImage("Data/Dia3.PNG");Dia4 = loadImage("Data/Dia4.PNG");
  Dia5 = loadImage("Data/Dia5.PNG");Dia6 = loadImage("Data/Dia6.PNG");Dia7 = loadImage("Data/Dia7.PNG");Dia8 = loadImage("Data/Dia8.PNG");
  Dia9 = loadImage("Data/Dia9.PNG");Dia10 = loadImage("Data/Dia10.PNG");Dia11 = loadImage("Data/Dia11.PNG");Dia12 = loadImage("Data/Dia12.PNG");
  Dia13 = loadImage("Data/Dia13.PNG");Dia14 = loadImage("Data/Dia14.PNG");Dia15 = loadImage("Data/Dia15.PNG");Dia16 = loadImage("Data/Dia16.PNG");
@@ -84,16 +84,16 @@ void setup()
  Dia37 = loadImage("Data/Dia37.PNG");
  
  //preload all movies
- myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_Solo.mp4"); 
- myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
- mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
- mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
- mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
- mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
- mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
- mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
- mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
-mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
+// myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_Solo.mp4"); 
+// myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
+// mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
+// mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
+// mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
+// mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
+// mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
+// mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
+// mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
+//mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
  
  //set aesthetics
  PFont erasDemi_font;
@@ -147,6 +147,6 @@ class Color{
     }
 }
 // Called every time a new frame is available to read
-void movieEvent(Movie m) {
-  m.read();
-}
+//void movieEvent(Movie m) {
+//  m.read();
+//}

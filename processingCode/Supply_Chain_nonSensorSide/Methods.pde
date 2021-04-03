@@ -18,7 +18,7 @@ public void checkWaiting(){
     }
     pagestate = pagestate + 1;
     if(pagestate==32){
-       playMovie(myDemandMov);
+       //playMovie(myDemandMov);
     }
     oppWaiting = 0;
     pagestate_change(pagestate);
@@ -126,9 +126,9 @@ String createRPiPacket(String opponent_waiting, String score_query){
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
 }
-void playMovie(Movie mov){
-    mov.play();
-    while(mov.available()){
-      image(mov,0,0);
-    }
-}
+//void playMovie(Movie mov){
+//    mov.play();
+//    while(mov.available()){
+//      image(mov,0,0);
+//    }
+//}
