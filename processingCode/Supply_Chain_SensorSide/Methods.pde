@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
@@ -99,8 +100,16 @@ void serialEvent(Serial thisPort){
     String[] val = new String[numBoards_left];
     val = split(new String(tmp),",");
     print("Decoded message from Arduino left: " + new String(tmp) +"\n");
-    for(int i = 0; i < val.length; i++){
-      stoneCount[i] = val[i];
+    for(int i = 0; i < numBoards_left; i++){
+      print("index " + str(i) + "reached\n");
+      byte[] bytes = val[i].getBytes();
+      print("bytes found\n");
+      print("bytes length " + str(bytes.length) + "\n");
+      byte[] bytes_kept = new byte[] {bytes[0]};
+      print("passed to byte array");
+      stoneCount[i] = new String(bytes_kept,StandardCharsets.UTF_8);
+      print("stone count\n");
+      //stoneCount[i] = val[i];
     }
     ArduinoLeftNewData = true;
   }
@@ -109,8 +118,12 @@ void serialEvent(Serial thisPort){
     val = split(new String(tmp),",");
     print("Decoded message from Arduino right: " + new String(tmp) +"\n");
     myScore = val[0];
-    for(int i = 1; i < val.length; i++){
-      stoneCount[numBoards_left+i-1] = val[i];
+    for(int i = 1; i < numBoards_right+1; i++){
+      byte[] bytes = val[i].getBytes();
+      byte[] bytes_kept = new byte[] {bytes[0]};
+      stoneCount[numBoards_left+i-1] = new String(bytes_kept,StandardCharsets.UTF_8);
+      
+      //stoneCount[numBoards_left+i-1] = val[i];
     }
     ArduinoRightNewData = true;
   }
@@ -158,24 +171,80 @@ String createRPiPacket(String opponent_waiting, String score_query){
 }
 String[] getRecommendation(){ //inv places should be 17 numbers, roundsLeft should be 10 in the first round
   //call program
-  String roundsLeft = str(10-roundNo+1);
+  String roundsLeft = str(11-roundNo);
   int numArgs = 22;
   String[] args = new String[numArgs];
-  String filePath = new String(sketchPath()+"/../../../AI/model.4.0/log.txt");
+  String filePath = new String(sketchPath()+"/../../AI/model.4.0/log.txt");
   
   args[0] = "python3";
-  args[1] = new String(sketchPath()+"/../../../AI/model.4.0/SCGamePredictor.keras.py");
-  args[2] = new String(sketchPath()+"/../../../AI/model.4.0/model.4.0.keras");
+  args[1] = new String(sketchPath()+"/../../AI/model.4.0/SCGamePredictor.keras.py");
+  args[2] = new String(sketchPath()+"/../../AI/model.4.0/model.4.0.keras");
   args[3] = filePath;
   args[4] = roundsLeft;
   String inv_places[] = new String[numBoards];
+  for(int i =0;i<numBoards;i++){
+    inv_places[i] = "0";
+  }
+  inv_places = conv_stoneCount_invPlaces();
   for(int i = 5; i < numArgs; i++){
     args[i] = inv_places[i-5];
   }
-  try{
+  try{ 
+    for(int j = 0; j < args.length; j++){
+      if(args[j] == null){
+        print(str(j) + " is NULL\n");
+      }
+      else{
+        print(str(j) + ": " + args[j] + "\n");
+      }
+    }
+    print("entered try 1\n");
+    print("command: " + String.join(",", args)+"\n");
+    String[] newArgs = new String[numArgs];
+    newArgs[0] = "python3";
+    newArgs[1] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/SCGamePredictor.keras.py";
+    newArgs[2] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/model.4.0.keras";
+    newArgs[3] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/log.txt";
+    newArgs[4] = "10";
+    newArgs[5] = "0";
+    newArgs[6] = "0";
+    newArgs[7] = "0";
+    newArgs[8] = "0";
+    newArgs[9] = "0";
+    newArgs[10] = "0";
+    newArgs[11] = "0";
+    newArgs[12] = "0";
+    newArgs[13] = "0";
+    newArgs[14] = "0";
+    newArgs[15] = "0";
+    newArgs[16] = "0";
+    newArgs[17] = "0";
+    newArgs[18] = "0";
+    newArgs[19] = "1";
+    newArgs[20] = "0";
+    newArgs[21] = "0";
+    
+    for(int k = 0; k < newArgs.length; k++)
+    {
+      print(str(k) + "\n");
+      print("#"+args[k]+"#\n");
+      print("#"+newArgs[k]+"#\n");
+      print("Same: " + str(args[k].equals(newArgs[k])) + "\n");
+      print("Same int: " + str(args[k].equals(0)) + "\n");
+      print("Null: " + str(args[k].equals(null)) + "\n");
+      print("Bits: args - ");
+      printBytes(args[k]);
+      print("\n   newargs - ");
+      printBytes(newArgs[k]);
+      print("\n");
+      print("type: " + args[k].getClass().getName() + "\n\n");
+    }
     Process p = exec(args);  
+    print("entered try 2\n");
     p.waitFor();
+    print("entered try 3\n");
     String[] txtDat = loadStrings(filePath);
+    print("entered try 4\n");
     String[] recRaw = txtDat[0].split(" ");
     return parseRec(recRaw);  
   }
@@ -185,26 +254,41 @@ String[] getRecommendation(){ //inv places should be 17 numbers, roundsLeft shou
   }
 }
 
-String [] conv_stoneCount_invPlaces(){
-  String inv_places[] = new String[numBoards];
-  inv_places[0] = stoneCount[1];
-  inv_places[1] = stoneCount[0];
-  inv_places[2] = stoneCount[3];
-  inv_places[3] = stoneCount[16];
-  inv_places[4] = stoneCount[10];
-  inv_places[5] = stoneCount[5];
-  inv_places[6] = stoneCount[7];
-  inv_places[7] = stoneCount[14];
-  inv_places[8] = stoneCount[2];
-  inv_places[9] = stoneCount[6];
-  inv_places[10] = stoneCount[4];
-  inv_places[11] = stoneCount[8];
-  inv_places[12] = stoneCount[15];
-  inv_places[13] = stoneCount[9];
-  inv_places[14] = stoneCount[13];
-  inv_places[15] = stoneCount[12];
-  inv_places[16] = stoneCount[11];
-  return inv_places;
+void printBytes(String var)
+{
+  byte[] varBytes = var.getBytes();
+  for(byte b: varBytes)
+  {
+     print(b);
+  }
+}
+
+String[] conv_stoneCount_invPlaces(){
+  String inv[] = new String[numBoards];
+  print("this is stonecount: \n");
+  for(int i = 0; i < stoneCount.length; i++){
+    print(str(i) + ": " + stoneCount[i] + "\n");
+  }
+  if(inv.length == numBoards){
+    inv[0] = stoneCount[1];
+    inv[1] = stoneCount[0];
+    inv[2] = stoneCount[3];
+    inv[3] = stoneCount[16];
+    inv[4] = stoneCount[10];
+    inv[5] = stoneCount[5];
+    inv[6] = stoneCount[7];
+    inv[7] = stoneCount[14];
+    inv[8] = stoneCount[2];
+    inv[9] = stoneCount[6];
+    inv[10] = stoneCount[4];
+    inv[11] = stoneCount[8];
+    inv[12] = stoneCount[15];
+    inv[13] = stoneCount[9];
+    inv[14] = stoneCount[13];
+    inv[15] = stoneCount[12];
+    inv[16] = stoneCount[11];
+  }
+  return inv;
 }
 
 String[] parseRec(String[] rec){

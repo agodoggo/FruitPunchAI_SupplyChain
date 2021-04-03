@@ -13,13 +13,36 @@ void setup() {
   for(int i = 4; i < numArgs; i++){
     args[i] = state[i-4];
   }
-  print(args);
-  exec(args);
+  try{ 
+    for(int j = 0; j < args.length; j++){
+      if(args[j] == null){
+        print(str(j) + " is NULL\n");
+      }
+      else{
+        print(str(j) + ": " + args[j] + "\n");
+      }
+    }
+    print("entered try 1");
+    Process p = exec(args);  
+    print("entered try 2");
+    p.waitFor();
+    print("entered try 3");
+    String[] txtDat = loadStrings(filePath);
+    print("entered try 4");
+    String[] recRaw = txtDat[0].split(" ");
+    print(recRaw);
+    //return parseRec(recRaw);  
+  }
+  catch(Exception e){
+    e.printStackTrace();
+    //return null;
+  }
   //probably need to change this, sloppy! Need this because program takes about that long to call commmand.
   delay(10000);
   String[] txtDat = loadStrings(filePath);
   String[] rec = txtDat[0].split(" ");
   String parsedRec[] = parseRec(rec);
+  
 }
 
 void draw() {
@@ -39,13 +62,13 @@ String[] def_state(String[] writeArr){
       writeArr[i] = "0";
     }
     writeArr[0] = "10";
-    writeArr[8] = "2";
-    writeArr[9] = "2";
-    writeArr[10] = "2";
-    writeArr[11] = "2";
-    writeArr[12] = "3";
-    writeArr[13] = "3";
-    writeArr[15] = "3";
+    writeArr[8] = "0";
+    writeArr[9] = "0";
+    writeArr[10] = "0";
+    writeArr[11] = "0";
+    writeArr[12] = "0";
+    writeArr[13] = "0";
+    writeArr[15] = "1";
  }
  return writeArr;
 }
