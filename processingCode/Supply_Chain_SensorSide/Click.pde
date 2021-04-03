@@ -15,6 +15,7 @@ void mouseClicked(){
       //myIntroMov.jump(0.0);
       //myIntroMov.play();
       //movPlaying = true;
+      pagestate = 3;
   }
   ////Minus button should decrease number in system
   //else if (pagestate == 1 || pagestate == 2 && mouseX>280 && mouseX < 340 && mouseY > 450 && mouseY < 510) {
@@ -27,6 +28,7 @@ void mouseClicked(){
       //myIntroMov.jump(0.0);
       //myIntroMov.play();
       //movPlaying = true;
+      pagestate = 3;
     }
   else if((pagestate==1||pagestate==2) ){
     key_pressed();
@@ -38,6 +40,7 @@ void mouseClicked(){
   else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
     //setupMovs = true;
     //movPlaying = true;
+    pagestate = 12;
   }  
   //Question mark
    else if (pagestate == 3 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
