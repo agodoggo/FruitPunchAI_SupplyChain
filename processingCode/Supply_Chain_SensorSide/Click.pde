@@ -11,10 +11,7 @@ void mouseClicked(){
   //Dia 1 and 2 buttons
   //next button
   else if (pagestate == 1 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
-      //introMov = true;
-      //myIntroMov.jump(0.0);
-      //myIntroMov.play();
-      //movPlaying = true;
+      //playMovie(Intro_video_AI_Co_op);
       pagestate = 3;
   }
   ////Minus button should decrease number in system
@@ -24,10 +21,7 @@ void mouseClicked(){
   //else if (pagestate == 1 || pagestate == 2 && mouseX>460 && mouseX < 520 && mouseY > 450 && mouseY < 510) {
   //}
   else if (pagestate == 2 && mouseX>55 && mouseX < 290 && mouseY > 1110 && mouseY < 1244) {
-      //introMov = true;
-      //myIntroMov.jump(0.0);
-      //myIntroMov.play();
-      //movPlaying = true;
+      //playMovie(Intro_video_AI_Co_op);
       pagestate = 3;
     }
   else if((pagestate==1||pagestate==2) ){
@@ -38,25 +32,47 @@ void mouseClicked(){
   // Dia 3 buttons
   //next button
   else if (pagestate == 3 && mouseX>280 && mouseX < 530 && mouseY > 1060 && mouseY < 1190) {
-    //setupMovs = true;
-    //movPlaying = true;
+    pagestate = -1;
+  }
+  else if (pagestate == -1){
+    pagestate = -2;
+  }
+  else if (pagestate == -2){
+    pagestate = -3;
+  }
+  else if (pagestate == -3){
+    pagestate = -4;
+  }
+  else if (pagestate == -4){
+    pagestate = -5;
+  }
+  else if (pagestate == -5){
+    pagestate = -6;
+  }
+  else if (pagestate == -6){
+    pagestate = -7;
+  }
+  else if (pagestate == -7){
+    pagestate = -8;
+  }
+  else if(pagestate == -8){
     pagestate = 12;
-  }  
+  }
+  
+  
   //Question mark
    else if (pagestate == 3 && mouseX>520 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
     pagestate = 4;  
   }
   //rewind logo for seeing the video again
    else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
-     //introMov = true;
-     // myIntroMov.jump(0.0);
-     // myIntroMov.play();
-     // movPlaying = true;
+     //playMovie(Intro_video_AI_Co_op);
+     pagestate = 3;
   }
   
   //Dias 4-11
   //next buttons - going through the pages after the question button
-  else if (pagestate == 4 || pagestate == 5 ||pagestate == 6 ||pagestate == 7||pagestate == 8||pagestate == 9 || pagestate == 10) {
+  else if (pagestate == 4 || pagestate == 5 ||pagestate == 6 ||pagestate == 7||pagestate == 8||pagestate == 9 || pagestate == 10 || pagestate == 11) {
     if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
        pagestate = 3;
      }
@@ -131,6 +147,7 @@ void mouseClicked(){
   else if (pagestate == 18 && mouseX>40 && mouseX < 300 && mouseY > 950 && mouseY < 1090) {
     send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
+    rec = getRecommendation();
     //send stone count, phase, and roundnumber to c++ program
     //get result and store in variable to be displayed on pagestate 19
     pagestate = 19;
@@ -169,6 +186,7 @@ void mouseClicked(){
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
     //send stone count, phase, and roundnumber to c++ program
+    rec = getRecommendation();
     //get result and store in variable to be displayed on pagestate 19
     pagestate = 25;
   }
