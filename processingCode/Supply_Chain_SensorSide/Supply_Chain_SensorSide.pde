@@ -61,6 +61,7 @@ int numBoards_left = 11;
 int numBoards_right = 6;
 int numBoards = 17;
 String[] stoneCount = new String[numBoards];
+
 String rec[] = new String[8];
 
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
@@ -131,12 +132,17 @@ void setup()
  erasDemi_font = createFont("Data/ERASDEMI.TTF",20.0);
  textFont(erasDemi_font);
  
- println(Serial.list());
+ for(int i =0; i< stoneCount.length; i++){
+  stoneCount[i] = "0";
+ }
  
- String arduinoPort_left = Serial.list()[2]; // figure this out
+ ///JEROEN: This line gave a warning, which I fixed by joining the list into a string separated by commas
+ println("Serial: " + String.join(",", Serial.list()));
+ 
+ String arduinoPort_left = Serial.list()[3]; // figure this out
  myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
  
-  String arduinoPort_right = Serial.list()[3]; //figure this out
+  String arduinoPort_right = Serial.list()[2]; //figure this out
  myArduinoPort_right = new Serial(this, arduinoPort_right, baudRate);
 
  String RPiPort = Serial.list()[5]; //figure this out
