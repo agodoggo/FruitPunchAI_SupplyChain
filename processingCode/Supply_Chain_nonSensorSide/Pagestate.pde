@@ -3,6 +3,38 @@ public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
+  if(pagestate == -1){
+    image(Dia_0,0,0);
+    //playMovie(Board_setup_video_0);
+  }
+  else if(pagestate == -2){
+    image(Dia_1,0,0);
+    //playMovie(Board_setup_video_1);
+  }
+  else if(pagestate == -3){
+    image(Dia_2,0,0);
+    //playMovie(Board_setup_video_2);
+  }
+  else if(pagestate == -4){
+    image(Dia_3,0,0);
+    //playMovie(Board_setup_video_3);
+  }
+  else if(pagestate == -5){
+    //playMovie(Board_setup_video_4);
+    image(Dia_4,0,0);
+  }
+  else if(pagestate == -6){
+    //playMovie(Board_setup_video_5);
+    image(Dia_5,0,0);
+  }
+  else if(pagestate == -7){
+    //playMovie(Board_setup_video_6);
+    image(Dia_6,0,0);
+  }
+  else if(pagestate == -8){
+    //playMovie(Board_setup_video_7);
+    image(Dia_7,0,0);
+  }
   if(pagestate == 0){
   image(Dia0,0,0);
   displayHighScores();
@@ -101,17 +133,15 @@ public void pagestate_change(int pagestate) {
   image(Dia31,0,0);
   }
   else if(pagestate == 32){
-    String demandMsg = demandMsg();
-    textAlign(CENTER);
-    fill(0);
-    textSize(30);
-    text(demandMsg,400,400); //display name
-    delay(5000);
+    //textAlign(CENTER);
+    //fill(255,255,255);
+    //textSize(30);
+    //text(demandMsg,400,400); //display name
     image(Dia32,0,0);
     textAlign(CENTER);
-    fill(0);
+    fill(255,255,255);
     textSize(30);
-    text(demandMsg,375,375); //display demand
+    text(demandMsg,370,395); //display demand
   }
   else if(pagestate == 33){
   image(Dia33,0,0);
@@ -140,12 +170,17 @@ public void pagestate_change(int pagestate) {
   
   //display score on score page
   if(pagestate == 36){
+    textAlign(LEFT);
     textSize(50);
     fill(0);
-    text("Your score ",350,600);
+    text("Your score ",250,600);
     text(trim(myScore),700,600);
-    text("Opponent's score ",350,750);
+    text("Opponent's score ",250,750);
     text(trim(oppScore),700,750);
+    textSize(45);
+    fill(255,255,255);
+    textAlign(CENTER);
+    text(roundNo+"/10", 205, 450);
   }
   //display name on name enter page
   if (pagestate == 1 || pagestate == 2){

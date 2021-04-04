@@ -1,4 +1,5 @@
 //Serial receiving from Raspberry Pi
+import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
@@ -12,13 +13,14 @@ public void checkWaiting(){
     }
     else if(pagestate==31){
       myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
+       demandMsg = demandMsg();
     }
     else if(pagestate == 35){
        myArduinoPort.write(createArduinoPacket(NONE,NONE));
     }
     pagestate = pagestate + 1;
     if(pagestate==32){
-       //playMovie(myDemandMov);
+       playMovie(Determining_demand_boxes_video);
     }
     oppWaiting = 0;
     pagestate_change(pagestate);
@@ -101,21 +103,21 @@ void serialEvent(Serial thisPort){
 }
 
 String demandMsg(){
-  int dice_roll = int(random(-0.5,2.5));
+  int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
   if(dice_roll == 0){
-    return "Dutch Retail demands" + quantDemand() + "Game Computers";
+    return "Dutch Retail demands " + quantDemand() + " Game Computers";
   }
   else if(dice_roll == 1){
-    return "Dutch Retail demands" + quantDemand() + "Tablets";
+    return "Dutch Retail demands " + quantDemand() + " Tablets";
   }
   else if(dice_roll == 2){
-    return "German Retail demands" + quantDemand() + "Game Computers";
+    return "German Retail demands " + quantDemand() + " Game Computers";
   }
   return "No country";
 }
 
 String quantDemand(){
-  return str(int(random(0.5,6.5)));
+  return str(ThreadLocalRandom.current().nextInt(1, 7)); //https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
 }
 
 String createArduinoPacket(String arrow_phase, String score_query){
@@ -126,9 +128,15 @@ String createRPiPacket(String opponent_waiting, String score_query){
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
   return "<"+opponent_waiting+","+score_query+">";
 }
-//void playMovie(Movie mov){
-//    mov.play();
-//    while(mov.available()){
-//      image(mov,0,0);
-//    }
-//}
+void playMovie(String filePath){
+  String[] args = new String[3];
+  args[0] = "omxplayer";
+  args[1] = filePath;
+  args[2] = "--orientation=90";
+  Process p = exec(args);
+  try {
+   int result = p.waitFor();
+   println("the process returned " + result);
+   }
+   catch (InterruptedException e) { }
+} 

@@ -6,10 +6,18 @@ PImage Dia0; PImage Dia1;PImage Dia2;PImage Dia3;PImage Dia4;PImage Dia5;PImage 
 PImage Dia11;PImage Dia12;PImage Dia13;PImage Dia14;PImage Dia15;PImage Dia16;PImage Dia17;PImage Dia18;PImage Dia19;
 PImage Dia20;PImage Dia21;PImage Dia22;PImage Dia23;PImage Dia24;PImage Dia25;PImage Dia26;PImage Dia27;PImage Dia28;PImage Dia29;
 PImage Dia30;PImage Dia31;PImage Dia32;PImage Dia33;PImage Dia34;PImage Dia35;PImage Dia36;PImage Dia37;
-
-//movies
-//Movie myIntroMov; Movie myDemandMov; Movie mySetupMov0;Movie mySetupMov1;Movie mySetupMov2;Movie mySetupMov3;Movie mySetupMov4;Movie mySetupMov5;
-//Movie mySetupMov6;Movie mySetupMov7;
+PImage Dia_0; PImage Dia_1; PImage Dia_2; PImage Dia_3;PImage Dia_4;PImage Dia_5;PImage Dia_6;PImage Dia_7;
+//videos
+String Board_setup_video_0;
+String Board_setup_video_1;
+String Board_setup_video_2;
+String Board_setup_video_3;
+String Board_setup_video_4;
+String Board_setup_video_5;
+String Board_setup_video_6;
+String Board_setup_video_7;
+String Determining_demand_boxes_video;
+String Intro_video_AI_Co_op;
 
 //colors
 Color SUPPLY_col = new Color(170,111,35);
@@ -45,6 +53,7 @@ String oppScore = "0";
 
 //data variables
 String name = "";
+String demandMsg = "";
 
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
@@ -82,18 +91,25 @@ void setup()
  Dia29 = loadImage("Data/Dia29.PNG");Dia30 = loadImage("Data/Dia30.PNG");Dia31 = loadImage("Data/Dia31.PNG");Dia32 = loadImage("Data/Dia32.PNG");
  Dia33 = loadImage("Data/Dia33.PNG");Dia34 = loadImage("Data/Dia34.PNG");Dia35 = loadImage("Data/Dia35.PNG");Dia36 = loadImage("Data/Dia36.PNG");
  Dia37 = loadImage("Data/Dia37.PNG");
- 
+  Dia_0 = loadImage("Data/Board_set_up_video_0_LF.png");
+ Dia_1 = loadImage("Data/Board_set_up_video_1_LF.png");
+ Dia_2 = loadImage("Data/Board_set_up_video_2_LF.png");
+ Dia_3 = loadImage("Data/Board_set_up_video_3_LF.png");
+ Dia_4 = loadImage("Data/Board_set_up_video_4_LF.png");
+ Dia_5 = loadImage("Data/Board_set_up_video_5_LF.png");
+ Dia_6 = loadImage("Data/Board_set_up_video_6_LF.png");
+ Dia_7 = loadImage("Data/Board_set_up_video_7_LF.png");
  //preload all movies
-// myIntroMov = new Movie(this, sketchPath()+"/Data/Intro_video_Solo.mp4"); 
-// myDemandMov = new Movie(this, sketchPath()+"/Data/Determining_demand_boxes_video.mp4");
-// mySetupMov0 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_0.mp4");
-// mySetupMov1 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_1.mp4");
-// mySetupMov2 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_2.mp4");
-// mySetupMov3 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_3.mp4");
-// mySetupMov4 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_4.mp4");
-// mySetupMov5 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_5.mp4");
-// mySetupMov6 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_6.mp4");
-//mySetupMov7 = new Movie(this,sketchPath()+"/Data/Board_set_up_video_7.mp4");
+Intro_video_AI_Co_op = sketchPath()+"/Data/Intro_video_Solo.mp4"; 
+Determining_demand_boxes_video = sketchPath()+"/Data/Determining_demand_boxes_video.mp4";
+Board_setup_video_0 = sketchPath()+"/Data/Board_set_up_video_0.mp4";
+Board_setup_video_1 = sketchPath()+"/Data/Board_set_up_video_1.mp4";
+Board_setup_video_2 = sketchPath()+"/Data/Board_set_up_video_2.mp4";
+Board_setup_video_3 = sketchPath()+"/Data/Board_set_up_video_3.mp4";
+Board_setup_video_4 = sketchPath()+"/Data/Board_set_up_video_4.mp4";
+Board_setup_video_5 = sketchPath()+"/Data/Board_set_up_video_5.mp4";
+Board_setup_video_6 = sketchPath()+"/Data/Board_set_up_video_6.mp4";
+Board_setup_video_7 = sketchPath()+"/Data/Board_set_up_video_7.mp4";
  
  //set aesthetics
  PFont erasDemi_font;
@@ -124,8 +140,8 @@ void draw()
   if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35){
     checkWaiting();
   }
-  //int percent = (int)(100*(double)usedMem()/totalMem());
-  //println(percent + "%");
+  int percent = (int)(100*(double)usedMem()/totalMem());
+  println(percent + "%");
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
