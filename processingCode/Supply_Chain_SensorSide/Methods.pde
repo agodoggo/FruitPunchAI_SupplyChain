@@ -1,4 +1,5 @@
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
     if(pagestate==17){
@@ -16,6 +17,7 @@ public void checkWaiting(){
     else if(pagestate==31){
       myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
       myArduinoPort_right.write(createArduinoPacket_right(DEMAND,NONE,NONE));
+      demandMsg = demandMsg();
     }
     else if(pagestate == 35){
       myArduinoPort_left.write(createArduinoPacket_left(NONE,NONE));
@@ -23,10 +25,7 @@ public void checkWaiting(){
     }
     pagestate = pagestate + 1;
     if(pagestate==32){
-      //myDemandMov.jump(0.0);
-      //myDemandMov.play();
-      //demandMov = true;
-      //movPlaying = true;
+      playMovie(Determining_demand_boxes_video);
     }
     oppWaiting = 0;
     pagestate_change(pagestate);
@@ -140,21 +139,21 @@ void serialEvent(Serial thisPort){
 }
 
 String demandMsg(){
-  int dice_roll = int(random(-0.5,2.5));
+  int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
   if(dice_roll == 0){
-    return "Dutch Retail demands" + quantDemand() + "Game Computers";
+    return "Dutch Retail demands " + quantDemand() + " Game Computers";
   }
   else if(dice_roll == 1){
-    return "Dutch Retail demands" + quantDemand() + "Tablets";
+    return "Dutch Retail demands " + quantDemand() + " Tablets";
   }
   else if(dice_roll == 2){
-    return "German Retail demands" + quantDemand() + "Game Computers";
+    return "German Retail demands " + quantDemand() + " Game Computers";
   }
   return "No country";
 }
 
 String quantDemand(){
-  return str(int(random(0.5,6.5)));
+  return str(ThreadLocalRandom.current().nextInt(1, 7)); //https://stackoverflow.com/questions/363681/how-do-i-generate-random-integers-within-a-specific-range-in-java
 }
 
 String createArduinoPacket_left(String arrow_phase, String stone_count_query){ //direction purely for print statement
@@ -318,3 +317,15 @@ String[] parseRec(String[] rec){
 //     return false;
 //   }
 //}
+
+void playMovie(String filePath){
+  String[] args = new String[2];
+  args[0] = "omxplayer";
+  args[1] = filePath;
+  Process p = exec(args);
+  try {
+   int result = p.waitFor();
+   println("the process returned " + result);
+   }
+   catch (InterruptedException e) { }
+} 
