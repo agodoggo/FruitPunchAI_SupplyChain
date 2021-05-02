@@ -55,28 +55,29 @@ void mouseClicked(){
     pagestate = -8;
   }
   else if(pagestate == -8){
-    pagestate = 12;
+    pagestate = 4;
   }
   //Question mark
-   else if (pagestate == 3 && mouseX>580 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
-    pagestate = 4;  
-  }
-  //rewind logo for seeing the video again
-   else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
-     //playMovie(Intro_video_AI_Co_op);
-     pagestate = 3;
-  }
+  // else if (pagestate == 3 && mouseX>580 && mouseX < 620 && mouseY > 700 && mouseY < 800) {
+  //  pagestate = 4;  
+  //}
+  ////rewind logo for seeing the video again
+  // else if (pagestate == 3 && mouseX>160 && mouseX <350 && mouseY > 670 && mouseY < 840) {
+  //   //playMovie(Intro_video_AI_Co_op);
+  //   pagestate = 3;
+  //}
   
   //Dias 4-11
   //next buttons - going through the pages after the question button
   else if (pagestate == 4 || pagestate == 5 ||pagestate == 6 ||pagestate == 7||pagestate == 8||pagestate == 9 || pagestate == 10 || pagestate == 11) {
     if (mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
-       pagestate = 3;
+       pagestate = 4;
      }
     else if (mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250) {
       pagestate += 1;
     }
   }
+  
   else if(pagestate == 11 && mouseX>50 && mouseX < 300 && mouseY > 1110 && mouseY < 1250){
       pagestate = 3;
     }
@@ -265,6 +266,12 @@ void mouseClicked(){
       pagestate = 0;
       addHighScore(name,Integer.parseInt(myScore));
       saveHighScore();
+    }
+  }
+  
+  else if (pagestate >=12 && pagestate <= 34 && pagestate == 36){
+    if (mouseX >= 750 && mouseX <= 800 && mouseY >=0 && mouseY <= 50){
+      exit();
     }
   }
   

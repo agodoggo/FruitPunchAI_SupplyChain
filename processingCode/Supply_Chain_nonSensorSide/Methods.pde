@@ -102,16 +102,14 @@ void serialEvent(Serial thisPort){
   }
 }
 
-String demandMsg(){
+String demandMsg() {
   int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
-  if(dice_roll == 0){
-    return "Dutch Retail demands " + quantDemand() + " Game Computers";
-  }
-  else if(dice_roll == 1){
-    return "Dutch Retail demands " + quantDemand() + " Tablets";
-  }
-  else if(dice_roll == 2){
-    return "German Retail demands " + quantDemand() + " Game Computers";
+  if (dice_roll == 0) {
+    return quantDemand() + "Game Computers\nNetherlands";
+  } else if (dice_roll == 1) {
+    return quantDemand() + "Tablets\nNetherlands";
+  } else if (dice_roll == 2) {
+    return quantDemand() + "Tablets\nGermany";
   }
   return "No country";
 }
@@ -139,4 +137,4 @@ void playMovie(String filePath){
    println("the process returned " + result);
    }
    catch (InterruptedException e) { }
-} 
+}
