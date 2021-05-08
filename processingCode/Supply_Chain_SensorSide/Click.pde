@@ -70,7 +70,7 @@ void mouseClicked() {
 
   //Dias 13-15
   //back button
-  else if ((pagestate == 13 || pagestate == 14 ||pagestate == 15 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+  else if ((pagestate == 13 || pagestate == 14 ||pagestate == 15) && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
       pagestate = 12;
   }
   else if ((pagestate == 13 || pagestate == 14) && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){
