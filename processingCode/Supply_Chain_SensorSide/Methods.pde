@@ -96,14 +96,14 @@ void serialEvent(Serial thisPort) {
     val = split(new String(tmp), ",");
     print("Decoded message from Arduino left: " + new String(tmp) +"\n");
     for (int i = 0; i < numBoards_left; i++) {
-      print("index " + str(i) + "reached\n");
+      //print("index " + str(i) + "reached\n");
       byte[] bytes = val[i].getBytes();
-      print("bytes found\n");
-      print("bytes length " + str(bytes.length) + "\n");
+      //print("bytes found\n");
+      //print("bytes length " + str(bytes.length) + "\n");
       byte[] bytes_kept = new byte[] {bytes[0]};
-      print("passed to byte array");
+      //print("passed to byte array");
       stoneCount[i] = new String(bytes_kept, StandardCharsets.UTF_8);
-      print("stone count\n");
+      //print("stone count\n");
       //stoneCount[i] = val[i];
     }
     ArduinoLeftNewData = true;
@@ -183,58 +183,15 @@ String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft sho
     args[i] = inv_places[i-5];
   }
   try { 
-    for (int j = 0; j < args.length; j++) {
-      if (args[j] == null) {
-        print(str(j) + " is NULL\n");
-      } else {
-        print(str(j) + ": " + args[j] + "\n");
-      }
-    }
-    print("entered try 1\n");
-    print("command: " + String.join(",", args)+"\n");
-    String[] newArgs = new String[numArgs];
-    newArgs[0] = "python3";
-    newArgs[1] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/SCGamePredictor.keras.py";
-    newArgs[2] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/model.4.0.keras";
-    newArgs[3] = "/home/pi/Documents/FruitPunchAI_SupplyChain/processingCode/Supply_Chain_SensorSide/../../AI/model.4.0/log.txt";
-    newArgs[4] = "10";
-    newArgs[5] = "0";
-    newArgs[6] = "0";
-    newArgs[7] = "0";
-    newArgs[8] = "0";
-    newArgs[9] = "0";
-    newArgs[10] = "0";
-    newArgs[11] = "0";
-    newArgs[12] = "0";
-    newArgs[13] = "0";
-    newArgs[14] = "0";
-    newArgs[15] = "0";
-    newArgs[16] = "0";
-    newArgs[17] = "0";
-    newArgs[18] = "0";
-    newArgs[19] = "1";
-    newArgs[20] = "0";
-    newArgs[21] = "0";
-
-    for (int k = 0; k < newArgs.length; k++)
-    {
-      print(str(k) + "\n");
-      print("#"+args[k]+"#\n");
-      print("#"+newArgs[k]+"#\n");
-      print("Same: " + str(args[k].equals(newArgs[k])) + "\n");
-      print("Same int: " + str(args[k].equals(0)) + "\n");
-      print("Null: " + str(args[k].equals(null)) + "\n");
-      print("Bits: args - ");
-      printBytes(args[k]);
-      print("\n   newargs - ");
-      printBytes(newArgs[k]);
-      print("\n");
-      print("type: " + args[k].getClass().getName() + "\n\n");
-    }
+    //for (int j = 0; j < args.length; j++) {
+    //  if (args[j] == null) {
+    //    print(str(j) + " is NULL\n");
+    //  } else {
+    //    print(str(j) + ": " + args[j] + "\n");
+    //  }
+    //}
     Process p = exec(args);  
-    print("entered try 2\n");
     p.waitFor();
-    print("entered try 3\n");
     String[] txtDat = loadStrings(filePath);
     print("entered try 4\n");
     String[] recRaw = txtDat[0].split(" ");
@@ -258,10 +215,10 @@ void printBytes(String var)
 
 String[] conv_stoneCount_invPlaces() {
   String inv[] = new String[numBoards];
-  print("this is stonecount: \n");
-  for (int i = 0; i < stoneCount.length; i++) {
-    print(str(i) + ": " + stoneCount[i] + "\n");
-  }
+  //print("this is stonecount: \n");
+  //for (int i = 0; i < stoneCount.length; i++) {
+  //  print(str(i) + ": " + stoneCount[i] + "\n");
+  //}
   if (inv.length == numBoards) {
     inv[0] = stoneCount[1];
     inv[1] = stoneCount[0];

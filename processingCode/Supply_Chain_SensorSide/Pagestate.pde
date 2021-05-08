@@ -52,6 +52,7 @@ public void pagestate_change(int pagestate) {
     }
   } else if (pagestate == 12) {
     image(Dia12, 0, 0);
+    println("12th Dia shown");
   } else if (pagestate == 13) {
     image(Dia13, 0, 0);
   } else if (pagestate == 14) {
