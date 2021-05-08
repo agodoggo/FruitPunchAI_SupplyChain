@@ -5,15 +5,8 @@ import processing.serial.*;
 PImage Dia0; 
 PImage Dia1;
 PImage Dia2;
-PImage Dia3;
-PImage Dia4;
-PImage Dia5;
-PImage Dia6;
-PImage Dia7;
-PImage Dia8;
-PImage Dia9;
-PImage Dia10;
-PImage Dia11;
+PImage Dia3_Clickable;
+PImage Dia3_Hidden;
 PImage Dia12;
 PImage Dia13;
 PImage Dia14;
@@ -39,26 +32,34 @@ PImage Dia33;
 PImage Dia34;
 PImage Dia35;
 PImage Dia36;
-PImage Dia37;
-PImage Dia_0; 
-PImage Dia_1; 
-PImage Dia_2; 
-PImage Dia_3;
-PImage Dia_4;
-PImage Dia_5;
-PImage Dia_6;
-PImage Dia_7;
-//videos
-String Board_setup_video_0;
-String Board_setup_video_1;
-String Board_setup_video_2;
-String Board_setup_video_3;
-String Board_setup_video_4;
-String Board_setup_video_5;
-String Board_setup_video_6;
-String Board_setup_video_7;
+PImage Instructions0;
+PImage Instructions1;
+PImage Instructions2;
+PImage Instructions3;
+PImage Instructions4;
+PImage Instructions5;
+PImage Instructions6;
+PImage Instructions7;
+PImage Setup1;
+PImage Setup2;
+PImage Setup3;
+PImage Setup4;
+PImage Setup5;
+PImage Setup6;
+PImage Setup7;
+PImage Setup8;
+
+
+
+PImage BoardMap;
+PImage Electronics;
+PImage GameComputerCasing;
+PImage TabletCasing;
+PImage AssembledTablet;
+PImage AssembledGameComputer;
+
+
 String Determining_demand_boxes_video;
-String Intro_video_AI_Co_op;
 
 //colors
 Color SUPPLY_col = new Color(170, 111, 35);
@@ -120,24 +121,28 @@ String WAITING = "1";
 int blinkTime = millis();
 boolean blinkOn = true;
 
+//float timeout
+long fiveMinutes = 1000 * 60 * 5; //1000 ms * 60 s * 5 min
+boolean inActive = false;
+int lastPageState = 0;
+boolean InstructionsSeen = false;
+boolean SetupSeen = false;
+
+//mouse Press variables
+long startTimePressed;
+boolean mousePress = false;
+
 void setup()
 { 
   //set screen size, this is the pixel ratio of the build in screens
   size (800, 1280);
 
   //preload all the images in the program, this should make the entire programm fast by not loading a picture per pagestate
-  Dia0 = loadImage("Data/Dia0.PNG");
+   Dia0 = loadImage("Data/Dia0.PNG");
   Dia1 = loadImage("Data/Dia1.PNG");
   Dia2 = loadImage("Data/Dia2.PNG");
-  Dia3 = loadImage("Data/Dia3.PNG");
-  Dia4 = loadImage("Data/Dia4.PNG");
-  Dia5 = loadImage("Data/Dia5.PNG");
-  Dia6 = loadImage("Data/Dia6.PNG");
-  Dia7 = loadImage("Data/Dia7.PNG");
-  Dia8 = loadImage("Data/Dia8.PNG");
-  Dia9 = loadImage("Data/Dia9.PNG");
-  Dia10 = loadImage("Data/Dia10.PNG");
-  Dia11 = loadImage("Data/Dia11.PNG");
+  Dia3_Clickable = loadImage("Data/Dia3_Clickable.PNG");
+  Dia3_Hidden = loadImage("Data/Dia3_Hidden.PNG");
   Dia12 = loadImage("Data/Dia12.PNG");
   Dia13 = loadImage("Data/Dia13.PNG");
   Dia14 = loadImage("Data/Dia14.PNG");
@@ -163,26 +168,31 @@ void setup()
   Dia34 = loadImage("Data/Dia34.PNG");
   Dia35 = loadImage("Data/Dia35.PNG");
   Dia36 = loadImage("Data/Dia36.PNG");
-  Dia37 = loadImage("Data/Dia37.PNG");
-  Dia_0 = loadImage("Data/Board_set_up_video_0_LF.png");
-  Dia_1 = loadImage("Data/Board_set_up_video_1_LF.png");
-  Dia_2 = loadImage("Data/Board_set_up_video_2_LF.png");
-  Dia_3 = loadImage("Data/Board_set_up_video_3_LF.png");
-  Dia_4 = loadImage("Data/Board_set_up_video_4_LF.png");
-  Dia_5 = loadImage("Data/Board_set_up_video_5_LF.png");
-  Dia_6 = loadImage("Data/Board_set_up_video_6_LF.png");
-  Dia_7 = loadImage("Data/Board_set_up_video_7_LF.png");
-  //preload all movies
-  Intro_video_AI_Co_op = sketchPath()+"/Data/Intro_video_Solo.mp4"; 
+  Instructions0 = loadImage("Data/Instructions0.PNG");
+  Instructions1 = loadImage("Data/Instructions1_coop.PNG");
+  Instructions2 = loadImage("Data/Instructions2.PNG");
+  Instructions3 = loadImage("Data/Instructions3.PNG");
+  Instructions4 = loadImage("Data/Instructions4.PNG");
+  Instructions5 = loadImage("Data/Instructions5.PNG");
+  Instructions6 = loadImage("Data/Instructions6.PNG");
+  Instructions7 = loadImage("Data/Instructions7.PNG");
+  Setup1 = loadImage("Data/Setup1.PNG");
+  Setup2 = loadImage("Data/Setup2.PNG");
+  Setup3 = loadImage("Data/Setup3.PNG");
+  Setup4 = loadImage("Data/Setup4.PNG");
+  Setup5 = loadImage("Data/Setup5.PNG");
+  Setup6 = loadImage("Data/Setup6.PNG");
+  Setup7 = loadImage("Data/Setup7.PNG");
+  Setup8 = loadImage("Data/Setup8.PNG");
+  
+  BoardMap = loadImage("Data/BoardMap.png");
+  Electronics = loadImage("Data/Electronics.png");
+  GameComputerCasing = loadImage("Data/GameComputerCasing");
+  TabletCasing = loadImage("Data/TabletCasing");
+  AssembledTablet = loadImage("Data/AssembledTablet");
+  AssembledGameComputer = loadImage("Data/AssembledGameComputer");
+  
   Determining_demand_boxes_video = sketchPath()+"/Data/Determining_demand_boxes_video.mp4";
-  Board_setup_video_0 = sketchPath()+"/Data/Board_set_up_video_0.mp4";
-  Board_setup_video_1 = sketchPath()+"/Data/Board_set_up_video_1.mp4";
-  Board_setup_video_2 = sketchPath()+"/Data/Board_set_up_video_2.mp4";
-  Board_setup_video_3 = sketchPath()+"/Data/Board_set_up_video_3.mp4";
-  Board_setup_video_4 = sketchPath()+"/Data/Board_set_up_video_4.mp4";
-  Board_setup_video_5 = sketchPath()+"/Data/Board_set_up_video_5.mp4";
-  Board_setup_video_6 = sketchPath()+"/Data/Board_set_up_video_6.mp4";
-  Board_setup_video_7 = sketchPath()+"/Data/Board_set_up_video_7.mp4";
 
   //set aesthetics
   PFont erasDemi_font;
@@ -222,6 +232,15 @@ void draw()
       blinkOn = !blinkOn;
     }
   }
+  else if(!inActive && millis() - startTimePressed > fiveMinutes){
+      inActive = true;
+      lastPageState = pagestate;
+      pagestate = 35;
+      pagestate_change(pagestate);
+    }
+    else if(millis() - startTimePressed < fiveMinutes){
+      inActive = false;
+    }
   int percent = (int)(100*(double)usedMem()/totalMem());
   println(percent + "%");
 }
@@ -244,7 +263,3 @@ class Color {
     this.b = b;
   }
 }
-// Called every time a new frame is available to read
-//void movieEvent(Movie m) {
-//  m.read();
-//}

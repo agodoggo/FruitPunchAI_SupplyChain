@@ -2,29 +2,33 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting() {
   if (oppWaiting == 1) { //checks if RPi Instruction for opponent waiting is true
-    if (pagestate==17) {
-      myArduinoPort_left.write(createArduinoPacket_left(ASSEMBLY, NONE));
-      myArduinoPort_right.write(createArduinoPacket_right(NONE, NONE, NONE));
-    } else if (pagestate==22) {
-      myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
-      myArduinoPort_right.write(createArduinoPacket_right(LOGISTICS, NONE, NONE));
-    } else if (pagestate==26) {
+    if (pagestate==16) {
+      send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
+      send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
+      rec = getRecommendation();
+    } else if (pagestate==20) {
+      send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
+      send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
+      rec = getRecommendation();
+    } else if (pagestate==23) {
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(TRANSPORT1, NONE, NONE));
-    } else if (pagestate==31) {
+    } else if (pagestate==28) {
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(DEMAND, NONE, NONE));
       demandMsg = demandMsg();
-    } else if (pagestate == 35) {
+    } else if (pagestate == 33) {
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(NONE, NONE, NONE));
     }
     pagestate = pagestate + 1;
-    if (pagestate==32) {
-      playMovie(Determining_demand_boxes_video);
-    }
     oppWaiting = 0;
     pagestate_change(pagestate);
+    if (pagestate==29) {
+      playMovie(Determining_demand_boxes_video);
+      pagestate = 30;
+      pagestate_change(pagestate);
+    }
   }
 }
 
