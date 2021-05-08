@@ -49,6 +49,11 @@ PImage Dia_5;
 PImage Dia_6;
 PImage Dia_7;
 PImage BoardMap;
+PImage Electronics;
+PImage GameComputerCasing;
+PImage TabletCasing;
+PImage AssembledTablet;
+PImage AssembledGameComputer;
 //videos
 String Board_setup_video_0;
 String Board_setup_video_1;
@@ -114,6 +119,7 @@ int[] mapX = new int[numBoards];
 int[] mapY = new int[numBoards];
 
 String rec[] = new String[8];
+boolean textFlag = false;
 
 //instruction packets will be sent to arduino as <ARROW_PHASE,SCORE_QUERY> for non sensor side, 1 is true, 0 is false for score query
 //instruction packets will be sent between raspberry Pis as <OPPONENT_WAITING, SCORE>, 1 is true, 0 is false
@@ -137,6 +143,10 @@ String WAITING = "1";
 
 //Stone count codes
 String STONE_QUERY = "1";
+
+//blinking cursor data
+int blinkTime = millis();
+boolean blinkOn = true;
 
 void setup()
 {
@@ -191,6 +201,11 @@ void setup()
   Dia_6 = loadImage("Data/Board_set_up_video_6_LF.png");
   Dia_7 = loadImage("Data/Board_set_up_video_7_LF.png");
   BoardMap = loadImage("Data/BoardMap.png");
+  Electronics = loadImage("Data/Electronics.png");
+  GameComputerCasing = loadImage("Data/GameComputerCasing");
+  TabletCasing = loadImage("Data/TabletCasing");
+  AssembledTablet = loadImage("Data/AssembledTablet");
+  AssembledGameComputer = loadImage("Data/AssembledGameComputer");
 
   //preload all movies
   Intro_video_AI_Co_op = sketchPath()+"/Data/Intro_video_AI_Co-op.mp4"; 
@@ -283,6 +298,17 @@ void draw()
     }
   } else if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35) {
     checkWaiting();
+  } else if (name.length() == 0 && pagestate == 1 || pagestate ==2 ) {
+    if (blinkOn) {
+      line(700, 380, 700, 420);
+    }
+    if (millis() - 500 > blinkTime) {
+      blinkTime = millis();
+      blinkOn = !blinkOn;
+    }
+  }
+  else if (textFlag == false && pagestate == 12 || pagestate == 16 || pagestate == 17 || pagestate == 20 || pagestate == 21 || pagestate ==23){
+    // put in refreshing circle here
   }
 }
 

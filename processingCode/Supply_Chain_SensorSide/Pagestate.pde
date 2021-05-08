@@ -224,20 +224,24 @@ public void pagestate_change(int pagestate) {
   }
   
   //display AI advice for each dia
-  if(pagestate == 16 || pagestate == 19 || pagestate ==25){
+  //edit this to fulfill tasks
+  if(pagestate == 12 || pagestate == 16 || pagestate == 17 || pagestate == 20 || pagestate == 21 || pagestate ==23){
     print(rec);
     String text="";
-    if(pagestate == 16){
+    if(pagestate == 12 || pagestate == 16){
       for(int i = 0; i < 5; i++){
         text = text + rec[i];
+        // insert pictures here next to text
       }
     }
-    else if(pagestate == 19){
+    else if(pagestate == 17 || pagestate ==20){
       text = text + rec[5];
       text = text + rec[6];
+      // insert pictures here next to text
     }
-    else if(pagestate == 25){
+    else if(pagestate == 21 || pagestate == 23){
       text = rec[7];
+      // insert pictures here next to text
     }
     textAlign(LEFT);
     textSize(20);

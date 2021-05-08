@@ -276,11 +276,12 @@ void mouseClicked() {
       saveHighScore();
     }
   }
-
-  //check if movie is playing, if so, stop movie
-  //else if(movPlaying){
-  //  movPlaying = false;
-  //}
+  
+  else if (pagestate >=12 && pagestate <= 34 && pagestate == 36){
+    if (mouseX >= 750 && mouseX <= 800 && mouseY >=0 && mouseY <= 50){
+      exit();
+    }
+  }
 
   //change to correct pagestate
   pagestate_change(pagestate);

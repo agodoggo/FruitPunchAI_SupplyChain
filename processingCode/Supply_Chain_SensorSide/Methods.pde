@@ -133,11 +133,11 @@ void serialEvent(Serial thisPort) {
 String demandMsg() {
   int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
   if (dice_roll == 0) {
-    return "Dutch Retail demands " + quantDemand() + " Game Computers";
+    return quantDemand() + "Game Computers \n Netherlands";
   } else if (dice_roll == 1) {
-    return "Dutch Retail demands " + quantDemand() + " Tablets";
+    return quantDemand() + "Tablets \n Netherlands";
   } else if (dice_roll == 2) {
-    return "German Retail demands " + quantDemand() + " Game Computers";
+    return quantDemand() + "Tablets \n Germany";
   }
   return "No country";
 }
@@ -234,6 +234,7 @@ String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft sho
     String[] txtDat = loadStrings(filePath);
     print("entered try 4\n");
     String[] recRaw = txtDat[0].split(" ");
+    textFlag = true;
     return parseRec(recRaw);
   }
   catch(Exception e) {
@@ -281,14 +282,14 @@ String[] conv_stoneCount_invPlaces() {
 
 String[] parseRec(String[] rec) {
   String[] ret = new String[rec.length];
-  ret[0] = "Order " + rec[1] + " phone components\n";
-  ret[1] = "Order " + rec[2] + " electronics components\n";
-  ret[2] = "Order " + rec[3] + " computer components\n";
-  ret[3] = "Order " + rec[4] + " finished phones\n";
-  ret[4] = "Order " + rec[5] + " finished computers\n";
-  ret[5] = "Produce " + rec[6] + " phones\n";
-  ret[6] = "Produce " + rec[7] + " computers\n";
-  ret[7] = "Move " + rec[8] + " phones from the Netherlands to Germany";
+  ret[0] = "Order " + rec[1] + " tablet casings\n";
+  ret[1] = "Order " + rec[2] + " electronics\n";
+  ret[2] = "Order " + rec[3] + " game computer casings\n";
+  ret[3] = "Order " + rec[4] + " assembled tablets\n";
+  ret[4] = "Order " + rec[5] + " assembled computers\n";
+  ret[5] = "Assemble " + rec[6] + " tablets\n";
+  ret[6] = "Assemble " + rec[7] + " game computers\n";
+  ret[7] = "Move " + rec[8] + " tablets from the Netherlands to Germany";
   return ret;
 }
 
