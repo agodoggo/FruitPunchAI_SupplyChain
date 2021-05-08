@@ -33,25 +33,29 @@ void mouseClicked() {
     pagestate = pagestate - 2;
   }
   else if ((pagestate == -1 || pagestate == -3 || pagestate == -5 || pagestate == -7 || pagestate == -9 || pagestate == -11 || pagestate == -13) && mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215){
+    println("if statement 1 entered");
     pagestate = 3;
     InstructionsSeen = true;
   }
-  else if (pagestate == -15 && (mouseX> 50 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) || (mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215)){
+  else if (pagestate == -15 && ((mouseX> 50 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) || (mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215))){
+    println("if statement 2 entered");
     pagestate = 3;
     InstructionsSeen = true;
   }
   
     //Board Setup buttons
    else if ((pagestate == -2 || pagestate == -4 || pagestate == -6 || pagestate == -8 || pagestate == -10 || pagestate == -12 || pagestate == -14) && mouseX> 50 && mouseX < 290 && mouseY > 1145 && mouseY < 1215){
-    pagestate = pagestate - 2;
+     pagestate = pagestate - 2;
   }
   else if ((pagestate == -2 || pagestate == -4 || pagestate == -6 || pagestate == -8 || pagestate == -10 || pagestate == -12 || pagestate == -14) && mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215){
     pagestate = 3;
+    println("if statement 3 entered");
     SetupSeen = true;
   }
-  else if (pagestate == -16 && (mouseX> 50 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) || (mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215)){
+  else if (pagestate == -16 && ((mouseX> 50 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) || (mouseX> 510 && mouseX < 745 && mouseY > 1145 && mouseY < 1215))){
     pagestate = 3;
     SetupSeen = true;
+    println("if statement 4 entered");
   }
   
   //dia 3

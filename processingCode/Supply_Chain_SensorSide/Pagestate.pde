@@ -3,7 +3,7 @@ public void pagestate_change(int pagestate) {
   //clears out old frame
   background(0);
   //change background picture
-  println("pagestate refreshed");
+  println("pagestate refreshed to " + pagestate);
   //instructions and setup
   if (pagestate == -1) {
     image(Instructions1, 0, 0);
