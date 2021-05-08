@@ -168,7 +168,7 @@ void setup()
   Dia34 = loadImage("Data/Dia34.PNG");
   Dia35 = loadImage("Data/Dia35.PNG");
   Dia36 = loadImage("Data/Dia36.PNG");
-  Instructions0 = loadImage("Data/Instructions0.PNG");
+  Instructions8 = loadImage("Data/Instructions8.PNG");
   Instructions1 = loadImage("Data/Instructions1_solo.PNG");
   Instructions2 = loadImage("Data/Instructions2.PNG");
   Instructions3 = loadImage("Data/Instructions3.PNG");
