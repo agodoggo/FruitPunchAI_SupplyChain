@@ -241,8 +241,8 @@ void draw()
     else if(millis() - startTimePressed < fiveMinutes){
       inActive = false;
     }
-  int percent = (int)(100*(double)usedMem()/totalMem());
-  println(percent + "%");
+  //int percent = (int)(100*(double)usedMem()/totalMem());
+  //println(percent + "%");
 }
 public long totalMem() {
   return Runtime.getRuntime().totalMemory();
