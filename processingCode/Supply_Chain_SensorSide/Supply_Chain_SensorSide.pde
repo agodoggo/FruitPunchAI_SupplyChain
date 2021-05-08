@@ -187,7 +187,7 @@ void setup()
   Dia34 = loadImage("Data/Dia34.PNG");
   Dia35 = loadImage("Data/Dia35.PNG");
   Dia36 = loadImage("Data/Dia36.PNG");
-  Instructions0 = loadImage("Data/Instructions0.PNG");
+  Instructions8 = loadImage("Data/Instructions8.PNG");
   Instructions1 = loadImage("Data/Instructions1_coop.PNG");
   Instructions2 = loadImage("Data/Instructions2.PNG");
   Instructions3 = loadImage("Data/Instructions3.PNG");
@@ -204,12 +204,12 @@ void setup()
   Setup7 = loadImage("Data/Setup7.PNG");
   Setup8 = loadImage("Data/Setup8.PNG");
   
-  BoardMap = loadImage("Data/BoardMap.png");
+  BoardMap = loadImage("Data/BoardMap.PNG");
   Electronics = loadImage("Data/Electronics.png");
-  GameComputerCasing = loadImage("Data/GameComputerCasing");
-  TabletCasing = loadImage("Data/TabletCasing");
-  AssembledTablet = loadImage("Data/AssembledTablet");
-  AssembledGameComputer = loadImage("Data/AssembledGameComputer");
+  GameComputerCasing = loadImage("Data/GameComputerCasing.png");
+  TabletCasing = loadImage("Data/TabletCasing.png");
+  AssembledTablet = loadImage("Data/AssembledTablet.png");
+  AssembledGameComputer = loadImage("Data/AssembledGameComputer.png");
   
   Determining_demand_boxes_video = sketchPath()+"/Data/Determining_demand_boxes_video.mp4";
 
