@@ -47,11 +47,7 @@ void mouseClicked(){
   
   //dia 3
   else if (InstructionsSeen && SetupSeen && pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) {
-    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
-    send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-    //send stone count, phase, and roundnumber to c++ program
-    rec = getRecommendation();
-    //get result and store in variable to be displayed on pagestate 16
+    myArduinoPort.write(createArduinoPacket(NONE,NONE));
     pagestate = 12;
   }
 
@@ -69,7 +65,7 @@ void mouseClicked(){
 
   //Dias 13-15
   //back button
-  else if ((pagestate == 13 || pagestate == 14 ||pagestate == 15 && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
+  else if ((pagestate == 13 || pagestate == 14 ||pagestate == 15) && mouseX>510 && mouseX < 750 && mouseY > 1120 && mouseY < 1240) {
       pagestate = 12;
   }
   else if ((pagestate == 13 || pagestate == 14) && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240){

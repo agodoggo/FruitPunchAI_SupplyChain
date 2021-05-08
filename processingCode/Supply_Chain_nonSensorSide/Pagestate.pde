@@ -104,8 +104,6 @@ public void pagestate_change(int pagestate) {
     image(Dia35, 0, 0);
   } else if (pagestate == 36) {
     image(Dia36, 0, 0);
-  } else if (pagestate == 37) {
-    image(Dia37, 0, 0);
   }
 
 
