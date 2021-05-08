@@ -32,7 +32,7 @@ PImage Dia33;
 PImage Dia34;
 PImage Dia35;
 PImage Dia36;
-PImage Instructions0;
+PImage Instructions8;
 PImage Instructions1;
 PImage Instructions2;
 PImage Instructions3;

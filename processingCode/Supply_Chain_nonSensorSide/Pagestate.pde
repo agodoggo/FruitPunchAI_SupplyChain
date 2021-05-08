@@ -5,35 +5,35 @@ public void pagestate_change(int pagestate) {
   println("pagestate refreshed");
   //instructions and setup
   if (pagestate == -1) {
-    image(Instructions0, 0, 0);
+    image(Instructions1, 0, 0);
   } else if (pagestate == -2) {
     image(Setup1, 0, 0);
   } else if (pagestate == -3) {
-    image(Instructions1, 0, 0);
+    image(Instructions2, 0, 0);
   } else if (pagestate == -4) {
     image(Setup2, 0, 0);
   } else if (pagestate == -5) {
-    image(Instructions2, 0, 0);
+    image(Instructions3, 0, 0);
   } else if (pagestate == -6) {
     image(Setup3, 0, 0);
   } else if (pagestate == -7) {
-    image(Instructions3, 0, 0);
+    image(Instructions4, 0, 0);
   } else if (pagestate == -8) {
     image(Setup4, 0, 0);
   } else if (pagestate == -9) {
-    image(Instructions4, 0, 0);
+    image(Instructions5, 0, 0);
   } else if (pagestate == -10) {
     image(Setup5, 0, 0);
   } else if (pagestate == -11) {
-    image(Instructions5, 0, 0);
+    image(Instructions6, 0, 0);
   } else if (pagestate == -12) {
     image(Setup6, 0, 0);
   } else if (pagestate == -13) {
-    image(Instructions6, 0, 0);
+    image(Instructions7, 0, 0);
   } else if (pagestate == -14) {
     image(Setup7, 0, 0);
   } else if (pagestate == -15) {
-    image(Instructions7, 0, 0);
+    image(Instructions8, 0, 0);
   } else if (pagestate == -16) {
     image(Setup8, 0, 0);
   } else if (pagestate == 0) {
