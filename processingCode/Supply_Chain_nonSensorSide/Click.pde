@@ -4,6 +4,8 @@ void mouseClicked(){
   if (pagestate == 0 && mouseX>70 && mouseX <730 && mouseY >310 && mouseY < 460) {
     pagestate = 1;
     newGameSetup();
+    InstructionsSeen = false;
+    SetupSeen = false;
   }
   
   
