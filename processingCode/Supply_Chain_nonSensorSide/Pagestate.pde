@@ -104,8 +104,6 @@ public void pagestate_change(int pagestate) {
     image(Dia35, 0, 0);
   } else if (pagestate == 36) {
     image(Dia36, 0, 0);
-  } else if (pagestate == 37) {
-    image(Dia37, 0, 0);
   }
 
 
@@ -118,7 +116,7 @@ public void pagestate_change(int pagestate) {
   }
 
   //display score on score page
-  if (pagestate == 36) {
+  if (pagestate == 34) {
     textAlign(LEFT);
     textSize(50);
     fill(0);
@@ -142,7 +140,7 @@ public void pagestate_change(int pagestate) {
     }
   }
   //display name and score for each phase in phase color
-  if (pagestate>=12 && pagestate <= 36) {
+  if (pagestate>=12 && pagestate <= 36 && pagestate != 35) {
     //supply phase color
     if (pagestate>= 12 && pagestate <= 17) {    
       fill(SUPPLY_col.r, SUPPLY_col.g, SUPPLY_col.b);
@@ -160,7 +158,7 @@ public void pagestate_change(int pagestate) {
       fill(TRANSPORT_col.r, TRANSPORT_col.g, TRANSPORT_col.b);
     }
     //demand phase color
-    else if (pagestate>= 32 && pagestate <= 37) {
+    else if (pagestate>= 32 && pagestate <= 37 && pagestate != 35) {
       fill(DEMAND_col.r, DEMAND_col.g, DEMAND_col.b);
     }
     textAlign(CENTER);
