@@ -90,14 +90,19 @@ public void pagestate_change(int pagestate) {
     image(Dia30, 0, 0);
     textAlign(CENTER);
     fill(255, 255, 255);
-    textSize(30);
-    text(demandMsg, 370, 395); //display demand
+    textSize(40);
+    text(demandMsg, 370, 430); //display demand
   } else if (pagestate == 31) {
     image(Dia31, 0, 0);
   } else if (pagestate == 32) {
     image(Dia32, 0, 0);
   } else if (pagestate == 33) {
     image(Dia33, 0, 0);
+    textAlign(CENTER);
+    fill(255, 255, 255);
+    textSize(40);
+    print(demandMsg);
+    text(demandMsg, 370, 430); //display demand
   } else if (pagestate == 34) {
     image(Dia34, 0, 0);
   } else if (pagestate == 35) {
@@ -136,29 +141,29 @@ public void pagestate_change(int pagestate) {
       textAlign(CENTER);
       fill(0);
       textSize(30);
-      text(name, 400, 770);
+      text(name, 400, 780);
     }
   }
   //display name and score for each phase in phase color
   if (pagestate>=12 && pagestate <= 36 && pagestate != 35) {
     //supply phase color
-    if (pagestate>= 12 && pagestate <= 17) {    
+    if (pagestate>= 12 && pagestate <= 16) {    
       fill(SUPPLY_col.r, SUPPLY_col.g, SUPPLY_col.b);
     }
     //assembly phase color
-    else if (pagestate>= 18 && pagestate <= 22) {
+    else if (pagestate>= 17 && pagestate <= 20) {
       fill(ASSEMBLY_col.r, ASSEMBLY_col.g, ASSEMBLY_col.b);
     }
     //logistics phase color
-    else if (pagestate>= 23 && pagestate <= 26) {
+    else if (pagestate>= 21 && pagestate <= 23) {
       fill(LOGISTICS_col.r, LOGISTICS_col.g, LOGISTICS_col.b);
     }
     //transport phase color
-    else if (pagestate>= 27 && pagestate <= 31) {
+    else if (pagestate>= 24 && pagestate <= 28) {
       fill(TRANSPORT_col.r, TRANSPORT_col.g, TRANSPORT_col.b);
     }
     //demand phase color
-    else if (pagestate>= 32 && pagestate <= 37 && pagestate != 35) {
+    else if (pagestate>= 29 && pagestate <= 36 && pagestate != 35) {
       fill(DEMAND_col.r, DEMAND_col.g, DEMAND_col.b);
     }
     textAlign(CENTER);

@@ -1,4 +1,5 @@
 //Serial receiving from Raspberry Pi
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting(){
   if (oppWaiting == 1){ //checks if RPi Instruction for opponent waiting is true
@@ -13,7 +14,6 @@ public void checkWaiting(){
     }
     else if(pagestate==28){
       myArduinoPort.write(createArduinoPacket(DEMAND,NONE));
-       demandMsg = demandMsg();
     }
     else if(pagestate == 33){
        myArduinoPort.write(createArduinoPacket(NONE,NONE));
@@ -93,13 +93,22 @@ void serialEvent(Serial thisPort){
     ArduinoNewData = true;
   }
   if(thisPort == myRPiPort){
-    String[] val = new String[2];
+    String[] val = new String[3];
     val = split(new String(tmp),",");
     print("Decoded message from Raspberry Pi: " + new String(tmp) +"\n");
     oppWaiting = Integer.parseInt(val[0]);
     print("oppWaiting: " + str(oppWaiting) +"\n");
     oppScore = val[1];
     print("oppScore: " + oppScore +"\n");
+    byte[] bytes= val[2].getBytes();
+    int lastInd = 34;
+    for(int i = 0; i < bytes.length; i++){
+      if (bytes[i] == 'y' || bytes[i] == 's'){
+        lastInd = i+1;
+      }
+    }
+    byte[] bytes_kept = Arrays.copyOfRange(bytes,0,lastInd);
+    demandMsg = new String(bytes_kept, StandardCharsets.UTF_8);
     RaspberryPiNewData = true;
   }
 }
@@ -107,11 +116,11 @@ void serialEvent(Serial thisPort){
 String demandMsg() {
   int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
   if (dice_roll == 0) {
-    return quantDemand() + "Game Computers\nNetherlands";
+    return quantDemand() + " Game Computers\nThe Netherlands";
   } else if (dice_roll == 1) {
-    return quantDemand() + "Tablets\nNetherlands";
+    return quantDemand() + " Tablets\nThe Netherlands";
   } else if (dice_roll == 2) {
-    return quantDemand() + "Tablets\nGermany";
+    return quantDemand() + " Tablets\nGermany";
   }
   return "No country";
 }

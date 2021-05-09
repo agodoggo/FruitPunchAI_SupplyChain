@@ -135,7 +135,8 @@ boolean mousePress = false;
 void setup()
 { 
   //set screen size, this is the pixel ratio of the build in screens
-  size (800, 1280);
+  fullScreen();
+  //size (800, 1280);
 
   //preload all the images in the program, this should make the entire programm fast by not loading a picture per pagestate
    Dia0 = loadImage("Data/Dia0.PNG");
@@ -215,17 +216,21 @@ void setup()
   pagestate_change(pagestate);
   initHighScore();
   displayHighScores();
+  blinkTime = millis();
+  blinkOn = true;
 }
 
 void draw()
 {
   //loop waiting if waiting
-  if (pagestate == 17 || pagestate == 22 || pagestate == 26 || pagestate == 31 || pagestate == 35) {
+  if (pagestate == 16 || pagestate == 20 || pagestate == 23 || pagestate == 28 || pagestate == 33) {
     checkWaiting();
   }
-  else if (name.length() == 0 && pagestate == 1 || pagestate ==2 ){
-    if (blinkOn){
-      line(700, 380, 700, 420);
+  else if (name.length() == 0 && (pagestate == 1 || pagestate == 2)) {
+    pagestate_change(pagestate);
+    fill(0, 0, 0);
+    if (blinkOn) {
+      line(400, 745, 400, 790);
     }
     if (millis() - 500 > blinkTime) {
       blinkTime = millis();

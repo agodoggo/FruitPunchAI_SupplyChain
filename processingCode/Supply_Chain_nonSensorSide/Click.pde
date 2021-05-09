@@ -226,9 +226,9 @@ void mouseClicked(){
     }
   }
   
-  else if (pagestate >=12 && pagestate <= 34 && pagestate == 36){
+  else if ((pagestate >=12 && pagestate <= 34) || pagestate == 36){
     if (mouseX >= 750 && mouseX <= 800 && mouseY >=0 && mouseY <= 50){
-      exit();
+      pagestate = 35;
     }
   }
   
