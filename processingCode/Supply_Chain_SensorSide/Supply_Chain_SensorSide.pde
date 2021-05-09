@@ -143,7 +143,7 @@ String WAITING = "1";
 String STONE_QUERY = "1";
 
 //blinking cursor data
-int blinkTime = millis();
+int blinkTime;
 boolean blinkOn = true;
 
 //float timeout
@@ -154,7 +154,8 @@ int lastPageState = 0;
 void setup()
 {
   //set screen size, this is the pixel ratio of the build in screens
-  size (800, 1280);
+  fullScreen();
+  //size (800, 1280);
 
   //preload all the images in the program, this should make the entire programm fast by not loading a picture per pagestate
   Dia0 = loadImage("Data/Dia0.PNG");
@@ -203,50 +204,50 @@ void setup()
   Setup6 = loadImage("Data/Setup6.PNG");
   Setup7 = loadImage("Data/Setup7.PNG");
   Setup8 = loadImage("Data/Setup8.PNG");
-  
+
   BoardMap = loadImage("Data/BoardMap.PNG");
   Electronics = loadImage("Data/Electronics.png");
   GameComputerCasing = loadImage("Data/GameComputerCasing.png");
   TabletCasing = loadImage("Data/TabletCasing.png");
   AssembledTablet = loadImage("Data/AssembledTablet.png");
   AssembledGameComputer = loadImage("Data/AssembledGameComputer.png");
-  
+
   Determining_demand_boxes_video = sketchPath()+"/Data/Determining_demand_boxes_video.mp4";
 
-  mapX[0] = 280;
-  mapY[0] = 200;
-  mapX[1] = 122;
-  mapY[1] = 395;
-  mapX[2] = 290;
-  mapY[2] = 595;
-  mapX[3] = 584;
-  mapY[3] = 153;
-  mapX[4] = 584;
-  mapY[4] = 646;
-  mapX[5] = 420;
-  mapY[5] = 300;
-  mapX[6] = 424;
-  mapY[6] = 495; 
-  mapX[7] = 860;
-  mapY[7] = 304;
-  mapX[8] = 290;
-  mapY[8] = 395;
-  mapX[9] = 420;
-  mapY[9] = 380;
-  mapX[10] = 420;
-  mapY[10] = 174;
-  mapX[11] = 420;
-  mapY[11] = 578;
-  mapX[12] = 580;
-  mapY[12] = 300;
-  mapX[13] = 580;
-  mapY[13] = 500;
-  mapX[14] = 855;
-  mapY[14] = 142;
-  mapX[15] = 719;
-  mapY[15] = 285;
-  mapX[16] = 720;
-  mapY[16] = 480;
+  mapX[0] = 195;
+  mapY[0] = 165;
+  mapX[1] = 70;
+  mapY[1] = 320;
+  mapX[2] = 195;
+  mapY[2] = 465;
+  mapX[3] = 410;
+  mapY[3] = 145;
+  mapX[4] = 415;
+  mapY[4] = 505;
+  mapX[5] = 290;
+  mapY[5] = 245;
+  mapX[6] = 295;
+  mapY[6] = 390; 
+  mapX[7] = 615;
+  mapY[7] = 245;
+  mapX[8] = 200;
+  mapY[8] = 310;
+  mapX[9] = 305;
+  mapY[9] = 295;
+  mapX[10] = 300;
+  mapY[10] = 150;
+  mapX[11] = 305;
+  mapY[11] = 445;
+  mapX[12] = 420;
+  mapY[12] = 230;
+  mapX[13] = 420;
+  mapY[13] = 380;
+  mapX[14] = 630;
+  mapY[14] = 120;
+  mapX[15] = 530;
+  mapY[15] = 225;
+  mapX[16] = 530;
+  mapY[16] = 370;
   //set aesthetics
   PFont erasDemi_font;
   erasDemi_font = createFont("Data/ERASDEMI.TTF", 20.0);
@@ -277,6 +278,8 @@ void setup()
   pagestate_change(pagestate);
   initHighScore();
   displayHighScores();
+  blinkTime = millis();
+  blinkOn = true;
 }
 
 void draw()
@@ -292,9 +295,11 @@ void draw()
     }
   } else if (pagestate == 16 || pagestate == 20 || pagestate == 23 || pagestate == 28 || pagestate == 33) {
     checkWaiting();
-  } else if (name.length() == 0 && pagestate == 1 || pagestate == 2) {
+  } else if (name.length() == 0 && (pagestate == 1 || pagestate == 2)) {
+    pagestate_change(pagestate);
+    fill(0, 0, 0);
     if (blinkOn) {
-      line(700, 380, 700, 420);
+      line(400, 745, 400, 790);
     }
     if (millis() - 500 > blinkTime) {
       blinkTime = millis();
@@ -302,16 +307,14 @@ void draw()
     }
   } else if (textFlag == false && pagestate == 12 || pagestate == 16 || pagestate == 17 || pagestate == 20 || pagestate == 21 || pagestate ==23) {
     // put in refreshing circle here
+  } else if (!inActive && millis() - startTimePressed > fiveMinutes) {
+    inActive = true;
+    lastPageState = pagestate;
+    pagestate = 35;
+    pagestate_change(pagestate);
+  } else if (millis() - startTimePressed < fiveMinutes) {
+    inActive = false;
   }
-    else if(!inActive && millis() - startTimePressed > fiveMinutes){
-      inActive = true;
-      lastPageState = pagestate;
-      pagestate = 35;
-      pagestate_change(pagestate);
-    }
-    else if(millis() - startTimePressed < fiveMinutes){
-      inActive = false;
-    }
 }
 
 //}
