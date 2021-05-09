@@ -52,7 +52,6 @@ public void pagestate_change(int pagestate) {
     }
   } else if (pagestate == 12) {
     image(Dia12, 0, 0);
-    println("12th Dia shown");
   } else if (pagestate == 13) {
     image(Dia13, 0, 0);
   } else if (pagestate == 14) {
@@ -91,14 +90,18 @@ public void pagestate_change(int pagestate) {
     image(Dia30, 0, 0);
     textAlign(CENTER);
     fill(255, 255, 255);
-    textSize(30);
-    text(demandMsg, 370, 395); //display demand
+    textSize(40);
+    text(demandMsg, 370, 430); //display demand
   } else if (pagestate == 31) {
     image(Dia31, 0, 0);
   } else if (pagestate == 32) {
     image(Dia32, 0, 0);
   } else if (pagestate == 33) {
     image(Dia33, 0, 0);
+    textAlign(CENTER);
+    fill(255, 255, 255);
+    textSize(40);
+    text(demandMsg, 370, 430); //display demand
   } else if (pagestate == 34) {
     image(Dia34, 0, 0);
   } else if (pagestate == 35) {
@@ -137,29 +140,29 @@ public void pagestate_change(int pagestate) {
       textAlign(CENTER);
       fill(0);
       textSize(30);
-      text(name, 400, 770);
+      text(name, 400, 780);
     }
   }
   //display name and score for each phase in phase color
   if (pagestate>=12 && pagestate <= 36 && pagestate != 35) {
     //supply phase color
-    if (pagestate>= 12 && pagestate <= 17) {    
+    if (pagestate>= 12 && pagestate <= 16) {    
       fill(SUPPLY_col.r, SUPPLY_col.g, SUPPLY_col.b);
     }
     //assembly phase color
-    else if (pagestate>= 18 && pagestate <= 22) {
+    else if (pagestate>= 17 && pagestate <= 20) {
       fill(ASSEMBLY_col.r, ASSEMBLY_col.g, ASSEMBLY_col.b);
     }
     //logistics phase color
-    else if (pagestate>= 23 && pagestate <= 26) {
+    else if (pagestate>= 21 && pagestate <= 23) {
       fill(LOGISTICS_col.r, LOGISTICS_col.g, LOGISTICS_col.b);
     }
     //transport phase color
-    else if (pagestate>= 27 && pagestate <= 31) {
+    else if (pagestate>= 24 && pagestate <= 28) {
       fill(TRANSPORT_col.r, TRANSPORT_col.g, TRANSPORT_col.b);
     }
     //demand phase color
-    else if (pagestate>= 32 && pagestate <= 37 && pagestate != 35) {
+    else if (pagestate>= 29 && pagestate <= 36 && pagestate != 35) {
       fill(DEMAND_col.r, DEMAND_col.g, DEMAND_col.b);
     }
     textAlign(CENTER);
@@ -175,22 +178,40 @@ public void pagestate_change(int pagestate) {
   if (pagestate == 12 || pagestate == 16 || pagestate == 17 || pagestate == 20 || pagestate == 21 || pagestate ==23) {
     print(rec);
     String text="";
-    if (pagestate == 12 || pagestate == 16) {
-      for (int i = 0; i < 5; i++) {
-        text = text + rec[i];
-        // insert pictures here next to text
-      }
+    textSize(40);
+    fill(0,0,0);
+    if (pagestate == 12 || pagestate == 16) { //images are 210 and 100
+        textSize(37);
+        text("Produce", 230, 764);
+        textSize(40);
+        text(rec[0] + "x ",20,855);
+        image(TabletCasing,80,780);
+        text(rec[1] + "x ",270,855);
+        image(Electronics,330,780);
+        text(rec[2] + "x ",520,855);
+        image(GameComputerCasing,580,780);
+        text(rec[3] + "x ",20,1020);
+        image(AssembledTablet,80,940);
+        text(rec[4] + "x ",270,1020);
+        image(AssembledGameComputer,330,940);
     } else if (pagestate == 17 || pagestate ==20) {
-      text = text + rec[5];
-      text = text + rec[6];
+        textSize(37);
+        text("Assemble", 230, 764);
+        textSize(40);
+        text(rec[5] + "x ",20,1020);
+        image(AssembledTablet,80,940);
+        text(rec[6] + "x ",270,1020);
+        image(AssembledGameComputer,330,940);
       // insert pictures here next to text
     } else if (pagestate == 21 || pagestate == 23) {
-      text = rec[7];
+        textSize(37);
+        text("Move", 230, 850);
+        textSize(40);
+        text(rec[7] + "x ",20,960);
+        image(AssembledTablet,80,880);
       // insert pictures here next to text
     }
     textAlign(LEFT);
-    textSize(20);
-    fill(255, 255, 255);
     text(text, 80, 850); //display name
   }
 }

@@ -62,20 +62,11 @@ void mouseClicked() {
   
   //dia 3
   else if (InstructionsSeen && SetupSeen && pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) {
-    long start =  millis();
-    pagestate = 12;
-    pagestate_change(pagestate);
-    textSize(30);
-    fill(0,0,0);
-    text("AI Advice computing \nwait time of ~7 seconds",40,800);
-    //delay(7000);
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-    //send stone count, phase, and roundnumber to c++ program
     rec = getRecommendation();
-    //get result and store in variable to be displayed on pagestate 16
-    long end = millis()-start;
-    print("ended in " + end + " ms");
+    pagestate = 12;
+    pagestate_change(pagestate);
   }
 
   //SUPPLY PHASE
@@ -83,7 +74,7 @@ void mouseClicked() {
   //next button
   else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
     pagestate = 16;
-    myRPiPort.write(createRPiPacket(WAITING, NONE));
+    myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }  
   //info button on dia 12
   else if (pagestate == 12 && mouseX>650 && mouseX < 750 && mouseY > 1130 && mouseY < 1230) {
@@ -104,7 +95,7 @@ void mouseClicked() {
   //next button to Dia 20
   else if (pagestate == 17 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     pagestate = 20;
-    myRPiPort.write(createRPiPacket(WAITING, NONE));
+    myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }
   //info button
   else if (pagestate == 17 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -131,7 +122,7 @@ void mouseClicked() {
   //next button -> Dia 23
   else if (pagestate == 21 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     pagestate = 23;
-    myRPiPort.write(createRPiPacket(WAITING, NONE));
+    myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }
 
   //Dia 21
@@ -169,7 +160,8 @@ void mouseClicked() {
   //next button -> 32 (change to 31 when waiting for opponent function written)
   else if (pagestate == 26 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     pagestate = 28;
-    myRPiPort.write(createRPiPacket(WAITING, NONE));
+    demandMsg = demandMsg();
+    myRPiPort.write(createRPiPacket(WAITING, NONE,demandMsg));
   }
   //info button
   else if (pagestate == 26 && mouseX>650 && mouseX <750 && mouseY >1130 && mouseY < 1230) {
@@ -187,7 +179,7 @@ void mouseClicked() {
   else if (pagestate == 30 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     myArduinoPort_left.write("<"+NONE+","+NONE+">");
     send_waitForArduinoData("right", DEMAND, SCORE_QUERY, NONE);
-    myRPiPort.write(createRPiPacket(WAITING, myScore)); //send score and waiting status together
+    myRPiPort.write(createRPiPacket(WAITING, myScore, demandMsg)); //send score and waiting status together
     pagestate = 33;
   }
   //info button
@@ -213,9 +205,11 @@ void mouseClicked() {
   //go back to beginning
   else if (pagestate == 34 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     if (roundNo <= roundLim) {
+      send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
+      send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
+      rec = getRecommendation();
       pagestate = 12;
       roundNo = roundNo + 1;
-      myArduinoPort_right.write(createArduinoPacket_right(NONE, NONE, NONE));
     } else {
       //display game over and return to homescreen
       pagestate = 36;
@@ -239,14 +233,16 @@ void mouseClicked() {
     }
   }
   
-  else if (pagestate >=12 && pagestate <= 34 && pagestate == 36){
-    if (mouseX >= 750 && mouseX <= 800 && mouseY >=0 && mouseY <= 50){
-      exit();
+  else if ((pagestate >=12 && pagestate <= 34) || pagestate == 36){
+    if (mouseX > 750 && mouseX < 800 && mouseY > 0 && mouseY < 50){
+      pagestate = 35;
     }
   }
 
   //change to correct pagestate
   pagestate_change(pagestate);
+  
+  println("mouseX: " + mouseX + "   mouseY: " + mouseY);
 }
 void mousePressed() {
   mousePress = true;

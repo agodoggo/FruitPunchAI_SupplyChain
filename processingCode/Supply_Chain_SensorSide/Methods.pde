@@ -16,7 +16,6 @@ public void checkWaiting() {
     } else if (pagestate==28) {
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(DEMAND, NONE, NONE));
-      demandMsg = demandMsg();
     } else if (pagestate == 33) {
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(NONE, NONE, NONE));
@@ -137,11 +136,11 @@ void serialEvent(Serial thisPort) {
 String demandMsg() {
   int dice_roll = int(ThreadLocalRandom.current().nextInt(0, 3));
   if (dice_roll == 0) {
-    return quantDemand() + "Game Computers \n Netherlands";
+    return quantDemand() + " Game Computers\nThe Netherlands";
   } else if (dice_roll == 1) {
-    return quantDemand() + "Tablets \n Netherlands";
+    return quantDemand() + " Tablets\nThe Netherlands";
   } else if (dice_roll == 2) {
-    return quantDemand() + "Tablets \n Germany";
+    return quantDemand() + " Tablets\nGermany";
   }
   return "No country";
 }
@@ -158,9 +157,9 @@ String createArduinoPacket_right(String arrow_phase, String score_query, String 
   print("New message to right Arduino " + " : " + "<"+arrow_phase+","+score_query+","+stone_count_query+">"+"\n");
   return "<"+arrow_phase+","+score_query+","+stone_count_query+">";
 }
-String createRPiPacket(String opponent_waiting, String score_query) {
-  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+">"+"\n");
-  return "<"+opponent_waiting+","+score_query+">";
+String createRPiPacket(String opponent_waiting, String score_query, String DemandMessageTmp) {
+  print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+","+DemandMessageTmp+">"+"\n");
+  return "<"+opponent_waiting+","+score_query+","+DemandMessageTmp+">";
 }
 String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft should be 10 in the first round
   //call program
@@ -183,13 +182,6 @@ String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft sho
     args[i] = inv_places[i-5];
   }
   try { 
-    //for (int j = 0; j < args.length; j++) {
-    //  if (args[j] == null) {
-    //    print(str(j) + " is NULL\n");
-    //  } else {
-    //    print(str(j) + ": " + args[j] + "\n");
-    //  }
-    //}
     Process p = exec(args);  
     p.waitFor();
     String[] txtDat = loadStrings(filePath);
@@ -243,31 +235,24 @@ String[] conv_stoneCount_invPlaces() {
 
 String[] parseRec(String[] rec) {
   String[] ret = new String[rec.length];
-  ret[0] = "Order " + rec[1] + " tablet casings\n";
-  ret[1] = "Order " + rec[2] + " electronics\n";
-  ret[2] = "Order " + rec[3] + " game computer casings\n";
-  ret[3] = "Order " + rec[4] + " assembled tablets\n";
-  ret[4] = "Order " + rec[5] + " assembled computers\n";
-  ret[5] = "Assemble " + rec[6] + " tablets\n";
-  ret[6] = "Assemble " + rec[7] + " game computers\n";
-  ret[7] = "Move " + rec[8] + " tablets from the Netherlands to Germany";
+  //ret[0] = "Order " + rec[1] + " tablet casings\n";
+  //ret[1] = "Order " + rec[2] + " electronics\n";
+  //ret[2] = "Order " + rec[3] + " game computer casings\n";
+  //ret[3] = "Order " + rec[4] + " assembled tablets\n";
+  //ret[4] = "Order " + rec[5] + " assembled computers\n";
+  //ret[5] = "Assemble " + rec[6] + " tablets\n";
+  //ret[6] = "Assemble " + rec[7] + " game computers\n";
+  //ret[7] = "Move " + rec[8] + " tablets from the Netherlands to Germany";
+  ret[0] = rec[1];
+  ret[1] = rec[2];
+  ret[2] = rec[3];
+  ret[3] = rec[4];
+  ret[4] = rec[5];
+  ret[5] = rec[6];
+  ret[6] = rec[7];
+  ret[7] = rec[8];
   return ret;
 }
-
-//boolean playMovie(Movie mov){
-//  println("movie time " + mov.time());
-//  println("movie duration " + mov.duration());
-//  //println("difference of " + (mov.duration()-mov.time()) + " is " + str((mov.duration()-mov.time()) < 0.1)); 
-//  if((mov.duration()-mov.time()) > 0.1){
-//      //println("Movie image refreshed");
-//      image(mov,0,0);
-//      return true;
-//   }
-//   else{
-//     pagestate_change(pagestate);
-//     return false;
-//   }
-//}
 
 void playMovie(String filePath) {
   String[] args = new String[2];
@@ -280,4 +265,4 @@ void playMovie(String filePath) {
   }
   catch (InterruptedException e) {
   }
-} 
+}
