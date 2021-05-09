@@ -62,15 +62,20 @@ void mouseClicked() {
   
   //dia 3
   else if (InstructionsSeen && SetupSeen && pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) {
+    long start =  millis();
     pagestate = 12;
     pagestate_change(pagestate);
     textSize(30);
-    text("AI Advice computing \nwait time of ~7 seconds",40,800)
+    fill(0,0,0);
+    text("AI Advice computing \nwait time of ~7 seconds",40,800);
+    //delay(7000);
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
     //send stone count, phase, and roundnumber to c++ program
     rec = getRecommendation();
     //get result and store in variable to be displayed on pagestate 16
+    long end = millis()-start;
+    print("ended in " + end + " ms");
   }
 
   //SUPPLY PHASE
