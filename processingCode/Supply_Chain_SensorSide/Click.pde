@@ -62,11 +62,15 @@ void mouseClicked() {
   
   //dia 3
   else if (InstructionsSeen && SetupSeen && pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) {
+    pagestate=12;
+    pagestate_change(pagestate);
+    textSize(20);
+    fill(0);
+    text("AI advice computing\nPlease wait ~7 seconds",40,945);
+    redraw();
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
     rec = getRecommendation();
-    pagestate = 12;
-    pagestate_change(pagestate);
   }
 
   //SUPPLY PHASE
@@ -205,11 +209,16 @@ void mouseClicked() {
   //go back to beginning
   else if (pagestate == 34 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
     if (roundNo <= roundLim) {
+      roundNo = roundNo + 1;
+      pagestate=12;
+      pagestate_change(pagestate);
+      textSize(20);
+      fill(0);
+      text("AI advice computing\nPlease wait ~7 seconds",40,945);
+      redraw();
       send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
       send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
       rec = getRecommendation();
-      pagestate = 12;
-      roundNo = roundNo + 1;
     } else {
       //display game over and return to homescreen
       pagestate = 36;

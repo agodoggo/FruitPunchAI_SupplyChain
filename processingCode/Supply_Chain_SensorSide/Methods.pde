@@ -3,10 +3,22 @@ import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting() {
   if (oppWaiting == 1) { //checks if RPi Instruction for opponent waiting is true
     if (pagestate==16) {
+      pagestate=pagestate+1;
+      pagestate_change(pagestate);
+      textSize(20);
+      fill(0);
+      text("AI advice computing\nPlease wait ~7 seconds",40,945);
+      redraw();
       send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
       send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
       rec = getRecommendation();
     } else if (pagestate==20) {
+      pagestate=pagestate+1;
+      pagestate_change(pagestate);
+      textSize(20);
+      fill(0);
+      text("AI advice computing\nPlease wait ~7 seconds",40,945);
+      redraw();
       send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
       send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
       rec = getRecommendation();
