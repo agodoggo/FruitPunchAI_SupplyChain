@@ -151,6 +151,14 @@ long fiveMinutes = 1000 * 60 * 5; //1000 ms * 60 s * 5 min
 boolean inActive = false;
 int lastPageState = 0;
 
+//thread variable
+int threadFlag = 0;
+int INACTIVE = 0;
+int RUNNING = 1;
+int DONE = 2;
+boolean displayAdvice = true;
+
+
 void setup()
 {
   //set screen size, this is the pixel ratio of the build in screens
@@ -293,9 +301,11 @@ void draw()
     for (int i = 0; i < inv_places.length; i++) {
       text(inv_places[i], mapX[i], mapY[i]);
     }
-  } else if (pagestate == 16 || pagestate == 20 || pagestate == 23 || pagestate == 28 || pagestate == 33) {
+  }
+  if (pagestate == 16 || pagestate == 20 || pagestate == 23 || pagestate == 28 || pagestate == 33) {
     checkWaiting();
-  } else if (name.length() == 0 && (pagestate == 1 || pagestate == 2)) {
+  } 
+  if (name.length() == 0 && (pagestate == 1 || pagestate == 2)) {
     pagestate_change(pagestate);
     fill(0, 0, 0);
     if (blinkOn) {
@@ -305,15 +315,19 @@ void draw()
       blinkTime = millis();
       blinkOn = !blinkOn;
     }
-  } else if (textFlag == false && pagestate == 12 || pagestate == 16 || pagestate == 17 || pagestate == 20 || pagestate == 21 || pagestate ==23) {
-    // put in refreshing circle here
-  } else if (!inActive && millis() - startTimePressed > fiveMinutes) {
+  } 
+  if (!inActive && millis() - startTimePressed > fiveMinutes) {
     inActive = true;
     lastPageState = pagestate;
     pagestate = 35;
     pagestate_change(pagestate);
   } else if (millis() - startTimePressed < fiveMinutes) {
     inActive = false;
+  }
+  if (displayAdvice && threadFlag == DONE) {
+    println("displaying advice");
+    displayAdvice = false;
+    pagestate_change(pagestate);
   }
 }
 

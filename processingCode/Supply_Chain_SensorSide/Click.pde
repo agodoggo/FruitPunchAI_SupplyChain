@@ -63,20 +63,15 @@ void mouseClicked() {
   //dia 3
   else if (InstructionsSeen && SetupSeen && pagestate == 3 && mouseX>55 && mouseX < 290 && mouseY > 1145 && mouseY < 1215) {
     pagestate=12;
-    pagestate_change(pagestate);
-    textSize(20);
-    fill(0);
-    text("AI advice computing\nPlease wait ~7 seconds",40,945);
-    redraw();
     send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
     send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-    rec = getRecommendation();
+    thread("getRecommendation");
   }
 
   //SUPPLY PHASE
   //Dia 12
   //next button
-  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240) {
+  else if (pagestate == 12 && mouseX>50 && mouseX < 300 && mouseY > 1120 && mouseY < 1240 && threadFlag == DONE) {
     pagestate = 16;
     myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }  
@@ -97,7 +92,7 @@ void mouseClicked() {
   //ASSEMBLY
   //Dia 17
   //next button to Dia 20
-  else if (pagestate == 17 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
+  else if (pagestate == 17 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240 && threadFlag == DONE) {
     pagestate = 20;
     myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }
@@ -124,7 +119,7 @@ void mouseClicked() {
   //LOGISTICS  
   //Dia 21
   //next button -> Dia 23
-  else if (pagestate == 21 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240) {
+  else if (pagestate == 21 && mouseX>55 && mouseX <290 && mouseY >1120 && mouseY < 1240 && threadFlag == DONE) {
     pagestate = 23;
     myRPiPort.write(createRPiPacket(WAITING, NONE, NONE));
   }
@@ -211,14 +206,9 @@ void mouseClicked() {
     if (roundNo <= roundLim) {
       roundNo = roundNo + 1;
       pagestate=12;
-      pagestate_change(pagestate);
-      textSize(20);
-      fill(0);
-      text("AI advice computing\nPlease wait ~7 seconds",40,945);
-      redraw();
       send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
       send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-      rec = getRecommendation();
+      thread("getRecommendation");
     } else {
       //display game over and return to homescreen
       pagestate = 36;

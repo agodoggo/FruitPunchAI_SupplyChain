@@ -179,37 +179,43 @@ public void pagestate_change(int pagestate) {
     print(rec);
     String text="";
     textSize(40);
-    fill(0,0,0);
-    if (pagestate == 12 || pagestate == 16) { //images are 210 and 100
+    fill(0, 0, 0);
+    if (threadFlag == DONE) {
+      if (pagestate == 12 || pagestate == 16) { //images are 210 and 100
         textSize(37);
         text("Produce", 230, 764);
         textSize(40);
-        text(rec[0] + "x ",20,855);
-        image(TabletCasing,80,780);
-        text(rec[1] + "x ",270,855);
-        image(Electronics,330,780);
-        text(rec[2] + "x ",520,855);
-        image(GameComputerCasing,580,780);
-        text(rec[3] + "x ",20,1020);
-        image(AssembledTablet,80,940);
-        text(rec[4] + "x ",270,1020);
-        image(AssembledGameComputer,330,940);
-    } else if (pagestate == 17 || pagestate ==20) {
+        text(rec[0] + "x ", 20, 855);
+        image(TabletCasing, 80, 780);
+        text(rec[1] + "x ", 270, 855);
+        image(Electronics, 330, 780);
+        text(rec[2] + "x ", 520, 855);
+        image(GameComputerCasing, 580, 780);
+        text(rec[3] + "x ", 20, 1020);
+        image(AssembledTablet, 80, 940);
+        text(rec[4] + "x ", 270, 1020);
+        image(AssembledGameComputer, 330, 940);
+      } else if (pagestate == 17 || pagestate ==20) {
         textSize(37);
         text("Assemble", 230, 764);
         textSize(40);
-        text(rec[5] + "x ",20,1020);
-        image(AssembledTablet,80,940);
-        text(rec[6] + "x ",270,1020);
-        image(AssembledGameComputer,330,940);
-      // insert pictures here next to text
-    } else if (pagestate == 21 || pagestate == 23) {
+        text(rec[5] + "x ", 20, 1020);
+        image(AssembledTablet, 80, 940);
+        text(rec[6] + "x ", 270, 1020);
+        image(AssembledGameComputer, 330, 940);
+        // insert pictures here next to text
+      } else if (pagestate == 21 || pagestate == 23) {
         textSize(37);
         text("Move", 230, 850);
         textSize(40);
-        text(rec[7] + "x ",20,960);
-        image(AssembledTablet,80,880);
-      // insert pictures here next to text
+        text(rec[7] + "x ", 20, 960);
+        image(AssembledTablet, 80, 880);
+        // insert pictures here next to text
+      }
+    } else if (threadFlag == RUNNING || threadFlag == INACTIVE) {
+      textSize(40);
+      fill(0);
+      text("AI advice computing\nPlease wait ~7 seconds", 40, 850);
     }
     textAlign(LEFT);
     text(text, 80, 850); //display name

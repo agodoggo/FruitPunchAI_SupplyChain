@@ -3,26 +3,17 @@ import java.util.concurrent.ThreadLocalRandom;
 public void checkWaiting() {
   if (oppWaiting == 1) { //checks if RPi Instruction for opponent waiting is true
     if (pagestate==16) {
-      pagestate=pagestate+1;
-      pagestate_change(pagestate);
-      textSize(20);
-      fill(0);
-      text("AI advice computing\nPlease wait ~7 seconds",40,945);
-      redraw();
+      threadFlag = INACTIVE;
       send_waitForArduinoData("left", ASSEMBLY, NONE, STONE_QUERY);
       send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
-      rec = getRecommendation();
+      thread("getRecommendation");
     } else if (pagestate==20) {
-      pagestate=pagestate+1;
-      pagestate_change(pagestate);
-      textSize(20);
-      fill(0);
-      text("AI advice computing\nPlease wait ~7 seconds",40,945);
-      redraw();
+      threadFlag = INACTIVE;
       send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
       send_waitForArduinoData("right", LOGISTICS, NONE, STONE_QUERY);
-      rec = getRecommendation();
+      thread("getRecommendation");
     } else if (pagestate==23) {
+      threadFlag = INACTIVE;
       myArduinoPort_left.write(createArduinoPacket_left(NONE, NONE));
       myArduinoPort_right.write(createArduinoPacket_right(TRANSPORT1, NONE, NONE));
     } else if (pagestate==28) {
@@ -173,8 +164,9 @@ String createRPiPacket(String opponent_waiting, String score_query, String Deman
   print("New message to Raspberry Pi: " + "<"+opponent_waiting+","+score_query+","+DemandMessageTmp+">"+"\n");
   return "<"+opponent_waiting+","+score_query+","+DemandMessageTmp+">";
 }
-String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft should be 10 in the first round
+void getRecommendation() { //inv places should be 17 numbers, roundsLeft should be 10 in the first round
   //call program
+  threadFlag = RUNNING;
   String roundsLeft = str(11-roundNo);
   int numArgs = 22;
   String[] args = new String[numArgs];
@@ -200,12 +192,14 @@ String[] getRecommendation() { //inv places should be 17 numbers, roundsLeft sho
     print("entered try 4\n");
     String[] recRaw = txtDat[0].split(" ");
     textFlag = true;
-    return parseRec(recRaw);
+    rec = parseRec(recRaw);
+    threadFlag = DONE;
   }
   catch(Exception e) {
     e.printStackTrace();
-    return null;
   }
+  displayAdvice = true;
+  println("AI call finished, "+ displayAdvice);
 }
 
 void printBytes(String var)
