@@ -215,7 +215,7 @@ public void pagestate_change(int pagestate) {
     } else if (threadFlag == RUNNING || threadFlag == INACTIVE) {
       textSize(40);
       fill(0);
-      text("AI advice computing\nPlease wait ~7 seconds", 40, 850);
+      text("AI advice computing\nPlease wait ~7 seconds", 40, 900);
     }
     textAlign(LEFT);
     text(text, 80, 850); //display name
