@@ -75,11 +75,13 @@ The Arduinos and Raspberry Pis also communicate using their serial ports, the co
 
 
 Arrows Lighting
+
 The arrows which light up are controlled by a MOSFET circuit.
 The MOSFET acts as a switch to turn the LEDs connected on and off.
 All of the arrows which must light up at once in the same phase are connected to the same MOSFET.
 
 Miscellaneous
+
 Both Raspberry Pis can be connected to from a PC using VNCShare.
 On bootup, the Raspberry Pis and Arduinos should run the software immediately, allowing one to play.
 The folder in which the code is located on each Raspberry Pi is in home/pi/documents.
@@ -87,6 +89,9 @@ The raspberry Pis can get out of sync if one player exits out of the game and th
 If you have any questions about the Arduino code or processing code or in general about the project, please contact me at agoston.walter@gmail.com or +17575534281.
 I will do my best to help you troubleshoot an error or get set up with the board game.
 
+
+
 Sincerely,
+
 Ágoston Ottó Walter
 Eindhoven 27 June, 2021
