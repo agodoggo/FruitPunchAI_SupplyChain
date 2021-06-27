@@ -9,7 +9,7 @@ Each side is controlled by a Raspbery Pi 4B on which the appropriate version of 
 This is in the processingCode folder. The AI side uses the processingCode/SupplyChain_SensorSide code, and the non-AI side uses the processingCode/SupplyChain_nonSensorSide.
 The AI side can be distinguished from the non-AI side by the light-dependent resisters embedded in the different board areas for inserting the game pieces.
 
-#Software Instructions
+Software Instructions
 
 Both raspberry Pis have the appropriate software (Processing) to run, as seen above.
 The arduinos have their own appropriate software as well.
@@ -17,7 +17,7 @@ The ATMega Arduino on the non Raspberry Pi side of the Sensor Side runs using th
 The ATMega Arduino on the Raspberry Pi side of the Sensor Side runs using the arduinoCode/FinalVersion/SensorSide_Board2/SensorSide_Board2.ino
 The Arduino Uno on the non Raspberry Pi side of the Sensor Side runs using the arduinoCode/FinalVersion/nonSensorSide/nonSensorSide.ino
 
-#Hardware Instructions
+Hardware Instructions
 
 General
 Each area into which the playing pieces can be inserted has circuitry for controlling the LEDs and detecting the presence of a game piece.
@@ -79,7 +79,7 @@ The arrows which light up are controlled by a MOSFET circuit.
 The MOSFET acts as a switch to turn the LEDs connected on and off.
 All of the arrows which must light up at once in the same phase are connected to the same MOSFET.
 
-#Miscellaneous
+Miscellaneous
 Both Raspberry Pis can be connected to from a PC using VNCShare.
 On bootup, the Raspberry Pis and Arduinos should run the software immediately, allowing one to play.
 The folder in which the code is located on each Raspberry Pi is in home/pi/documents.
