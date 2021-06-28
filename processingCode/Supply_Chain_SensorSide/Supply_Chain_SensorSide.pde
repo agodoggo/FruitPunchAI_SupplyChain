@@ -268,10 +268,10 @@ void setup()
   ///JEROEN: This line gave a warning, which I fixed by joining the list into a string separated by commas
   println("Serial: " + String.join(",", Serial.list()));
 
-  String arduinoPort_left = Serial.list()[3]; // figure this out
+  String arduinoPort_left = Serial.list()[2]; // figure this out
   myArduinoPort_left = new Serial(this, arduinoPort_left, baudRate);
 
-  String arduinoPort_right = Serial.list()[2]; //figure this out
+  String arduinoPort_right = Serial.list()[3]; //figure this out
   myArduinoPort_right = new Serial(this, arduinoPort_right, baudRate);
 
   String RPiPort = Serial.list()[5]; //figure this out
@@ -296,6 +296,8 @@ void draw()
   if (mousePress && millis() - startTimePressed > 1000) {
     image(BoardMap, 0, 0);
     String[] inv_places = new String[numBoards];
+    send_waitForArduinoData("left", NONE, NONE, STONE_QUERY);
+      send_waitForArduinoData("right", NONE, NONE, STONE_QUERY);
     inv_places = conv_stoneCount_invPlaces();
     fill(0, 0, 0);
     for (int i = 0; i < inv_places.length; i++) {
