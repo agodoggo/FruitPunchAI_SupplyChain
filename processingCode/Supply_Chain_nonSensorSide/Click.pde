@@ -212,6 +212,8 @@ void mouseClicked(){
   else if (pagestate == 35){
     if(mouseX > 110 && mouseX < 360 && mouseY > 666 && mouseY < 815){
       pagestate = 0;
+      myScore = "0";
+      name = "";
     }
     else if(mouseX > 440 && mouseX < 690 && mouseY > 666 && mouseY < 815){
       pagestate = lastPageState;
@@ -223,6 +225,8 @@ void mouseClicked(){
       pagestate = 0;
       addHighScore(name, Integer.parseInt(myScore));
       saveHighScore();
+      name="";
+      myScore="0";
     }
   }
   
